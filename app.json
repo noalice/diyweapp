@@ -1,0 +1,19 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/animation/animation",
+    "pages/production/production",
+
+    "pages/production/theme/theme",
+    "pages/production/element/element",
+    "pages/production/result/result",
+
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "手机小程序",
+    "navigationBarTextStyle":"black"
+  }
+}

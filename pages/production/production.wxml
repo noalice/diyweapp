@@ -1,0 +1,10 @@
+<!--production.wxml-->
+<view class="container">
+  <view class="production">
+    <button bindtap="CatpetTap" type="default"> 地毯 </button>
+     <button bindtap="BagTap" type="default"> 布包 </button>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view>

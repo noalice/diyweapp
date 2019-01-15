@@ -1,0 +1,12 @@
+/**production.wxss**/
+.production {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* 按钮间距 无效 */
+  /* padding:10px; */
+}
+
+.usermotto {
+  margin-top: 200px;
+}
