@@ -1,3 +1,10 @@
 {
+  
+  "navigationBarTextStyle": "white",
+
+  "navigationBarBackgroundColor": "#00656d",
+
+  "navigationBarTitleText": "导航文字",
+  
   "usingComponents": {}
 }

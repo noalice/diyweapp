@@ -1,25 +1,106 @@
 /**animation.wxss**/
-.userinfo {
-  display: flex;
-  /* view纵向布局  row为横向布局*/
-  flex-direction: column;
-  /* 水平居中 */
-  align-items: center;
-  /* 垂直居中 无效*/
-  /* justify-content:center; */
+
+.container {
+  width: 750rpx;
+  height: 100vh;
+  background: #00585f  no-repeat top center;
+  background-size: 750rpx 1334rpx;
+  font-family: 'HYYCH';
+  overflow: hidden;
 }
 
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
+.wave {
+  width: 750rpx;
+  height: 800rpx;
+}
+/** 用户头像 **/
+
+.headImage {
+  /** border-radius 圆角边框
+    长宽一样时，形状是一个圆**/
+  width: 190rpx;
+  height: 190rpx;
   border-radius: 50%;
+  /** 子元素在父级元素居中**/
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top:0;
+  margin: auto;
 }
 
-.userinfo-nickname {
-  color: #aaa;
+.content {
+  position: absolute;
+  top: 416rpx;
+  left: 50%;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  background-color: #FFF;
+  transform: translateX(-50%) translateY(-50%);
+  border: 4rpx solid #FFF;
 }
 
-.usermotto {
-  margin-top: 200px;
+/** 波纹的父级元素 **/
+.animate {
+  width: 600rpx;
+  height: 600rpx;
+  position: absolute;
+  top: 125rpx;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.animate .w2 {
+  /** 等待若干秒后开始动画 **/
+  animation-delay: 1s;
+}
+
+.animate .w3 {
+  animation-delay: 2s;
+}
+
+.animate .w4 {
+  animation-delay: 3s;
+}
+
+.animate view {
+  border: 4rpx solid #fff;
+  background:#fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /** animation-name ：keyframe 名称
+      animation-duration ：完成动画所花费的时间
+      animation-timing-function ：规定动画的速度曲线 （infinite匀速）
+      animation-delay ：动画开始之前的延迟
+      animation-iteration-count ：播放次数
+      animation-direction ：规定是否应该轮流反向播放动画
+      **/
+  animation:swan 3s infinite;
+  animation-name:swan;
+  animation-duration:3s;
+  animation-timing-function:infinite;
+  /**animation-iteration-count:1;**/
+}
+
+@-webkit-keyframes swan {
+  from {
+    opacity: 1;
+    width: 200rpx;
+    height: 200rpx;
+    top: 31%;
+    left: 33%;
+  }
+
+  to {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
 }
