@@ -14,6 +14,12 @@
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "手机小程序",
-    "navigationBarTextStyle":"black"
-  }
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh": true
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": true
 }
