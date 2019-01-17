@@ -1,3 +1,4 @@
+
 // pages/production/element/element.js
 Page({
 
@@ -116,4 +117,5 @@ Page({
   onShareAppMessage: function () {
 
   }
+
 })

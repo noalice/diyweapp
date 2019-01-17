@@ -1,3 +1,4 @@
+
 var api = require('../config/api.js')
 
 const formatTime = date => {
@@ -128,3 +129,4 @@ module.exports = {
   getUserInfo: getUserInfo,
 
 }
+

@@ -1,3 +1,4 @@
+
 // pages/production/result.js
 Page({
 
@@ -107,4 +108,5 @@ Page({
   onShareAppMessage: function () {
 
   }
+
 })

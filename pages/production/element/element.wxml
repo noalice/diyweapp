@@ -1,3 +1,4 @@
+
 <!--pages/production/element/element.wxml-->
 <!-- <text bindtap="ResultTap">pages/production/element/element.wxml</text> -->
 
@@ -26,3 +27,4 @@
     </view>
   </view>
 </scroll-view>
+
