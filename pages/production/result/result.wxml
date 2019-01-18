@@ -1,2 +1,12 @@
 <!--pages/production/result.wxml-->
-<text>pages/production/result.wxml</text>
+
+<!-- 画布 -->
+<view class="center">
+  <canvas wx:if="{{production == 'C'}}" canvas-id="canvasC" class="canvas" style="width:200px; height:300px;"></canvas>
+  <canvas wx:else canvas-id="canvasB" class="canvas" style="width:300px; height:300px;"></canvas>
+</view>
+
+<!-- 故事 -->
+<view class="txt">
+  <text>小故事</text>
+</view>

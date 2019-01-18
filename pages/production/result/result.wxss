@@ -1,1 +1,17 @@
 /* pages/production/result.wxss */
+
+.txt{
+  text-align: center;
+}
+
+.center {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  margin-top:30px;
+}
+/* 画布边框 */
+canvas{
+  border: 1px solid #E0E0E0;
+}

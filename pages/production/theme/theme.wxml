@@ -1,8 +1,8 @@
-  <swiper class="swiper-block" previous-margin="0rpx" next-margin="0rpx" current="0" bindchange="swiperChange" vertical="{{vertical}} " display-multiple-items="3" circular="true">
-    <block wx:for="{{imgUrls}}" wx:index="{{index}}">
-      <swiper-item class="swiper-item">
+<swiper class="swiper-block" previous-margin="0rpx" next-margin="0rpx" current="0" bindchange="swiperChange" vertical="{{vertical}} " display-multiple-items="3" circular="true">
+  <block wx:for="{{imgUrls}}" wx:index="{{index}}">
+    <swiper-item class="swiper-item">
       <!-- aspectFill保持纵横比缩放 -->
-        <image mode="aspectFill" src="{{item}}" class="slide-image {{swiperIndex == index ? 'active' : ''}}" />
-      </swiper-item>
-    </block>
-  </swiper>
+      <image mode="aspectFill" src="{{item}}" class="slide-image {{swiperIndex == index ? 'active' : ''}}" bindtap="swipclick"/>
+    </swiper-item>
+  </block>
+</swiper>
