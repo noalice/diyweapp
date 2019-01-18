@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -38,30 +38,36 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
-					"name": "产品页面",
-					"pathName": "pages/production/production",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "动画页面",
+					"name": "01动画页面",
 					"pathName": "pages/animation/animation",
 					"query": ""
 				},
 				{
 					"id": -1,
-					"name": "主题页面",
+					"name": "02产品页面",
+					"pathName": "pages/production/production",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "03主题页面",
 					"pathName": "pages/production/theme/theme",
 					"query": ""
 				},
 				{
 					"id": -1,
-					"name": "元素页面",
-					"pathName": "pages/production/element/element"
+					"name": "04元素页面",
+					"pathName": "pages/production/element/element",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "05结果页面",
+					"pathName": "pages/production/result/result"
 				}
 			]
 		}

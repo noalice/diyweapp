@@ -4,6 +4,8 @@ const app = getApp()
 
 Page({
   data: {
+    bkimg:"",//背景图片
+
     motto: '动画页面',
     userInfo: {},
     hasUserInfo: false,
@@ -18,6 +20,13 @@ Page({
     })
   },
   onLoad: function () {
+
+    this.setData({
+      bkimg: 
+        app.globalData.rootURL + "5ae220b2bf444ed499dcdb74ad5dcf0a.png"
+    })
+
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

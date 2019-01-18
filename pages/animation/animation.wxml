@@ -9,15 +9,9 @@
     <!-- 头像 -->
     <view class="content" bindtap="bindViewTap">
 
-     <!-- <image src="{{userInfo.avatarUrl}}" class="headImage" mode="cover"/>-->
-     <image src="http://119.23.13.172:8080/appserver-master-1.0.0-dev/user-images/5ae220b2bf444ed499dcdb74ad5dcf0a.png" class="headImage" mode="cover"/>
+      <!-- <image src="{{userInfo.avatarUrl}}" class="headImage" mode="cover"/>-->
+      <image src="{{bkimg}}" class="headImage" mode="cover" />
     </view>
-
-  <view class="nextbutton">
-  <text>
-  点击选择主题
-  </text>
-  </view>
 
   </view>
 </view>
