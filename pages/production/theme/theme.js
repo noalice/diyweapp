@@ -52,5 +52,5 @@ Page({
     wx.navigateTo({
       url: '../element/element'
     })
-  },
+  }
 })

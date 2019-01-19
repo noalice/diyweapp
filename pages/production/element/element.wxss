@@ -45,10 +45,14 @@ button{
 /* 画布边框 */
 canvas{
   border: 1px solid #E0E0E0;
+  background: #123456;
 }
 
 .bottom{
   width:100%;
   position: fixed;
   bottom:0rpx;
+}
+.border{
+  border:3px solid black;
 }

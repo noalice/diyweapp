@@ -23,9 +23,10 @@
 
   <!-- 选择栏 -->
   <!-- 
-    同时显示滑块的数量 display-multiple-items 
+    同时显示滑块的数量 display-multiple-items ，可以为小数
     禁止外部swiper手指触摸滑动 stopTouchMove
     aspectFit	保持纵横比缩放图片，使图片的长边能完全显示出来。也就是说，可以完整地将图片显示出来。
+    swiper-item 添加 padding-right:5px 尾部会不能到底
   -->
   <block wx:if="{{production == 'C'}}">
     <swiper current="{{indexb}}" vertical="true">
@@ -33,9 +34,9 @@
         <view style="height:150px;">
 
           <swiper current="0" display-multiple-items="3">
-            <swiper-item wx:for="{{imgURL}}" style="height:120rpx;">
-              <view style="height:120px; margin:15px 10px;">
-                 <image src="{{item}}"  bindtap="" mode="aspectFit" style="width:120px;height:120px;"/>
+            <swiper-item  wx:for="{{imgURL}}" style="height:120rpx;margin:15px 10px;">
+              <view style="height:120px;">
+                <image src="{{item}}" data-num="{{index}}" bindtap='swipclick' mode="aspectFit" style="width:120px;height:120px;" class="{{select==index?'border':''}}" />  
               </view>
             </swiper-item>
           </swiper>
@@ -50,10 +51,10 @@
       <swiper-item wx:for="{{bag}}" style="height:150rpx;" catchtouchmove="stopTouchMove">
         <view style="background:{{item.color}};height:150px;">
 
-          <swiper current="0" display-multiple-items="3">
-            <swiper-item wx:for="{{imgURL}}" style="height:120rpx;">
-              <view style="height:120px;margin:15px 10px;">
-                 <image src="{{item}}"  bindtap="" mode="aspectFit" style="width:120px;height:120px;"/>
+          <swiper current="0" display-multiple-items="2.5" >
+            <swiper-item wx:for="{{imgURL}}" style="height:120rpx;margin:15px 10px;" >
+              <view style=" height:120px;" >
+                <image src="{{item}}" data-num="{{index}}" bindtap='swipclick'  mode="aspectFit " style="width:120px;height:120px;" class="{{select==index?'border':''}}"/>
               </view>
             </swiper-item>
           </swiper>
@@ -65,12 +66,12 @@
 
   <!-- 按钮：地毯（边框，四角，中心）；布包（图案，颜色） -->
   <!-- 
-  注意：data-current="{{index}}"
+  注意：data-current="{{index}} "
   -->
-  <block wx:if="{{production == 'C'}}">
+   <block wx:if="{{production == 'C'}}">
     <scroll-view scroll-x style="height:70rpx;width:100%;">
       <view wx:for="{{carpet}}" style="height:100rpx;width:33.3%;display:inline-block;">
-        <view bindtap='changeview' style="width:100%;height:60rpx;text-align:center;line-height:60rpx;background:{{item.color}};color:#ffffff;display:inline-block;" data-current="{{index}}">{{item.name}}</view>
+        <view bindtap='changeview' style="width:100%;height:60rpx;text-align:center;line-height:60rpx;background:{{item.color}};color:#ffffff;" data-current="{{index}}">{{item.name}}</view>
       </view>
     </scroll-view>
   </block>
@@ -78,7 +79,7 @@
   <block wx:else>
     <scroll-view scroll-x style="height:70rpx;width:100%;">
       <view wx:for="{{bag}}" style="height:100rpx;width:50%;display:inline-block;">
-        <view bindtap='changeview' style="width:100%;height:60rpx;text-align:center;line-height:60rpx;background:{{item.color}};color:#ffffff;display:inline-block;" data-current="{{index}}">{{item.name}}</view>
+        <view bindtap='changeview' style="width:100%;height:60rpx;text-align:center;line-height:60rpx;background:{{item.color}};color:#ffffff;" data-current="{{index}}">{{item.name}}</view>
       </view>
     </scroll-view>
   </block>
