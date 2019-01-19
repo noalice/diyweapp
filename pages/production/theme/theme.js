@@ -2,7 +2,6 @@
 // pages/production/result.js
 
 const app = getApp()
-
 /*保证是中间图案的放大*/
 function chageIndex(index) {
   if (index == 4) {
@@ -13,19 +12,32 @@ function chageIndex(index) {
 }
 Page({
   data: {
-    themeName:[
-      '繁花似锦',
-      '福寿天成',
-      '龙凤呈祥',
-      '鸟语花香',
-      '鸢飞鱼跃',
-    ],
+
     imgUrls: [
-      '/resources/images/theme/0.jpg',
-      '/resources/images/theme/1.jpg',
-      '/resources/images/theme/2.jpg',
-      '/resources/images/theme/3.jpg',
-      '/resources/images/theme/4.jpg',
+      {
+        img: app.globalData.rootURL+'USTP0301.png',
+        text: app.globalData.rootURL + 'USTT0301.png'
+      },
+
+      {
+        img: app.globalData.rootURL + 'USTP0302.png',
+        text: app.globalData.rootURL + 'USTT0302.png'
+      },
+
+      {
+        img: app.globalData.rootURL + 'USTP0303.png',
+        text: app.globalData.rootURL + 'USTT0303.png'
+      },
+
+      {
+        img: app.globalData.rootURL + 'USTP0304.png',
+        text: app.globalData.rootURL + 'USTT0304.png'
+      }, 
+
+      {
+        img: app.globalData.rootURL + 'USTP0305.png',
+        text: app.globalData.rootURL + 'USTT0305.png'
+      },
     ],
     // swiper组件设置
     indicatorDots: false,
@@ -52,5 +64,14 @@ Page({
     wx.navigateTo({
       url: '../element/element'
     })
+<<<<<<< HEAD
+=======
+  },
+
+  ReturnTap:function(){
+    wx.navigateTo({
+      url: '../production'
+    })
+>>>>>>> master
   }
 })

@@ -1,4 +1,5 @@
 {
   "navigationBarTitleText": "导航文字",
-  "usingComponents": {}
+  "usingComponents": {},
+  "disableScroll": true
 }
