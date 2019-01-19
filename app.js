@@ -1,18 +1,49 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function() {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    var openId = 
+    console.log("onLaunch")
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log('临时的code' + res.code);
+        // 获取到临时凭证code
+        if (res.code) {
+          console.log('向服务器发送请求')
+          // 目前的url仅做测试
+          
+          wx.request({
+            // 自己服务器的接口
+            url: 'https://www.vrwbg.com:8080/mini/getOpenId',
+            method: 'GET',
+            // 传code至后台
+            // 请求参数
+            data: {
+              code: res.code
+            },
+            // 登录成功 返回json对象
+
+            success: function(res) {
+              console.log('返回的openid:' + res.data.openId)
+              getApp().globalData.openId = res.data.openId
+              console.log(getApp().globalData.openId )
+            }
+
+          })
+          
+        } else {
+          // res.errMsg错误信息 没有获取到微信的code
+          console.log('获取用户登录态失败！')
+        }
       }
     })
-    // 获取用户信息
+
+    // 获取用户信息 获取用户的当前设置。返回值中只会出现小程序已经向用户请求过的权限。
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -33,18 +64,24 @@ App({
       }
     })
   },
-  
+
   globalData: {
     userInfo: null,
     // 产品类型
-    production:"",
+    production: "",
     // 主题
-    theme:0,
+    theme: 0,
     //服务器图片root路径
-    rootURL:"http://119.23.13.172:8080/appserver-master-1.0.0-dev/user-images/",
+    rootURL: "http://119.23.13.172:8080/appserver-master-1.0.0-dev/user-images/",
+    // openId
+    openId: "",
+    //结果root路径
+    rURL:"https://www.vrwbg.com:8080/mini/image_results/",
+    //结果图名
+    rName:""
   },
   // 页面转发按钮
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
     return {
       // title: '自定义分享标题',
       // desc: '自定义分享描述',

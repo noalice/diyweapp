@@ -1,6 +1,10 @@
 // pages/production/element/element.js
 
 const app = getApp()
+const util = require('../../../utils/util.js')
+
+const contextC = wx.createCanvasContext('canvasC')
+const contextB = wx.createCanvasContext('canvasB')
 
 Page({
 
@@ -9,34 +13,34 @@ Page({
    */
   data: {
 
-    indexb: 0,//外面滑片
+    indexb: 0, //外面滑片
     //地毯
     carpet: [{
         "name": "主题",
         "color": "orange",
-        "url": "http://119.23.13.172:8080/appserver-master-1.0.0-dev/user-images/UGTT0001.png"
+        "url": app.globalData.rootURL + "UGTT0001.png"
       },
       {
         "name": "边框",
         "color": "blue",
-        "url": "http://119.23.13.172:8080/appserver-master-1.0.0-dev/user-images/USTT0401.png"
+        "url": app.globalData.rootURL + "USTT0401.png"
       },
       {
         "name": "角隅",
         "color": "green",
-        "url": "http://119.23.13.172:8080/appserver-master-1.0.0-dev/user-images/USTT0402.png"
+        "url": app.globalData.rootURL + "USTT0402.png"
       }
     ],
     //布包
     bag: [{
         "name": "主题",
         "color": "pink",
-        "url": "http://119.23.13.172:8080/appserver-master-1.0.0-dev/user-images/UGTT0001.png"
+        "url": app.globalData.rootURL + "UGTT0001.png"
       },
       {
         "name": "配色",
         "color": "black",
-        "url": "http://119.23.13.172:8080/appserver-master-1.0.0-dev/user-images/USTT0403.png"
+        "url": app.globalData.rootURL + "USTT0403.png"
       }
     ],
 
@@ -46,13 +50,17 @@ Page({
     eURL: "",
     imgformat: "",
     imgURL: [],
-    imgName:[],
+    imgName: [],
     // 里面滑片默认不选择
-    select:-1,
+    select: -1,
     drawName: "",
     drawName01: "",
     drawName02: "",
-    drawName03: ""
+    drawName03: "",
+    x: 0, //绘画位置
+    y: 0, //绘画位置
+    width: 0, //绘画宽度
+    height: 0, //绘画高度
   },
 
   //根据tab，得到滑片索引（通过 data-current="{{index}}" 得到）
@@ -64,36 +72,63 @@ Page({
     console.log("外部滑片:" + this.data.indexb);
 
     // 滑片切换有问题(一样的图片)
-    if (this.data.indexb == 0 && app.globalData.production == "C") {
-      this.data.eURL = "M";
-    }
-    if (this.data.indexb == 0 && app.globalData.production == "B") {
-      this.data.eURL = "P";
-    }
+    if (app.globalData.production == "C") {
+      if (this.data.indexb == 0) {
+        this.data.eURL = "M";
 
-    if (this.data.indexb == 1 && app.globalData.production == "C") {
-      this.data.eURL = "E";
-    }
-    if (this.data.indexb == 1 && app.globalData.production == "B") {
-      this.data.eURL = "C";
-    }
+        this.data.x = 25;
+        this.data.y = 25;
+        this.data.width = 175;
+        this.data.height = 275
+      }
+      if (this.data.indexb == 1) {
+        this.data.eURL = "E";
 
-    if (this.data.indexb == 2) {
-      this.data.eURL = "C";
+        this.data.x = 0;
+        this.data.y = 0;
+        this.data.width = 200;
+        this.data.height = 300
+      }
+      if (this.data.indexb == 2) {
+        this.data.eURL = "C";
+        // 画四个
+        // this.data.x = 25;
+        // this.data.y = 25;
+        // this.data.width = 175;
+        // this.data.height = 275 
+      }
+    } else {
+      if (this.data.indexb == 0) {
+        this.data.eURL = "P";
+
+        this.data.x = 100;
+        this.data.y = 100;
+        this.data.width = 100;
+        this.data.height = 100
+      }
+      if (this.data.indexb == 1) {
+        this.data.eURL = "C";
+
+        // 色块不画
+        this.data.x = 0;
+        this.data.y = 0;
+        this.data.width = 0;
+        this.data.height = 0
+      }
     }
 
     this.setData({
-      imgName:[
-         this.data.pURL + this.data.tURL + this.data.eURL + "I010",
-         this.data.pURL + this.data.tURL + this.data.eURL + "I020",
-         this.data.pURL + this.data.tURL + this.data.eURL + "I030",
-         this.data.pURL + this.data.tURL + this.data.eURL + "I040",
-         this.data.pURL + this.data.tURL + this.data.eURL + "I050",
-         this.data.pURL + this.data.tURL + this.data.eURL + "I060",
-         this.data.pURL + this.data.tURL + this.data.eURL + "I070",
-         this.data.pURL + this.data.tURL + this.data.eURL + "I080",
-         this.data.pURL + this.data.tURL + this.data.eURL + "I090",
-         this.data.pURL + this.data.tURL + this.data.eURL + "I100",
+      imgName: [
+        this.data.pURL + this.data.tURL + this.data.eURL + "I010",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I020",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I030",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I040",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I050",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I060",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I070",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I080",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I090",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I100",
       ],
 
       imgURL: [
@@ -111,7 +146,7 @@ Page({
     })
 
     console.log("事件点击加载获取图片路径：" + this.data.imgURL);
-    console.log("图片名称："+this.data.imgName[0]);
+    console.log("图片名称：" + this.data.imgName[0]);
 
 
   },
@@ -120,7 +155,7 @@ Page({
     return false;
   },
 
-  swipclick: function (e) {
+  swipclick: function(e) {
     this.setData({
       select: e.currentTarget.dataset.num,
     });
@@ -137,24 +172,44 @@ Page({
 
     console.log("需要绘画图片名称:" + this.data.drawName);
 
+    if (this.data.indexb == 0) {
+      this.data.drawName01 = this.data.drawName;
+      console.log("滑片0：" + this.data.drawName01);
+    }
+    if (this.data.indexb == 1) {
+      this.data.drawName02 = this.data.drawName;
+      console.log("滑片1：" + this.data.drawName02);
+    }
+    if (this.data.indexb == 2) {
+      this.data.drawName03 = this.data.drawName;
+      console.log("滑片2：" + this.data.drawName03);
+    }
 
-    // 画图(问题：1.时间长，下载图片时间 + 绘制时间  2.闪屏)
-    var context = wx.createCanvasContext('canvasC');
-    //这个地方的图片是需要注意，图片需要下载不然，手机上不能正常显示
-    // 将图片下载到本地(图片需要是https链接的)
+    var x = this.data.x;
+    var y = this.data.y;
+    var width = this.data.width;
+    var height = this.data.height;
+    var context;
+    if (app.globalData.production == "C") {
+      context = contextC;
+    } else {
+      context = contextB;
+    }
+
+    // 画图(问题：1.时间长，下载图片时间 + 绘制时间  2.闪屏 3.图片旋转90度 4.图片叠加 5.画四个角)
+    // 将图片下载到本地(图片需要是https链接的)，不然手机上不能正常显示
     wx.downloadFile({
       url: app.globalData.rootURL + this.data.drawName + this.data.imgformat,
-      success: function (res) {
+      success: function(res) {
         console.log(res);
-        // context.drawImage(res.tempFilePath, 0, 0, 300, 300)
-        context.drawImage(res.tempFilePath, 0, 0, 200, 300)
+        context.drawImage(res.tempFilePath, x, y, width, height)
         //绘制图片
         context.draw();
         //保存
         context.save();
         console.log(context);
-      }, fail: function (res) {
-      }
+      },
+      fail: function(res) {}
     })
 
   },
@@ -167,12 +222,42 @@ Page({
     })
   },
   ResultTap: function() {
-    wx.navigateTo({
-      url: '../result/result'
-    })
-  },
-  RequestTap: function() {
+    // 判断完成度
+    if (app.globalData.production == "C") {
+      if (this.data.drawName01 != "" && this.data.drawName02 != "" && this.data.drawName03 != "") {
+        // 获取结果图名
+        app.globalData.rName = util.createCp(this.data.drawName01, this.data.drawName02, this.data.drawName03, app.globalData.openId);
+        console.log("rName:" + app.globalData.rName );
 
+        wx.navigateTo({
+          url: '../result/result'
+        })
+      } else {
+        // 弹窗
+        wx.showToast({
+          title: '需要选择三个元素!!!',
+          icon: 'none',
+          duration: 2000 //持续的时间
+        })
+      }
+    } else {
+      if (this.data.drawName01 != "" && this.data.drawName02 != "") {
+        // 获取结果图名
+        app.globalData.rName = util.createCp(this.data.drawName01, this.data.drawName02, app.globalData.openId);
+        console.log("rName:" + app.globalData.rName);
+
+        wx.navigateTo({
+          url: '../result/result'
+        })
+      } else {
+        // 弹窗
+        wx.showToast({
+          title: '需要选择两个元素!!!',
+          icon: 'none',
+          duration: 2000 //持续的时间
+        })
+      }
+    }
   },
 
 
@@ -187,11 +272,23 @@ Page({
 
     if (app.globalData.production == "C") {
       this.data.pURL = "C";
+
       this.data.eURL = "M";
+      this.data.x = 25;
+      this.data.y = 25;
+      this.data.width = 175;
+      this.data.height = 275;
+
       this.data.imgformat = ".png";
     } else {
       this.data.pURL = "B";
+
       this.data.eURL = "P";
+      this.data.x = 100;
+      this.data.y = 100;
+      this.data.width = 100;
+      this.data.height = 100;
+
       this.data.imgformat = ".jpg";
     }
 
@@ -244,7 +341,7 @@ Page({
     })
 
     console.log("页面加载获取图片路径：" + this.data.imgURL);
-    console.log("图片名称："+this.data.imgName[0]);
+    console.log("图片名称：" + this.data.imgName[0]);
 
   },
 

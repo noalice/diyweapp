@@ -54,11 +54,17 @@ Page({
     })
   },
 
-  //轮播图点击事件(点击任意位置均为放大主题)
+  //轮播图点击事件(问题：点击任意位置均为放大主题)
   swipclick: function(e) {
     app.globalData.theme = this.data.swiperIndex + 1;
     console.log("theme:" + app.globalData.theme);
 
+    wx.navigateTo({
+      url: '../production'
+    })
+
+  },
+  ReturnTap:function(){
     wx.navigateTo({
       url: '../production'
     })

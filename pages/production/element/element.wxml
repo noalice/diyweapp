@@ -3,8 +3,7 @@
 <!-- 按钮 -->
 <view class="button">
   <button class="return" bindtap="ReturnTap" hover-class='hover'> 返回 </button>
-  <button wx:if="{{}}" class="submit" bindtap="RequestTap" hover-class='hover'> 完成 </button>
-  <button wx:else class="submit" bindtap="ResultTap" hover-class='hover'> 提交 </button>
+  <button class="submit" bindtap="ResultTap" hover-class='hover'> 完成 </button>
 </view>
 
 <!-- 文字提示 -->
@@ -27,6 +26,8 @@
     禁止外部swiper手指触摸滑动 stopTouchMove
     aspectFit	保持纵横比缩放图片，使图片的长边能完全显示出来。也就是说，可以完整地将图片显示出来。
     swiper-item 添加 padding-right:5px 尾部会不能到底
+
+    问题：选择带框后，下一个tab会默认带框
   -->
   <block wx:if="{{production == 'C'}}">
     <swiper current="{{indexb}}" vertical="true">
@@ -67,6 +68,7 @@
   <!-- 按钮：地毯（边框，四角，中心）；布包（图案，颜色） -->
   <!-- 
   注意：data-current="{{index}} "
+  问题：放图片不显示
   -->
    <block wx:if="{{production == 'C'}}">
     <scroll-view scroll-x style="height:70rpx;width:100%;">
