@@ -11,6 +11,7 @@ const app = getApp()
 Page({
   data: {
     motto: '产品页面',
+    returnimg: app.globalData.rootURL + "USTT0306.png",
   },
 
   //事件处理函数
@@ -20,7 +21,7 @@ Page({
       console.log("production：" + app.globalData.production);
 
     wx.navigateTo({
-      url: './theme/theme'
+      url: './element/element'
     })
   },
 
@@ -30,7 +31,14 @@ Page({
       console.log("production：" + app.globalData.production);
 
     wx.navigateTo({
+      url: './element/element'
+    })
+  } ,
+
+  ReturnTap: function () {
+    wx.navigateTo({
       url: './theme/theme'
     })
-  } 
+  }
+
 })

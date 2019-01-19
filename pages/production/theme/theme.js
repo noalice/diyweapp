@@ -1,4 +1,3 @@
-
 // pages/production/result.js
 
 const app = getApp()
@@ -13,9 +12,8 @@ function chageIndex(index) {
 Page({
   data: {
 
-    imgUrls: [
-      {
-        img: app.globalData.rootURL+'USTP0301.png',
+    imgUrls: [{
+        img: app.globalData.rootURL + 'USTP0301.png',
         text: app.globalData.rootURL + 'USTT0301.png'
       },
 
@@ -32,7 +30,7 @@ Page({
       {
         img: app.globalData.rootURL + 'USTP0304.png',
         text: app.globalData.rootURL + 'USTT0304.png'
-      }, 
+      },
 
       {
         img: app.globalData.rootURL + 'USTP0305.png',
@@ -44,34 +42,26 @@ Page({
     autoplay: false,
     interval: 5000,
     duration: 2000,
-    vertical:true,
+    vertical: true,
     //初始状态就让中间的图案放大
-    swiperIndex:1
+    swiperIndex: 1
   },
 
   swiperChange(e) {
     const that = this;
     that.setData({
-      swiperIndex:chageIndex(e.detail.current),
+      swiperIndex: chageIndex(e.detail.current),
     })
   },
 
   //轮播图点击事件(点击任意位置均为放大主题)
-  swipclick: function (e) {
-    app.globalData.theme = this.data.swiperIndex +1;
+  swipclick: function(e) {
+    app.globalData.theme = this.data.swiperIndex + 1;
     console.log("theme:" + app.globalData.theme);
 
     wx.navigateTo({
-      url: '../element/element'
-    })
-<<<<<<< HEAD
-=======
-  },
-
-  ReturnTap:function(){
-    wx.navigateTo({
       url: '../production'
     })
->>>>>>> master
   }
+
 })

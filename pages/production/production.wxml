@@ -1,6 +1,11 @@
 <!--production.wxml-->
+<!-- 返回按钮 -->
+<view style='height:1px;z-index:3;'>
+  <image mode="aspectFill" src="{{returnimg}}" bindtap="ReturnTap" style="width:60px;height:30px;z-index:3;"></image>
+</view>
+
 <view class='production'>
-  <button bindtap='CatpetTap' class='pro1' hover-class='pro-hover'>
+  <button bindtap='BagTap' class='pro1' hover-class='pro-hover'>
   </button>
-  <button bindtap='BagTap' class='pro2' hover-class='pro-hover'></button>
+  <button bindtap='CatpetTap' class='pro2' hover-class='pro-hover'></button>
 </view>

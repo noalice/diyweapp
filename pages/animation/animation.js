@@ -15,7 +15,7 @@ Page({
     wx.navigateTo({
       // url: '../logs/logs'
       // 点击跳转到产品页面
-      url: '../production/production'
+      url: '../production/theme/theme'
     })
   },
 
@@ -51,7 +51,7 @@ setTimeout(function(){
   wx.navigateTo({
     // url: '../logs/logs'
     // 点击跳转到产品页面
-    url: '../production/production'
+    url: '../production/theme/theme'
   })
 },1000)
   

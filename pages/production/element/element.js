@@ -163,7 +163,7 @@ Page({
   //事件处理函数
   ReturnTap: function() {
     wx.navigateTo({
-      url: '../theme/theme'
+      url: '../production'
     })
   },
   ResultTap: function() {

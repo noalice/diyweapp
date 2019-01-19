@@ -1,20 +1,14 @@
-<!-- 返回按钮 -->
-<!--
-<view class="button">
-  <button class="return" bindtap="ReturnTap" hover-class='hover'> 返回 </button>
-</view>
--->
- <swiper class="swiper-block" previous-margin="0rpx" next-margin="0rpx" current="0" bindchange="swiperChange" vertical="{{vertical}} " display-multiple-items="3" circular="true">
+
+<view class="swiper" style='z-index:1;'>
+  <swiper class="swiper-block" previous-margin="0rpx" next-margin="0rpx" current="0" bindchange="swiperChange" vertical="{{vertical}} " display-multiple-items="3" circular="true">
     <block wx:for="{{imgUrls}}" wx:index="{{index}}">
       <swiper-item class="swiper-item">
-      <view style="margin:0 auto;">
-      <!-- aspectFill保持纵横比缩放 -->
-      <image mode="aspectFill" src="{{item.img}}" class="slide-image {{swiperIndex == index ? 'image-active' : ''}}" bindtap='swipclick'/>
-        <image mode="aspectFill" src="{{item.text}}" class="slide-text-image  {{swiperIndex == index ? 'text-active' : ''}}"></image>
-      </view>
+        <view style="margin:0 auto;">
+          <!-- aspectFill保持纵横比缩放 -->
+          <image mode="aspectFill" src="{{item.img}}" class="slide-image {{swiperIndex == index ? 'image-active' : ''}}" bindtap='swipclick' />
+          <image mode="aspectFill" src="{{item.text}}" class="slide-text-image  {{swiperIndex == index ? 'text-active' : ''}}"></image>
+        </view>
       </swiper-item>
     </block>
   </swiper>
-
-
- 
+</view>
