@@ -116,29 +116,29 @@ Page({
 
     this.setData({
       imgName: [
-        this.data.pURL + this.data.tURL + this.data.eURL + "I010",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I020",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I030",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I040",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I050",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I060",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I070",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I080",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I090",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I100",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I01",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I02",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I03",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I04",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I05",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I06",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I07",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I08",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I09",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I10",
       ],
 
       imgURL: [
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I010" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I020" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I030" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I040" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I050" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I060" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I070" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I080" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I090" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I100" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I01" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I02" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I03" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I04" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I05" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I06" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I07" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I08" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I09" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I10" + this.data.imgformat,
       ]
     })
 
@@ -159,19 +159,19 @@ Page({
 
     console.log("里面滑片:" + this.data.select);
 
-    // var str = this.data.imgName[this.data.select];
-    // // 字符串去掉首位的“u”，再在末尾补0
-    // // 字符串长度 str.toString().length
-    // str = str.substr(1) +"0";
-    // this.data.drawName = str;
+    var str = this.data.imgName[this.data.select];
+    // 字符串去掉首位的“u”，再在末尾补0
+    // 字符串长度 str.toString().length
+    str = str.substr(1) + "0";
+    this.data.drawName = str;
 
-    this.data.drawName = this.data.imgName[this.data.select];
+    // this.data.drawName = this.data.imgName[this.data.select];
 
     console.log("需要绘画图片名称:" + this.data.drawName);
 
     if (this.data.indexb == 0) {
       this.data.drawName01 = this.data.drawName;
-      console.log("滑片0：" + this.data.drawName01);
+      console.log("滑片0drawName01：" + this.data.drawName01);
 
       if (app.globalData.production == "C") {
 
@@ -191,7 +191,7 @@ Page({
     }
     if (this.data.indexb == 1) {
       this.data.drawName02 = this.data.drawName;
-      console.log("滑片1：" + this.data.drawName02);
+      console.log("滑片1drawName02：" + this.data.drawName02);
 
       if (app.globalData.production == "C") {
 
@@ -199,12 +199,12 @@ Page({
           Eimg: app.globalData.rootURL + this.data.drawName + this.data.imgformat
         });
         console.log("Eimg：" + this.data.Eimg);
-      } 
+      }
 
     }
     if (this.data.indexb == 2) {
       this.data.drawName03 = this.data.drawName;
-      console.log("滑片2：" + this.data.drawName03);
+      console.log("滑片2drawName03：" + this.data.drawName03);
 
 
       this.setData({
@@ -227,8 +227,9 @@ Page({
     // 判断完成度
     if (app.globalData.production == "C") {
       if (this.data.drawName01 != "" && this.data.drawName02 != "" && this.data.drawName03 != "") {
-        // 获取结果图名
-        app.globalData.rName = util.createCp(this.data.drawName01, this.data.drawName02, this.data.drawName03, app.globalData.openId);
+        // 获取结果图名(e,c,m,id)
+        console.log("this.data.drawName02, this.data.drawName03, this.data.drawName01:" + this.data.drawName02, this.data.drawName03, this.data.drawName01);
+        app.globalData.rName = util.createCp(this.data.drawName02, this.data.drawName03, this.data.drawName01, app.globalData.openId);
         console.log("调用函数cp等到结果rName:" + app.globalData.rName);
 
         wx.navigateTo({
@@ -244,8 +245,8 @@ Page({
       }
     } else {
       if (this.data.drawName01 != "" && this.data.drawName02 != "") {
-        // 获取结果图名
-        app.globalData.rName = util.createBp(this.data.drawName01, this.data.drawName02, app.globalData.openId);
+        // 获取结果图名(id,p,c)
+        app.globalData.rName = util.createBp(app.globalData.openId,this.data.drawName01, this.data.drawName02);
         console.log("调用函数bp得到结果rName:" + app.globalData.rName);
 
         wx.navigateTo({
@@ -268,16 +269,20 @@ Page({
    */
   onLoad: function(options) {
 
+    wx.showLoading({
+      title: '加载中',
+    })
+
     this.setData({
       production: app.globalData.production
     });
 
     if (app.globalData.production == "C") {
-      this.data.pURL = "C";
+      this.data.pURL = "UC";
       this.data.eURL = "M";
       this.data.imgformat = ".png";
     } else {
-      this.data.pURL = "B";
+      this.data.pURL = "UB";
       this.data.eURL = "P";
       this.data.imgformat = ".jpg";
     }
@@ -304,29 +309,29 @@ Page({
 
     this.setData({
       imgName: [
-        this.data.pURL + this.data.tURL + this.data.eURL + "I010",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I020",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I030",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I040",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I050",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I060",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I070",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I080",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I090",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I100",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I01",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I02",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I03",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I04",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I05",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I06",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I07",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I08",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I09",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I10",
       ],
 
       imgURL: [
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I010" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I020" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I030" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I040" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I050" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I060" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I070" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I080" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I090" + this.data.imgformat,
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I100" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I01" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I02" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I03" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I04" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I05" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I06" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I07" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I08" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I09" + this.data.imgformat,
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I10" + this.data.imgformat,
       ]
     })
 
@@ -334,54 +339,9 @@ Page({
     console.log("图片名称：" + this.data.imgName[0]);
 
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
+  // 监听页面初次渲染完成
+  onReady: function () {
+    wx.hideLoading()
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
 
 })

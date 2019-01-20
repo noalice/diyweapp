@@ -71,7 +71,7 @@ App({
     // 主题
     theme: 0,
     //服务器图片root路径
-    rootURL: "http://119.23.13.172:8080/appserver-master-1.0.0-dev/user-images/",
+    rootURL: "https://www.vrwbg.com:8080/mini/image_resources/",
     // openId
     openId: "",
     //结果root路径

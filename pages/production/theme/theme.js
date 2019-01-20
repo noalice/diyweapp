@@ -65,10 +65,21 @@ Page({
     })
 
   },
-  ReturnTap:function(){
+  ReturnTap: function() {
     wx.navigateTo({
       url: '../production'
     })
-  }
+  },
+
+  // 页面初始化
+  onLoad: function(options) {
+    wx.showLoading({
+      title: '加载中',
+    })
+  },
+  // 监听页面初次渲染完成
+  onReady: function() {
+    wx.hideLoading()
+  },
 
 })

@@ -56,9 +56,9 @@ function createBp(pName,cName,openId){
     url: 'https://www.vrwbg.com:8080/mini/create-bp',
     method:'GET',//默认
     data:{
+      openId: openId,
       pName:pName,
       cName:cName,
-      openId:openId
     },
     header: {
       'content-type': 'application/json' // 默认值

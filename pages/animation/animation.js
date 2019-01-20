@@ -35,11 +35,11 @@ Page({
       });
     }, 1000)
 
-    setTimeout(function() {
-      that.setData({
-        rippleStyle2: 'top:' + y + 'px;left:' + x + 'px;-webkit-animation: ripple 0.6s ease-in-out;animation:ripple 0.6s linear 0.4s;'
-      });
-    }, 1000)
+    // setTimeout(function() {
+    //   that.setData({
+    //     rippleStyle2: 'top:' + y + 'px;left:' + x + 'px;-webkit-animation: ripple 0.6s ease-in-out;animation:ripple 0.6s linear 0.4s;'
+    //   });
+    // }, 1000)
 
     setTimeout(function() {
       wx.navigateTo({
