@@ -9,7 +9,10 @@
 </view>
 
 <!-- 图片 -->
-<!-- 问题：位置写死，宽高不一致会挪位置 -->
+<!-- 
+  问题：位置写死，宽高不一致会挪位置 
+  考虑：屏幕位置或固定center宽度
+-->
 <view class="center" style='width:100%;height:350px;position:relative;border:1px solid pink;'>
 
   <block wx:if="{{production == 'C'}}">
@@ -83,12 +86,14 @@
   <!-- 按钮：地毯（边框，四角，中心）；布包（图案，颜色） -->
   <!-- 
   注意：data-current="{{index}} "
-  问题：放图片不显示
+  问题： 
+    1.背景图片不能缩放  background:{{item.color}} url('{{item.url}}') no-repeat center center;color:#ffffff;background-size：50px 30px；
+    2.图片不能显示 img
   -->
   <block wx:if="{{production == 'C'}}">
     <scroll-view scroll-x style="height:70rpx;width:100%;">
       <view wx:for="{{carpet}}" style="height:100rpx;width:33.3%;display:inline-block;">
-        <view bindtap='changeview' style="width:100%;height:60rpx;text-align:center;line-height:60rpx;background:{{item.color}};color:#ffffff;" data-current="{{index}}">{{item.name}}</view>
+        <view bindtap='changeview' style="height:60rpx;text-align:center;line-height:60rpx;background:{{item.color}};color:#ffffff;" data-current="{{index}}">{{item.name}}</view>
       </view>
     </scroll-view>
   </block>
@@ -96,7 +101,7 @@
   <block wx:else>
     <scroll-view scroll-x style="height:70rpx;width:100%;">
       <view wx:for="{{bag}}" style="height:100rpx;width:50%;display:inline-block;">
-        <view bindtap='changeview' style="width:100%;height:60rpx;text-align:center;line-height:60rpx;background:{{item.color}};color:#ffffff;" data-current="{{index}}">{{item.name}}</view>
+        <view bindtap='changeview' style="height:60rpx;text-align:center;line-height:60rpx;background:{{item.color}};color:#ffffff;" data-current="{{index}}">{{item.name}}</view>
       </view>
     </scroll-view>
   </block>

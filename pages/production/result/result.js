@@ -2,21 +2,15 @@
 
 const app = getApp()
 
-const contextC = wx.createCanvasContext('canvasC')
-const contextB = wx.createCanvasContext('canvasB')
-
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
-    x: 0, //绘画位置
-    y: 0, //绘画位置
-    width: 0, //绘画宽度
-    height: 0, //绘画高度
-
+    rimg: '',
+    Bagimg: app.globalData.rootURL + "UGKP0002.png",
+    imgformat: "",
   },
 
 
@@ -28,34 +22,15 @@ Page({
     this.setData({
       production: app.globalData.production
     })
-
-    var x = this.data.x;
-    var y = this.data.y;
-    var width = this.data.width;
-    var height = this.data.height;
-    var context;
     if (app.globalData.production == "C") {
-      context = contextC;
+      this.data.imgformat = ".png";
     } else {
-      context = contextB;
+      this.data.imgformat = ".jpg";
     }
-
-    // 画图(问题：1.时间长，下载图片时间 + 绘制时间  2.闪屏 3.图片旋转90度 4.图片叠加 5.画四个角)
-    // 将图片下载到本地(图片需要是https链接的)，不然手机上不能正常显示
-    wx.downloadFile({
-      url: app.globalData.rURL + app.globalData.rName +".jpg",
-      success: function (res) {
-        console.log(res);
-        context.drawImage(res.tempFilePath, x, y, width, height)
-        //绘制图片
-        context.draw();
-        //保存
-        context.save();
-        console.log(context);
-      },
-      fail: function (res) { }
+    this.setData({
+      rimg: app.globalData.rURL + app.globalData.rName + this.data.imgformat
     })
-
+   
   },
 
   /**

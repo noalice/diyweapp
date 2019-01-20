@@ -1,9 +1,17 @@
 <!--pages/production/result.wxml-->
 
-<!-- 画布 -->
-<view class="center">
-  <canvas wx:if="{{production == 'C'}}" canvas-id="canvasC" class="canvas" style="width:200px; height:300px;"></canvas>
-  <canvas wx:else canvas-id="canvasB" class="canvas" style="width:300px; height:300px;"></canvas>
+<view class="center" style='width:100%;height:350px;position:relative;border:1px solid pink'>
+  <!-- <canvas wx:if="{{production == 'C'}}" canvas-id="canvasC" class="canvas" style="width:200px; height:300px;"></canvas>
+  <canvas wx:else canvas-id="canvasB" class="canvas" style="width:300px; height:300px;"></canvas> -->
+
+  <block wx:if="{{production == 'C'}}">
+    <image mode="aspectFill" src="{{rimg}}" style='transform:rotate(-90deg);width:300px;height:200px;position:relative;border:1px solid red'></image>
+  </block>
+
+  <block wx:else>
+    <image mode="aspectFill" src="{{Bagimg}}" style='width:200px;height:300px;position:relative;border:1px solid red'></image>
+    <image mode="aspectFill" src="{{rimg}}" style='width:100px;height:100px;position:absolute;left:37%;top:160px;border:1px solid black;'></image>
+  </block>
 </view>
 
 <!-- 故事 -->
