@@ -3,6 +3,9 @@
 const app = getApp()
 const util = require('../../../utils/util.js')
 
+const contextC = wx.createCanvasContext('canvasC')
+const contextB = wx.createCanvasContext('canvasB')
+
 Page({
 
   /**
@@ -42,11 +45,6 @@ Page({
     ],
     returnimg: app.globalData.rootURL + "UGTP0002.png",
     finishimg: app.globalData.rootURL + "UGTP0001.png",
-    Eimg: "",
-    Mimg: "",
-    Cimg: "",
-    Pimg: "",
-    Bagimg: app.globalData.rootURL + "UGKP0002.png",
     // image URL
     pURL: "",
     tURL: "",
@@ -202,39 +200,42 @@ Page({
     if (this.data.indexb == 0) {
       this.data.drawName01 = this.data.drawName;
       console.log("滑片0：" + this.data.drawName01);
-
-      if (app.globalData.production == "C") {
-        this.data.Mimg = app.globalData.rootURL + this.data.drawName + this.data.imgformat;
-        console.log("Mimg：" + this.data.Mimg);
-      } else {
-        this.data.Pimg = app.globalData.rootURL + this.data.drawName + this.data.imgformat;
-        console.log("Pimg：" + this.data.Pimg);
-      }
-
     }
     if (this.data.indexb == 1) {
       this.data.drawName02 = this.data.drawName;
       console.log("滑片1：" + this.data.drawName02);
-
-      if (app.globalData.production == "C") {
-        this.data.Eimg = app.globalData.rootURL + this.data.drawName + this.data.imgformat;
-        console.log("Eimg：" + this.data.Eimg);
-      } 
-
     }
     if (this.data.indexb == 2) {
       this.data.drawName03 = this.data.drawName;
       console.log("滑片2：" + this.data.drawName03);
-
-      this.data.Cimg = app.globalData.rootURL + this.data.drawName + this.data.imgformat;
-      console.log("Cimg：" + this.data.Cimg);
-
     }
 
     var x = this.data.x;
     var y = this.data.y;
     var width = this.data.width;
     var height = this.data.height;
+    var context;
+    if (app.globalData.production == "C") {
+      context = contextC;
+    } else {
+      context = contextB;
+    }
+
+    // 画图(问题：1.时间长，下载图片时间 + 绘制时间  2.闪屏 3.图片旋转90度 4.图片叠加 5.画四个角)
+    // 将图片下载到本地(图片需要是https链接的)，不然手机上不能正常显示
+    wx.downloadFile({
+      url: app.globalData.rootURL + this.data.drawName + this.data.imgformat,
+      success: function(res) {
+        console.log(res);
+        context.drawImage(res.tempFilePath, x, y, width, height)
+        //绘制图片
+        context.draw();
+        //保存
+        context.save();
+        console.log(context);
+      },
+      fail: function(res) {}
+    })
 
   },
 
@@ -251,7 +252,7 @@ Page({
       if (this.data.drawName01 != "" && this.data.drawName02 != "" && this.data.drawName03 != "") {
         // 获取结果图名
         app.globalData.rName = util.createCp(this.data.drawName01, this.data.drawName02, this.data.drawName03, app.globalData.openId);
-        console.log("调用函数cp等到结果rName:" + app.globalData.rName);
+        console.log("调用函数cp等到结果rName:" + app.globalData.rName );
 
         wx.navigateTo({
           url: '../result/result'
