@@ -60,10 +60,6 @@ Page({
     drawName01: '',
     drawName02: '',
     drawName03: '',
-    x: 0, //绘画位置
-    y: 0, //绘画位置
-    width: 0, //绘画宽度
-    height: 0, //绘画高度
   },
 
   //根据tab，得到滑片索引（通过 data-current="{{index}}" 得到）
@@ -82,11 +78,6 @@ Page({
         this.setData({
           select: -1,
         });
-
-        this.data.x = 25;
-        this.data.y = 25;
-        this.data.width = 175;
-        this.data.height = 275
       }
       if (this.data.indexb == 1) {
         this.data.eURL = "E";
@@ -95,11 +86,6 @@ Page({
         this.setData({
           select: -1,
         });
-
-        this.data.x = 0;
-        this.data.y = 0;
-        this.data.width = 200;
-        this.data.height = 300
       }
       if (this.data.indexb == 2) {
         this.data.eURL = "C";
@@ -108,11 +94,6 @@ Page({
         this.setData({
           select: -1,
         });
-        // 画四个
-        // this.data.x = 25;
-        // this.data.y = 25;
-        // this.data.width = 175;
-        // this.data.height = 275 
       }
     } else {
       if (this.data.indexb == 0) {
@@ -122,11 +103,6 @@ Page({
         this.setData({
           select: -1,
         });
-
-        this.data.x = 100;
-        this.data.y = 100;
-        this.data.width = 100;
-        this.data.height = 100
       }
       if (this.data.indexb == 1) {
         this.data.eURL = "C";
@@ -135,12 +111,6 @@ Page({
         this.setData({
           select: -1,
         });
-
-        // 色块不画
-        this.data.x = 0;
-        this.data.y = 0;
-        this.data.width = 0;
-        this.data.height = 0
       }
     }
 
@@ -204,10 +174,17 @@ Page({
       console.log("滑片0：" + this.data.drawName01);
 
       if (app.globalData.production == "C") {
-        this.data.Mimg = app.globalData.rootURL + this.data.drawName + this.data.imgformat;
+
+        //页面使用
+        this.setData({
+          Mimg: app.globalData.rootURL + this.data.drawName + this.data.imgformat
+        });
         console.log("Mimg：" + this.data.Mimg);
       } else {
-        this.data.Pimg = app.globalData.rootURL + this.data.drawName + this.data.imgformat;
+
+        this.setData({
+          Pimg: app.globalData.rootURL + this.data.drawName + this.data.imgformat
+        });
         console.log("Pimg：" + this.data.Pimg);
       }
 
@@ -217,7 +194,10 @@ Page({
       console.log("滑片1：" + this.data.drawName02);
 
       if (app.globalData.production == "C") {
-        this.data.Eimg = app.globalData.rootURL + this.data.drawName + this.data.imgformat;
+
+        this.setData({
+          Eimg: app.globalData.rootURL + this.data.drawName + this.data.imgformat
+        });
         console.log("Eimg：" + this.data.Eimg);
       } 
 
@@ -226,15 +206,13 @@ Page({
       this.data.drawName03 = this.data.drawName;
       console.log("滑片2：" + this.data.drawName03);
 
-      this.data.Cimg = app.globalData.rootURL + this.data.drawName + this.data.imgformat;
+
+      this.setData({
+        Cimg: app.globalData.rootURL + this.data.drawName + this.data.imgformat
+      });
       console.log("Cimg：" + this.data.Cimg);
 
     }
-
-    var x = this.data.x;
-    var y = this.data.y;
-    var width = this.data.width;
-    var height = this.data.height;
 
   },
 
@@ -296,23 +274,11 @@ Page({
 
     if (app.globalData.production == "C") {
       this.data.pURL = "C";
-
       this.data.eURL = "M";
-      this.data.x = 25;
-      this.data.y = 25;
-      this.data.width = 175;
-      this.data.height = 275;
-
       this.data.imgformat = ".png";
     } else {
       this.data.pURL = "B";
-
       this.data.eURL = "P";
-      this.data.x = 100;
-      this.data.y = 100;
-      this.data.width = 100;
-      this.data.height = 100;
-
       this.data.imgformat = ".jpg";
     }
 

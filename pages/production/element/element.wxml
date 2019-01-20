@@ -9,20 +9,25 @@
 </view>
 
 <!-- 图片 -->
-<view class="center" style='width:100%;height:350px;border:1px solid pink;position:relative'>
+<!-- 问题：位置写死，宽高不一致会挪位置 -->
+<view class="center" style='width:100%;height:350px;position:relative;border:1px solid pink;'>
 
   <block wx:if="{{production == 'C'}}">
-    <image mode="aspectFill" src="{{Eimg}}" style='width:300px;height:200px;border:1px solid red'></image>
-    <image mode="aspectFill" src="{{Mimg}}" style='width:300px;height:200px;border:1px solid black'></image>
-    <image mode="aspectFill" src="{{Cimg}}" style='width:300px;height:200px;border:1px solid blue'></image>
-    <image mode="aspectFill" src="{{Cimg}}" style='width:300px;height:200px;border:1px solid blue'></image>
-    <image mode="aspectFill" src="{{Cimg}}" style='width:300px;height:200px;border:1px solid blue'></image>
-    <image mode="aspectFill" src="{{Cimg}}" style='width:300px;height:200px;border:1px solid blue'></image>
+    <image mode="aspectFill" src="{{Eimg}}" style='transform:rotate(-90deg);width:300px;height:200px;position:relative;border:1px solid red'></image>
+    <image mode="aspectFill" src="{{Mimg}}" style='transform:rotate(-90deg);width:260px;height:160px;position:absolute;border:1px solid black'></image>
+    <!-- 左上 -->
+    <image mode="aspectFill" src="{{Cimg}}" style='width:50px;height:50px;position:absolute;left:110px;top:46px;border:1px solid blue'></image>
+    <!-- 左下 -->
+    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(-90deg);width:50px;height:50px;position:absolute;left:110px;top:252px;border:1px solid blue'></image>
+    <!-- 右上 -->
+    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(90deg);width:50px;height:50px;position:absolute;left:214px;top:46px;border:1px solid blue'></image>
+    <!-- 右下 -->
+    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(180deg);width:50px;height:50px;position:absolute;left:214px;top:252px;border:1px solid blue'></image>
   </block>
 
   <block wx:else>
-    <image mode="aspectFill" src="{{Bagimg}}" style='width:200px;height:300px;border:1px solid red'></image>
-    <image mode="aspectFill" src="{{Pimg}}" style='width:100px;height:100px;border:1px solid black;'></image>
+    <image mode="aspectFill" src="{{Bagimg}}" style='width:200px;height:300px;position:relative;border:1px solid red'></image>
+    <image mode="aspectFill" src="{{Pimg}}" style='width:100px;height:100px;position:absolute;left:37%;top:160px;border:1px solid black;'></image>
   </block>
 
 </view>
