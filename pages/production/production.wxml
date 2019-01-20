@@ -1,11 +1,12 @@
 <!--production.wxml-->
-<!-- 返回按钮 -->
-<view style='height:1px;z-index:3;'>
-  <image mode="aspectFill" src="{{returnimg}}" bindtap="ReturnTap" style="width:60px;height:30px;z-index:3;"></image>
-</view>
+<view style="width:100%;height:100%;background-image:url('{{bkimg}}');background-size:100% 100%;">
+  <!-- 返回按钮 -->
+  <view style='height:1px;z-index:3;'>
+    <image mode="aspectFill" src="{{returnimg}}" bindtap="ReturnTap" style="width:60px;height:30px;"></image>
+  </view>
 
-<view class='production'>
-  <button bindtap='BagTap' class='pro1' hover-class='pro-hover'>
-  </button>
-  <button bindtap='CatpetTap' class='pro2' hover-class='pro-hover'></button>
+  <view class='production'>
+    <button bindtap='BagTap' class='pro1' style="background-image:url('{{pro1}}');background-size:100% 100%;" hover-class='pro-hover'></button>
+    <button bindtap='CatpetTap' class='pro2' style="background-image:url('{{pro2}}');background-size:100% 100%;" hover-class='pro-hover'></button>
+  </view>
 </view>

@@ -10,8 +10,10 @@ const app = getApp()
    */
 Page({
   data: {
-    motto: '产品页面',
     returnimg: app.globalData.rootURL + "USTT0306.png",
+    pro1: app.globalData.rootURL + "USTT0201.png",
+    pro2: app.globalData.rootURL + "USTT0202.png",
+    bkimg: app.globalData.rootURL + "UGKP0001.png",
   },
 
   //事件处理函数

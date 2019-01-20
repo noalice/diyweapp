@@ -43,7 +43,8 @@ Page({
         "url": app.globalData.rootURL + "USTT0403.png"
       }
     ],
-
+    returnimg: app.globalData.rootURL + "UGTP0002.png",
+    finishimg: app.globalData.rootURL + "UGTP0001.png",
     // image URL
     pURL: "",
     tURL: "",
@@ -54,9 +55,9 @@ Page({
     // 里面滑片默认不选择
     select: -1,
     drawName: "",
-    drawName01: "",
-    drawName02: "",
-    drawName03: "",
+    drawName01: '',
+    drawName02: '',
+    drawName03: '',
     x: 0, //绘画位置
     y: 0, //绘画位置
     width: 0, //绘画宽度
@@ -71,10 +72,14 @@ Page({
 
     console.log("外部滑片:" + this.data.indexb);
 
-    // 滑片切换有问题(一样的图片)
     if (app.globalData.production == "C") {
       if (this.data.indexb == 0) {
         this.data.eURL = "M";
+
+        //不带默认选择框
+        this.setData({
+          select: -1,
+        });
 
         this.data.x = 25;
         this.data.y = 25;
@@ -84,6 +89,11 @@ Page({
       if (this.data.indexb == 1) {
         this.data.eURL = "E";
 
+        //不带默认选择框
+        this.setData({
+          select: -1,
+        });
+
         this.data.x = 0;
         this.data.y = 0;
         this.data.width = 200;
@@ -91,6 +101,11 @@ Page({
       }
       if (this.data.indexb == 2) {
         this.data.eURL = "C";
+
+        //不带默认选择框
+        this.setData({
+          select: -1,
+        });
         // 画四个
         // this.data.x = 25;
         // this.data.y = 25;
@@ -101,6 +116,11 @@ Page({
       if (this.data.indexb == 0) {
         this.data.eURL = "P";
 
+        //不带默认选择框
+        this.setData({
+          select: -1,
+        });
+
         this.data.x = 100;
         this.data.y = 100;
         this.data.width = 100;
@@ -108,6 +128,11 @@ Page({
       }
       if (this.data.indexb == 1) {
         this.data.eURL = "C";
+
+        //不带默认选择框
+        this.setData({
+          select: -1,
+        });
 
         // 色块不画
         this.data.x = 0;
@@ -227,7 +252,7 @@ Page({
       if (this.data.drawName01 != "" && this.data.drawName02 != "" && this.data.drawName03 != "") {
         // 获取结果图名
         app.globalData.rName = util.createCp(this.data.drawName01, this.data.drawName02, this.data.drawName03, app.globalData.openId);
-        console.log("rName:" + app.globalData.rName );
+        console.log("调用函数cp等到结果rName:" + app.globalData.rName );
 
         wx.navigateTo({
           url: '../result/result'
@@ -243,8 +268,8 @@ Page({
     } else {
       if (this.data.drawName01 != "" && this.data.drawName02 != "") {
         // 获取结果图名
-        app.globalData.rName = util.createCp(this.data.drawName01, this.data.drawName02, app.globalData.openId);
-        console.log("rName:" + app.globalData.rName);
+        app.globalData.rName = util.createBp(this.data.drawName01, this.data.drawName02, app.globalData.openId);
+        console.log("调用函数bp得到结果rName:" + app.globalData.rName);
 
         wx.navigateTo({
           url: '../result/result'

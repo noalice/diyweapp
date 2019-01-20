@@ -37,6 +37,7 @@ Page({
         text: app.globalData.rootURL + 'USTT0305.png'
       },
     ],
+    bkimg: app.globalData.rootURL + 'UGKP0001.png',
     // swiper组件设置
     indicatorDots: false,
     autoplay: false,

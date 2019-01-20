@@ -29,9 +29,8 @@ App({
             // 登录成功 返回json对象
 
             success: function(res) {
-              console.log('返回的openid:' + res.data.openId)
-              getApp().globalData.openId = res.data.openId
-              console.log(getApp().globalData.openId )
+              console.log('返回的openId:' + res.data.openId);
+              getApp().globalData.openId = res.data.openId;
             }
 
           })

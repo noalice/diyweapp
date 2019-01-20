@@ -2,8 +2,10 @@
 
 <!-- 按钮 -->
 <view class="button">
-  <button class="return" bindtap="ReturnTap" hover-class='hover'> 返回 </button>
-  <button class="submit" bindtap="ResultTap" hover-class='hover'> 完成 </button>
+  <!-- <button class="return" bindtap="ReturnTap" hover-class='hover'> 返回 </button>
+  <button class="submit" bindtap="ResultTap" hover-class='hover'> 完成 </button> -->
+  <image mode="aspectFill" src="{{returnimg}}" class="return" bindtap="ReturnTap"></image>
+  <image mode="aspectFill" src="{{finishimg}}" class="submit" bindtap="ResultTap"></image>
 </view>
 
 <!-- 文字提示 -->
@@ -27,10 +29,10 @@
     aspectFit	保持纵横比缩放图片，使图片的长边能完全显示出来。也就是说，可以完整地将图片显示出来。
     swiper-item 添加 padding-right:5px 尾部会不能到底
 
-    问题：选择带框后，下一个tab会默认带框
+    问题：选择带框后，下一个tab会默认带框【解决：改变动画时长 duration="100"】
   -->
   <block wx:if="{{production == 'C'}}">
-    <swiper current="{{indexb}}" vertical="true">
+    <swiper current="{{indexb}}" vertical="true" duration="100">
       <swiper-item wx:for="{{carpet}}" style="background:{{item.color}};height:150rpx;" catchtouchmove="stopTouchMove">
         <view style="height:150px;">
 
@@ -48,7 +50,7 @@
   </block>
 
   <block wx:else>
-    <swiper current="{{indexb}}" vertical="true">
+    <swiper current="{{indexb}}" vertical="true" duration="100">
       <swiper-item wx:for="{{bag}}" style="height:150rpx;" catchtouchmove="stopTouchMove">
         <view style="background:{{item.color}};height:150px;">
 

@@ -1,4 +1,6 @@
 <!--animation.wxml-->
+
+<!-- 自动水波纹 -->
 <!--
 <view class="container">
   <view class="wave">
@@ -7,18 +9,18 @@
       <view class="w3"></view>
       <view class="w4"></view>
     </view>
-    -->
-<!--
     <view class="content" bindtap="bindViewTap">
-      <image src="http://119.23.13.172:8080/appserver-master-1.0.0-dev/user-images/5ae220b2bf444ed499dcdb74ad5dcf0a.png" class="headImage" mode="cover" />
+      <image src="{{bkimg}}" class="headImage" mode="cover" />
     </view>
   </view>
 </view>
 -->
 
-<view class="ripple" style="{{rippleStyle}}"></view>
-<view class="ripple" style="{{rippleStyle1}}"></view>
+<!-- 点击水波纹 -->
+<view style="width:100%;height:100%;background-image:url('{{bkimg}}');background-size:100% 100%;opacity:{{opacity}}">
+  <view class="ripple" style="{{rippleStyle}}"></view>
+  <view class="ripple" style="{{rippleStyle1}}"></view>
 
-<view class="container" bindtouchstart="containerTap">
+  <view class="container" bindtouchstart="containerTap"></view>
 </view>
 

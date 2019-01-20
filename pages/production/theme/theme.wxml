@@ -1,5 +1,5 @@
 
-<view class="swiper" style='z-index:1;'>
+<view class="swiper" style="background-image:url('{{bkimg}}');background-size:100% 100%;">
   <swiper class="swiper-block" previous-margin="0rpx" next-margin="0rpx" current="0" bindchange="swiperChange" vertical="{{vertical}} " display-multiple-items="3" circular="true">
     <block wx:for="{{imgUrls}}" wx:index="{{index}}">
       <swiper-item class="swiper-item">

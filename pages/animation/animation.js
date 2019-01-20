@@ -4,98 +4,91 @@ const app = getApp()
 
 Page({
   data: {
-    bkimg: "", //背景图片
-    motto: '动画页面',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    bkimg: app.globalData.rootURL + 'UGKP0001.png', //背景图片
+    opacity: 0 //背景透明度
   },
   //事件处理函数（点击跳转函数bindViewTap注册）
-  bindViewTap: function() {
-    wx.navigateTo({
-      // url: '../logs/logs'
-      // 点击跳转到产品页面
-      url: '../production/theme/theme'
-    })
-  },
+  // bindViewTap: function() {
+  //   wx.navigateTo({
+  //     url: '../production/theme/theme'
+  //   })
+  // },
 
-  /* 点击屏幕回调函数 */
+  /* 点击屏幕回调函数(水波纹) */
   containerTap: function(res) {
     var that = this
     var x = res.touches[0].pageX;
-    var y = res.touches[0].pageY+85;
+    var y = res.touches[0].pageY + 85;
     this.setData({
       rippleStyle: '',
-      rippleStyle1:''
+      rippleStyle1: ''
     });
     setTimeout(function() {
       that.setData({
         rippleStyle: 'top:' + y + 'px;left:' + x + 'px;-webkit-animation: ripple 0.6s ease-in-out;animation:ripple 0.6s linear;'
       });
-    }, 200)
+    }, 1000)
 
-    setTimeout(function () {
+    setTimeout(function() {
       that.setData({
         rippleStyle1: 'top:' + y + 'px;left:' + x + 'px;-webkit-animation: ripple 0.6s ease-in-out;animation:ripple 0.6s linear 0.2s;'
       });
-    },200)
+    }, 1000)
 
-    setTimeout(function () {
+    setTimeout(function() {
       that.setData({
         rippleStyle2: 'top:' + y + 'px;left:' + x + 'px;-webkit-animation: ripple 0.6s ease-in-out;animation:ripple 0.6s linear 0.4s;'
       });
-    }, 200)
+    }, 1000)
 
-setTimeout(function(){
+    setTimeout(function() {
+      wx.navigateTo({
+        url: '../production/theme/theme'
+      })
+    }, 2000)
 
-  wx.navigateTo({
-    // url: '../logs/logs'
-    // 点击跳转到产品页面
-    url: '../production/theme/theme'
-  })
-},1000)
-  
   },
 
   onLoad: function() {
-    this.setData({
-      bkimg: app.globalData.rootURL + "5ae220b2bf444ed499dcdb74ad5dcf0a.png"
-    })
 
+    // 背景由透明到不透明
+    var that = this;
+    setTimeout(function() {
+      that.setData({
+        opacity: 0.2
+      });
+    }, 1000)
 
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse) {
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+    setTimeout(function() {
+      that.setData({
+        opacity: 0.4
+      });
+    }, 2000)
+
+    setTimeout(function() {
+      that.setData({
+        opacity: 0.6
+      });
+    }, 3000)
+
+    setTimeout(function() {
+      that.setData({
+        opacity: 0.8
+      });
+    }, 4000)
+
+    setTimeout(function() {
+      that.setData({
+        opacity: 1
+      });
+    }, 5000)
+
+    // （动画）背景不透明后自动跳转
+    // setTimeout(function () {
+    //   wx.navigateTo({
+    //     url: '../production/theme/theme'
+    //   })
+    // }, 6000)
+
   }
 })
