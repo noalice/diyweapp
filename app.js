@@ -76,8 +76,12 @@ App({
     openId: "",
     //结果root路径
     rURL:"https://www.vrwbg.com:8080/mini/image_results/",
-    //结果图名
-    rName:""
+    //结果参数
+    cc_name:"",//地毯参数
+    ce_name: "",
+    cm_name: "",
+    bp_name: "",//布包参数
+    bc_name: "",
   },
   // 页面转发按钮
   onShareAppMessage: function() {
@@ -89,5 +93,6 @@ App({
       desc: '分享该页面',
       path: '/page/user?id=123'
     }
-  }
+  },
+  
 })
