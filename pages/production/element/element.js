@@ -51,7 +51,7 @@ Page({
     pURL: "",
     tURL: "",
     eURL: "",
-    imgformat: "",
+    imgformat: ".png",
     imgURL: [],
     imgName: [],
     // 里面滑片默认不选择
@@ -227,9 +227,9 @@ Page({
     // 判断完成度
     if (app.globalData.production == "C") {
       if (this.data.drawName01 != "" && this.data.drawName02 != "" && this.data.drawName03 != "") {
-        // 获取结果图名(e,c,m,id)
-        console.log("this.data.drawName02, this.data.drawName03, this.data.drawName01:" + this.data.drawName02, this.data.drawName03, this.data.drawName01);
-        app.globalData.rName = util.createCp(this.data.drawName02, this.data.drawName03, this.data.drawName01, app.globalData.openId);
+        // 获取结果图名(c,e,m,id)
+        console.log("this.data.drawName02, this.data.drawName03, this.data.drawName01:" + this.data.drawName03, this.data.drawName02, this.data.drawName01);
+        app.globalData.rName = util.createCp(this.data.drawName03, this.data.drawName02, this.data.drawName01, app.globalData.openId);
         console.log("调用函数cp等到结果rName:" + app.globalData.rName);
 
         wx.navigateTo({
@@ -245,8 +245,8 @@ Page({
       }
     } else {
       if (this.data.drawName01 != "" && this.data.drawName02 != "") {
-        // 获取结果图名(id,p,c)
-        app.globalData.rName = util.createBp(app.globalData.openId,this.data.drawName01, this.data.drawName02);
+        // 获取结果图名(p,c,id)
+        app.globalData.rName = util.createBp(this.data.drawName01, this.data.drawName02,app.globalData.openId);
         console.log("调用函数bp得到结果rName:" + app.globalData.rName);
 
         wx.navigateTo({
@@ -280,11 +280,11 @@ Page({
     if (app.globalData.production == "C") {
       this.data.pURL = "UC";
       this.data.eURL = "M";
-      this.data.imgformat = ".png";
+      // this.data.imgformat = ".png";
     } else {
       this.data.pURL = "UB";
       this.data.eURL = "P";
-      this.data.imgformat = ".jpg";
+      // this.data.imgformat = ".jpg";
     }
 
     switch (app.globalData.theme) {
