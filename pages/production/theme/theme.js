@@ -45,7 +45,7 @@ Page({
     duration: 2000,
     vertical: true,
     //初始状态就让中间的图案放大
-    swiperIndex: 1
+    swiperIndex: 1,
   },
 
   swiperChange(e) {
@@ -75,6 +75,17 @@ Page({
   onLoad: function(options) {
     wx.showLoading({
       title: '加载中',
+    })
+    // 自适应屏幕高度
+    var that = this
+    wx.getSystemInfo({
+      success: function(res) {
+        // 高度,宽度 单位为px
+        that.setData({
+          // swiper-block样式 bgHeight
+          bgHeight: Math.ceil(((res.windowHeight * 750)) / (res.windowWidth)),
+        })
+      }
     })
   },
   // 监听页面初次渲染完成
