@@ -232,7 +232,7 @@ Page({
         })
       }
     } else {
-      if (app.globalData.bp_name != "" && app.globalData.bc_name != "") {
+      if (app.globalData.bp_name != "") {
 
         wx.navigateTo({
           url: '../result/result'
@@ -240,7 +240,7 @@ Page({
       } else {
         // 弹窗
         wx.showToast({
-          title: '需要选择两个元素!!!',
+          title: '需要选择主题元素!!!',
           icon: 'none',
           duration: 2000 //持续的时间
         })
