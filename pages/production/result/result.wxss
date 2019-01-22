@@ -9,9 +9,22 @@
   justify-content:center;
   align-items:center;
 
-  margin-top:30px;
+  /* margin-top:30px; */
 }
 /* 画布边框 */
 canvas{
   border: 1px solid #E0E0E0;
+}
+
+/* 去边框 */
+button::after {
+  border: 0;
+}
+.bt {
+  float: left;
+  height: 50rpx;
+  width: 100rpx;
+}
+.hover {
+  background-color: pink;
 }

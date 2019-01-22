@@ -13,29 +13,24 @@ Page({
     //地毯
     carpet: [{
         "name": "主题",
-        "color": "orange",
         "url": app.globalData.rootURL + "UGTT0001.png"
       },
       {
         "name": "边框",
-        "color": "blue",
         "url": app.globalData.rootURL + "USTT0401.png"
       },
       {
         "name": "角隅",
-        "color": "green",
         "url": app.globalData.rootURL + "USTT0402.png"
       }
     ],
     //布包
     bag: [{
         "name": "主题",
-        "color": "pink",
         "url": app.globalData.rootURL + "UGTT0001.png"
       },
       {
         "name": "配色",
-        "color": "black",
         "url": app.globalData.rootURL + "USTT0403.png"
       }
     ],
@@ -56,6 +51,11 @@ Page({
     // 里面滑片默认不选择
     select: -1,
     drawName: "",
+
+    // 图片位置
+    centerheight: 0,
+    Eimgbottom: 0,
+    Cimgtop:0,
   },
 
   //根据tab，得到滑片索引（通过 data-current="{{index}}" 得到）
@@ -109,33 +109,33 @@ Page({
       }
     }
 
-    this.data.imgName= [
-      this.data.pURL + this.data.tURL + this.data.eURL + "I01",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I02",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I03",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I04",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I05",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I06",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I07",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I08",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I09",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I10",
-    ],
+    this.data.imgName = [
+        this.data.pURL + this.data.tURL + this.data.eURL + "I01",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I02",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I03",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I04",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I05",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I06",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I07",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I08",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I09",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I10",
+      ],
 
-    this.setData({
-      imgURL: [
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I01.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I02.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I03.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I04.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I05.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I06.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I07.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I08.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I09.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I10.png",
-      ]
-    })
+      this.setData({
+        imgURL: [
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I01.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I02.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I03.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I04.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I05.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I06.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I07.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I08.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I09.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I10.png",
+        ]
+      })
 
     // console.log("事件点击加载获取图片路径：" + this.data.imgURL);
     // console.log("图片名称：" + this.data.imgName[0]);
@@ -258,6 +258,16 @@ Page({
       title: '加载中',
     })
 
+    //wx.getSystemInfoSync().windowHeight单位px，h单位rpx（px到rpx转换）
+    var h = 750 * wx.getSystemInfoSync().windowHeight / wx.getSystemInfoSync().windowWidth;
+    this.setData({
+      //上面100rpx,下面150rpx的60rpx
+      centerheight: h - 210,
+      // 上面的100rpx,下面的40rpx的150rpx的60rpx，中间的750rpx（120rpx手动调的）
+      Eimgbottom: (h - 1100) / 2 +120,
+      Cimgtop:(h-1000)/2,
+    })
+
     this.setData({
       production: app.globalData.production
     });
@@ -293,32 +303,32 @@ Page({
     }
 
     this.data.imgName = [
-      this.data.pURL + this.data.tURL + this.data.eURL + "I01",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I02",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I03",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I04",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I05",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I06",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I07",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I08",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I09",
-      this.data.pURL + this.data.tURL + this.data.eURL + "I10",
-    ],
+        this.data.pURL + this.data.tURL + this.data.eURL + "I01",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I02",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I03",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I04",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I05",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I06",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I07",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I08",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I09",
+        this.data.pURL + this.data.tURL + this.data.eURL + "I10",
+      ],
 
-    this.setData({
-      imgURL: [
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I01.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I02.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I03.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I04.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I05.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I06.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I07.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I08.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I09.png",
-        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I10.png",
-      ]
-    })
+      this.setData({
+        imgURL: [
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I01.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I02.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I03.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I04.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I05.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I06.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I07.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I08.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I09.png",
+          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I10.png",
+        ]
+      })
 
     // console.log("页面加载获取图片路径：" + this.data.imgURL);
     // console.log("图片名称：" + this.data.imgName[0]);

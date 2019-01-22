@@ -11,6 +11,16 @@ Page({
     rimg: '',
     Bagimg: app.globalData.rootURL + "UGKP0002.png",
     imgformat: "",
+    returnimg: app.globalData.rootURL + "USTT0501.png",
+    tipimg: app.globalData.rootURL + "UGKT0501.png",
+    centerh:"",
+  },
+
+// 结果页面跳转到哪里？？？
+  returnTap: function () {
+    wx.navigateTo({
+      url: '../element/element'
+    })
   },
   /**
    * 获取生成的地毯图片名
@@ -75,6 +85,12 @@ Page({
 
     wx.showLoading({
       title: '加载中',
+    })
+
+    //wx.getSystemInfoSync().windowHeight单位px，h单位rpx（px到rpx转换）
+    var h = 750 * wx.getSystemInfoSync().windowHeight / wx.getSystemInfoSync().windowWidth;
+    this.setData({
+      centerh: h-120,
     })
 
     this.setData({

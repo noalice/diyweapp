@@ -1,7 +1,7 @@
 <!--pages/production/element/element.wxml-->
 
 <!-- 按钮 -->
-<view class="button">
+<view class="button" style="position:absolute;z-index:2;">
   <!-- <button class="return" bindtap="ReturnTap" hover-class='hover'> 返回 </button>
   <button class="submit" bindtap="ResultTap" hover-class='hover'> 完成 </button> -->
   <image mode="aspectFill" src="{{returnimg}}" class="return" bindtap="ReturnTap"></image>
@@ -12,25 +12,28 @@
 <!-- 
   问题：位置写死，宽高不一致会挪位置 
   考虑：屏幕位置或固定center宽度
+  border:1px solid pink
 -->
-<view class="center" style='width:100%;height:350px;position:relative;border:1px solid pink;'>
+<view class="center" style='width:80%;height:{{centerheight}}rpx;position:relative;z-index:1;'>
 
   <block wx:if="{{production == 'C'}}">
-    <image mode="aspectFill" src="{{Eimg}}" style='transform:rotate(-90deg);width:300px;height:200px;position:relative;border:1px solid red'></image>
-    <image mode="aspectFill" src="{{Mimg}}" style='transform:rotate(-90deg);width:260px;height:160px;position:absolute;border:1px solid black'></image>
-    <!-- 左上 -->
-    <image mode="aspectFill" src="{{Cimg}}" style='width:50px;height:50px;position:absolute;left:110px;top:46px;border:1px solid blue'></image>
-    <!-- 左下 -->
-    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(-90deg);width:50px;height:50px;position:absolute;left:110px;top:252px;border:1px solid blue'></image>
-    <!-- 右上 -->
-    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(90deg);width:50px;height:50px;position:absolute;left:214px;top:46px;border:1px solid blue'></image>
-    <!-- 右下 -->
-    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(180deg);width:50px;height:50px;position:absolute;left:214px;top:252px;border:1px solid blue'></image>
+    <view style='width:550rpx;height:{{centerheight-140}}rpx;position:absolute;bottom:40rpx;background:#fff;'>
+      <image mode="aspectFill" src="{{Eimg}}" style='transform:rotate(-90deg);width:750rpx;height:500rpx;left:-100rpx;bottom:{{Eimgbottom}}rpx;position:absolute;'></image>
+      <image mode="aspectFill" src="{{Mimg}}" style='transform:rotate(-90deg);width:650rpx;height:400rpx;position:absolute;left:-50rpx;bottom:{{Eimgbottom+50}}rpx;'></image>
+      <!-- 左上 -->
+      <image mode="aspectFill" src="{{Cimg}}" style='width:100rpx;height:100rpx;position:absolute;left:75rpx;top:{{Cimgtop}}rpx;'></image>
+      <!-- 左下 -->
+      <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(-90deg);width:100rpx;height:100rpx;position:absolute;left:75rpx;top:{{Cimgtop+550}}rpx;'></image>
+      <!-- 右上 -->
+      <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(90deg);width:100rpx;height:100rpx;position:absolute;left:375rpx;top:{{Cimgtop}}rpx;'></image>
+      <!-- 右下 -->
+      <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(180deg);width:100rpx;height:100rpx;position:absolute;left:375rpx;top:{{Cimgtop+550}}rpx;'></image>
+    </view>
   </block>
 
   <block wx:else>
-    <image mode="aspectFill" src="{{Bagimg}}" style='width:200px;height:300px;position:relative;border:1px solid red'></image>
-    <image mode="aspectFill" src="{{Pimg}}" style='width:100px;height:100px;position:absolute;left:37%;top:160px;border:1px solid black;'></image>
+    <image mode="aspectFill" src="{{Bagimg}}" style='width:500rpx;height:750rpx;position:absolute;bottom:40rpx;'></image>
+    <image mode="aspectFill" src="{{Pimg}}" style='width:300rpx;height:300rpx;position:absolute;bottom:150rpx;'></image>
   </block>
 
 </view>
@@ -44,18 +47,19 @@
     禁止外部swiper手指触摸滑动 stopTouchMove
     aspectFit	保持纵横比缩放图片，使图片的长边能完全显示出来。也就是说，可以完整地将图片显示出来。
     swiper-item 添加 padding-right:5px 尾部会不能到底
+    previous-margin="15rpx" next-margin="15rpx"
 
     问题：选择带框后，下一个tab会默认带框【解决：改变动画时长 duration="100"】
   -->
   <block wx:if="{{production == 'C'}}">
-    <swiper current="{{indexb}}" vertical="true" duration="100">
-      <swiper-item wx:for="{{carpet}}" style="background:{{item.color}};height:150rpx;" catchtouchmove="stopTouchMove">
-        <view style="height:150px;">
+    <swiper current="{{indexb}}" vertical="true" duration="100" style="height:150rpx;">
+      <swiper-item wx:for="{{carpet}}" style="background:#ffffff;" catchtouchmove="stopTouchMove">
+        <view style="height:150rpx;">
 
-          <swiper current="0" display-multiple-items="3">
-            <swiper-item wx:for="{{imgURL}}" style="height:120rpx;margin:15px 10px;">
-              <view style="height:120px;">
-                <image src="{{item}}" data-num="{{index}}" bindtap='swipclick' mode="aspectFit" style="width:120px;height:120px;" class="{{select==index?'border':''}}" />
+          <swiper current="0" display-multiple-items="5">
+            <swiper-item wx:for="{{imgURL}}" style="height:120rpx;margin:15rpx 18rpx;">
+              <view style="height:120rpx;">
+                <image src="{{item}}" data-num="{{index}}" bindtap='swipclick' mode="aspectFit" style="width:120rpx;height:120rpx;" class="{{select==index?'border':''}}" />
               </view>
             </swiper-item>
           </swiper>
@@ -66,14 +70,14 @@
   </block>
 
   <block wx:else>
-    <swiper current="{{indexb}}" vertical="true" duration="100">
-      <swiper-item wx:for="{{bag}}" style="height:150rpx;" catchtouchmove="stopTouchMove">
-        <view style="background:{{item.color}};height:150px;">
+    <swiper current="{{indexb}}" vertical="true" duration="100" style="height:150rpx;">
+      <swiper-item wx:for="{{bag}}" style="background:#ffffff;" catchtouchmove="stopTouchMove">
+        <view style="height:150rpx;">
 
-          <swiper current="0" display-multiple-items="2.5">
-            <swiper-item wx:for="{{imgURL}}" style="height:120rpx;margin:15px 10px;">
-              <view style=" height:120px;">
-                <image src="{{item}}" data-num="{{index}}" bindtap='swipclick' mode="aspectFit " style="width:120px;height:120px;" class="{{select==index?'border':''}}" />
+          <swiper current="0" display-multiple-items="5">
+            <swiper-item wx:for="{{imgURL}}" style="height:120rpx;margin:15rpx 18rpx;">
+              <view style=" height:120rpx;">
+                <image src="{{item}}" data-num="{{index}}" bindtap='swipclick' mode="aspectFit " style="width:120rpx;height:120rpx;" class="{{select==index?'border':''}}" />
               </view>
             </swiper-item>
           </swiper>
@@ -89,19 +93,21 @@
   问题： 
     1.背景图片不能缩放  background:{{item.color}} url('{{item.url}}') no-repeat center center;color:#ffffff;background-size：50px 30px；
     2.图片不能显示 img
+    3.view 点击hover-class 无效【解决：样式 加 !important】，但点击完后回原色
+    4.border-left:1px solid black 一个不见
   -->
   <block wx:if="{{production == 'C'}}">
-    <scroll-view scroll-x style="height:70rpx;width:100%;">
-      <view wx:for="{{carpet}}" style="height:100rpx;width:33.3%;display:inline-block;">
-        <view bindtap='changeview' style="height:60rpx;text-align:center;line-height:60rpx;background:{{item.color}};color:#ffffff;" data-current="{{index}}">{{item.name}}</view>
+    <scroll-view scroll-x style="height:60rpx;width:100%;">
+      <view wx:for="{{carpet}}" style="width:33.3%;display:inline-block;">
+        <view bindtap='changeview' style="height:60rpx;text-align:center;line-height:60rpx;background:#a28081;color:#ffffff;" hover-class="clickcolor" data-current="{{index}}">{{item.name}}</view>
       </view>
     </scroll-view>
   </block>
 
   <block wx:else>
-    <scroll-view scroll-x style="height:70rpx;width:100%;">
-      <view wx:for="{{bag}}" style="height:100rpx;width:50%;display:inline-block;">
-        <view bindtap='changeview' style="height:60rpx;text-align:center;line-height:60rpx;background:{{item.color}};color:#ffffff;" data-current="{{index}}">{{item.name}}</view>
+    <scroll-view scroll-x style="height:60rpx;width:100%;">
+      <view wx:for="{{bag}}" style="width:50%;display:inline-block;">
+        <view bindtap='changeview' style="height:60rpx;text-align:center;line-height:60rpx;background:#a28081;color:#ffffff;" hover-class="clickcolor" data-current="{{index}}">{{item.name}}</view>
       </view>
     </scroll-view>
   </block>
