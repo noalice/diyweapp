@@ -5,7 +5,7 @@
   <!-- <button class="return" bindtap="ReturnTap" hover-class='hover'> 返回 </button>
   <button class="submit" bindtap="ResultTap" hover-class='hover'> 完成 </button> -->
   <image mode="aspectFill" src="{{returnimg}}" class="return" bindtap="ReturnTap"></image>
-  <image mode="aspectFill" src="{{finishimg}}" class="submit" bindtap="ResultTap"></image>
+  <image wx:if="{{showFinishbt == true}}" mode="aspectFill" src="{{finishimg}}" class="submit" bindtap="ResultTap"></image>
 </view>
 
 <!-- 图片 -->
@@ -17,7 +17,7 @@
 <view class="center" style='width:80%;height:{{centerheight}}rpx;position:relative;z-index:1;'>
 
   <block wx:if="{{production == 'C'}}">
-    <view style='width:550rpx;height:{{centerheight-140}}rpx;position:absolute;bottom:40rpx;background:#fff;'>
+    <view style='width:550rpx;height:{{centerheight-160}}rpx;position:absolute;bottom:30rpx;background:#fff'>
       <image mode="aspectFill" src="{{Eimg}}" style='transform:rotate(-90deg);width:750rpx;height:500rpx;left:-100rpx;bottom:{{Eimgbottom}}rpx;position:absolute;'></image>
       <image mode="aspectFill" src="{{Mimg}}" style='transform:rotate(-90deg);width:650rpx;height:400rpx;position:absolute;left:-50rpx;bottom:{{Eimgbottom+50}}rpx;'></image>
       <!-- 左上 -->
@@ -32,8 +32,7 @@
   </block>
 
   <block wx:else>
-    <image mode="aspectFill" src="{{Bagimg}}" style='width:500rpx;height:750rpx;position:absolute;bottom:40rpx;'></image>
-    <image mode="aspectFill" src="{{Pimg}}" style='width:300rpx;height:300rpx;position:absolute;bottom:150rpx;'></image>
+    <image mode="aspectFill" src="{{Pimg}}" style='width:750rpx;height:750rpx;position:absolute;bottom:50rpx;'></image>
   </block>
 
 </view>
@@ -91,15 +90,15 @@
   <!-- 
   注意：data-current="{{index}} "
   问题： 
-    1.背景图片不能缩放  background:{{item.color}} url('{{item.url}}') no-repeat center center;color:#ffffff;background-size：50px 30px；
-    2.图片不能显示 img
+    1.背景图片不能缩放  background:{{item.color}} url('{{item.url}}') no-repeat center center;color:#ffffff;background-size：50px 30px;
+    2.图片不能显示 img 被挤下去了
     3.view 点击hover-class 无效【解决：样式 加 !important】，但点击完后回原色
     4.border-left:1px solid black 一个不见
   -->
   <block wx:if="{{production == 'C'}}">
     <scroll-view scroll-x style="height:60rpx;width:100%;">
       <view wx:for="{{carpet}}" style="width:33.3%;display:inline-block;">
-        <view bindtap='changeview' style="height:60rpx;text-align:center;line-height:60rpx;background:#a28081;color:#ffffff;" hover-class="clickcolor" data-current="{{index}}">{{item.name}}</view>
+        <button bindtap='changeview' style="height:60rpx;text-align:center;line-height:60rpx;background:{{index==indexb? '#550508' : '#a28081'}};color:#ffffff;border-left:1px solid black;border-right:1px solid black" data-current="{{index}}">{{item.name}}</button>
       </view>
     </scroll-view>
   </block>
@@ -107,9 +106,14 @@
   <block wx:else>
     <scroll-view scroll-x style="height:60rpx;width:100%;">
       <view wx:for="{{bag}}" style="width:50%;display:inline-block;">
-        <view bindtap='changeview' style="height:60rpx;text-align:center;line-height:60rpx;background:#a28081;color:#ffffff;" hover-class="clickcolor" data-current="{{index}}">{{item.name}}</view>
+        <button bindtap='changeview' style="height:60rpx;text-align:center;line-height:60rpx;background:{{index==indexb? '#550508' : '#a28081'}};color:#ffffff;border-left:1px solid black;border-right:1px solid black" data-current="{{index}}">{{item.name}}</button>
       </view>
     </scroll-view>
   </block>
+
+  <!-- 确认按钮：展示结果图-->
+  <view style="height:60rpx;width:100%;">
+    <button bindtap='enablebt' style="background:{{enablecolor==true?'#550508':'#e0e0e0'}} url('{{autoimg}}') no-repeat center center">自动生成</button>
+  </view>
 
 </view>

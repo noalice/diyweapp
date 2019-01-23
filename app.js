@@ -77,11 +77,13 @@ App({
     //结果root路径
     rURL:"https://www.vrwbg.com:8080/mini/image_results/",
     //结果参数
-    cc_name:"",//地毯参数
+    cc_name:"",//地毯参数记录
     ce_name: "",
     cm_name: "",
-    bp_name: "",//布包参数
+    bp_name: "",//布包参数记录
     bc_name: "",
+    rNameUrl:"",//结果图路径记录
+    bagNoColorUrl:""//布包没有选择色块的图片路径记录
   },
   // 页面转发按钮
   onShareAppMessage: function() {

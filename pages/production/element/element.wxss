@@ -12,19 +12,21 @@ page{
 }
 
 /* 去掉按钮边框 */
-
 button::after {
   border: 0;
+  /* 去圆角 */
+  border-radius: 0;
 }
 
 button {
-  height: 50rpx;
-  /* 文字居中 */
-  align-items: center;
-  margin-top: 0rpx;
+  line-height:60rpx;
+  /* align-items: center; */
+  /* justify-content: center; */
   background-color: #fc0;
   color: #fff;
-  display: flex;
+  /* display: flex; */
+  /* 去圆角 */
+  border-radius: 0;
 }
 
 .return {
@@ -43,27 +45,10 @@ button {
   /* filter:sepia(50%) */
 }
 
-/* 按钮点击效果 */
-
-.hover {
-  background-color: pink;
-}
-
-.tip {
-  text-align: center;
-}
-
 .center {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-/* 画布边框 */
-
-canvas {
-  border: 1px solid #e0e0e0;
-  background: #123456;
 }
 
 .bottom {
@@ -76,7 +61,4 @@ canvas {
   border: 2px solid black;
 }
 
-.clickcolor{
-  background: #550508 !important;
-}
   
