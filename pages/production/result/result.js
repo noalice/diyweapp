@@ -16,8 +16,9 @@ Page({
         Bagimg: app.globalData.rootURL + "UGKP0002.png",
         imgformat: "",
         returnimg: app.globalData.rootURL + "USTT0501.png",
-        tipimg: app.globalData.rootURL + "UGKT0501.png",
-        h: 0, //动态获取到的屏幕展示高度
+        tipimg: app.globalData.rootURL + "USKT0501.png",
+        h: 0, // 动态获取到的屏幕展示高度
+        r:0,  // 相对iphone6的相对单位
         centerh: "",
         textimg: [],
         txtURL: "UDKT"
@@ -41,8 +42,11 @@ Page({
 
         //wx.getSystemInfoSync().windowHeight单位px，h单位rpx（px到rpx转换）
         this.data.h = 750 * wx.getSystemInfoSync().windowHeight / wx.getSystemInfoSync().windowWidth;
+        //相对单位，相对iPhone6的375px尺寸
+        this.data.r = wx.getSystemInfoSync().windowWidth/375;
         this.setData({
-          centerh: this.data.h - 140,
+          // 60-顶部返回 80-长按提示 logo-120
+          centerh: this.data.h -60 -80 - 120,
         })
 
         this.setData({
@@ -109,21 +113,21 @@ Page({
                   // 使用.then处理结果
                   .then(res => {
                     // 画背景包（x：125rpx）
-                    contextB.drawImage(res.tempFilePath, 62.5, bagy, 250, 375);
+                    contextB.drawImage(res.tempFilePath, 62.5 * this.data.r, bagy * this.data.r, 250 * this.data.r, 375 * this.data.r);
                   });
 
               utilApi.downloadimgPromise(that.data.textimg[Math.floor(Math.random() * that.data.textimg.length)])
                 // 使用.then处理结果
                 .then(res => {
                   // 画文字图片
-                  contextB.drawImage(res.tempFilePath, 62.5, txty, 250, 62.5)
+                  contextB.drawImage(res.tempFilePath, 62.5 * this.data.r, txty * this.data.r, 250 * this.data.r, 62.5 * this.data.r)
                 });
 
               utilApi.downloadimgPromise(app.globalData.rURL + res.data.rName + that.data.imgformat)
                 // 使用.then处理结果
                 .then(res => {
                   // 画结果图
-                  contextB.drawImage(res.tempFilePath, 112.5, proy, 150, 150);
+                  contextB.drawImage(res.tempFilePath, 112.5 * this.data.r, proy * this.data.r, 150 * this.data.r, 150 * this.data.r);
                   contextB.draw();
                 });
 

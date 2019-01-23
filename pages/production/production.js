@@ -12,7 +12,7 @@ Page({
   data: {
     returnimg: app.globalData.rootURL + "USTT0306.png",
     pro1: app.globalData.rootURL + "USTT0201.png",
-    pro2: app.globalData.rootURL + "USTT0202.png",
+    pro2: app.globalData.rootURL + "USTT0203.png",
     bkimg: app.globalData.rootURL + "UGKP0001.png",
   },
 
