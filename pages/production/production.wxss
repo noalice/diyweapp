@@ -29,8 +29,6 @@ page {
   height: 137rpx;
   background: transparent;
   border-color: transparent;
-  border-style: solid;
-  border-width: 2rpx;
 }
 
 .pro2 {
@@ -39,14 +37,11 @@ page {
   height: 137rpx;
   top: 100rpx;
   background: transparent;
-  border-style: none;
 }
+/* 去掉默认边框 */
 button::after {
   border: none;
 }
-
-
-
 .pro-hover {
   transform: scale(0.8);
 }
