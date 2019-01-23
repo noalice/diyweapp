@@ -3,9 +3,10 @@
   <button bindtap='returnTap' class='bt' style="background-image:url('{{returnimg}}');background-size:100% 100%;" hover-class='hover'></button>
 </view>
 
+<!-- bindlongtap 长按事件-->
 <view class="center">
   <canvas wx:if="{{production == 'C'}}" canvas-id="canvasC" class="canvas" style='width:100%;height:{{centerh}}rpx;position:relative;background:#e0e0e0;'></canvas>
-  <canvas wx:else canvas-id="canvasB" class="canvas" style='width:100%;height:{{centerh}}rpx;position:relative;background:#e0e0e0;'></canvas>
+  <canvas wx:else canvas-id="canvasB" class="canvas" style='width:100%;height:{{centerh}}rpx;position:relative;/*background:#e0e0e0;*/' bindlongtap='longtap'></canvas>
 </view>
 
 <view style="height:80rpx;width:500rpx;display:flex;align-items:center;float:right;">

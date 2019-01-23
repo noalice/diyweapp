@@ -30,7 +30,34 @@ Page({
           url: '../element/element'
         })
       },
+  longtap:function(){
+    var canvasId = 'canvasC';
+    if(app.globalData.production === 'B'){
+      canvasId = 'canvasB';
+    }
+    // 将画布保存至临时文件
+    wx.canvasToTempFilePath({
+      canvasId: canvasId,
+      fileType:'jpg',
+      success: function (res) {
+        console.log(canvasId+"保存图片成功："+res.tempFilePath)
+        // 保存至相册
+        wx.saveImageToPhotosAlbum({
+        filePath: res.tempFilePath,
+        })
+        }
+    }, this)
+    // TODO 结果图片名
+    utilApi.downloadimgPromise(app.globalData.rNameUrl)
+      // 使用.then处理结果
+      .then(res => {
+        // 保存结果图至相册
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+        })
+      });
 
+  },
       /**
        * 生命周期函数--监听页面加载
        */
@@ -113,6 +140,8 @@ Page({
                   // 使用.then处理结果
                   .then(res => {
                     // 画背景包（x：125rpx）
+                    contextB.setFillStyle('#e0e0e0');
+                    contextB.fillRect(0, 0, wx.getSystemInfoSync().windowWidth, (this.data.h - 60 - 80 - 120) * this.data.r);
                     contextB.drawImage(res.tempFilePath, 62.5 * this.data.r, bagy * this.data.r, 250 * this.data.r, 375 * this.data.r);
                   });
 
