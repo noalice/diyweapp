@@ -5,9 +5,10 @@ const app = getApp()
 Page({
   data: {
     bkimg: app.globalData.rootURL + 'UGKP0001.png', //背景图片
-    end:'',
-    outer:'',
-    inner:'',
+    end: '',
+    outer: '',
+    inner: '',
+    flag: 1 //判断页面是否已经跳转
   },
   //事件处理函数（点击跳转函数bindViewTap注册）
   // bindViewTap: function() {
@@ -42,26 +43,31 @@ Page({
     //     rippleStyle2: 'top:' + y + 'px;left:' + x + 'px;-webkit-animation: ripple 0.6s ease-in-out;animation:ripple 0.6s linear 0.4s;'
     //   });
     // }, 1000)
-
-    // 若干秒自动跳转至主题选择界面（动画完）
-    setTimeout(function() {
-      wx.navigateTo({
-        url: '../production/theme/theme'
-      })
-    }, 1000)
+    
+    if (this.data.flag == 1) {
+      // 若干秒自动跳转至主题选择界面（动画完）
+      setTimeout(function() {
+        wx.navigateTo({
+          url: '../production/theme/theme'
+        })
+      }, 1000)
+    }
   },
-  animationend:function(event){
-    setTimeout(function(){
+  animationend: function(event) {
+    //页面跳转
+    this.data.flag = 2;
+
+    setTimeout(function() {
       wx.navigateTo({
         url: '../production/theme/theme',
       })
-    },1000)
+    }, 1000)
 
   },
   onLoad: function() {
     this.setData({
-      outer:'outer',
-      inner:'inner',
+      outer: 'outer',
+      inner: 'inner',
     })
   }
 })
