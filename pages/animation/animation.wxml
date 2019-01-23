@@ -22,11 +22,14 @@
   <view class="ripple" style="{{rippleStyle1}}"></view>
 
   <view class="container" bindtouchstart="containerTap">
-    <!-- USKP0101.png图案 -->
-  <image class="animtion-outer {{end}} {{outer}}" src='https://www.vrwbg.com:8080/mini/image_resources/USKP0102.png' mode='scaleToFill' ></image>
+  <!-- USKP0101.png图案 -->
+  <image class="animtion-outer {{end}} {{outer}}" bindanimationend='animationend' src='https://www.vrwbg.com:8080/mini/image_resources/USKP0102.png' mode='scaleToFill' ></image>
   
   <!-- USKP0101.png边框 -->
+  <!--
   <image class="animtion-inner {{end}} {{inner}}" src='https://www.vrwbg.com:8080/mini/image_resources/USKP0101.png' mode='scaleToFill' bindanimationend='animationend'></image>
+  -->
   </view>
+  
 </view>
 

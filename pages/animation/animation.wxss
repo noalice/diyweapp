@@ -142,7 +142,7 @@ page{
   top: 0px;
 }
 .outer{
-  animation: fade-in 3s linear 0s;
+  animation: fade-in 3.5s linear 0.8s;
   animation-fill-mode:forwards;
 }
 .animtion-inner{

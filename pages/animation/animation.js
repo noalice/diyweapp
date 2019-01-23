@@ -51,9 +51,12 @@ Page({
     }, 1000)
   },
   animationend:function(event){
-    wx.navigateTo({
-      url: '../production/theme/theme',
-    })
+    setTimeout(function(){
+      wx.navigateTo({
+        url: '../production/theme/theme',
+      })
+    },1000)
+
   },
   onLoad: function() {
     this.setData({
