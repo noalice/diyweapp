@@ -63,6 +63,7 @@ Page({
     centerheight: 0,
     Eimgbottom: 0,
     Cimgtop: 0,
+    flag: -1, //判断布包选择了色块后是否点击了自动上色
   },
 
   //根据tab，得到滑片索引（通过 data-current="{{index}}" 得到）
@@ -239,14 +240,14 @@ Page({
       if (app.globalData.cc_name != "" && app.globalData.ce_name != "" && app.globalData.cm_name != "") {
         this.setData({
           enablecolor: true,
-          autoimg: app.globalData.rootURL +"USTT0406.png"
+          autoimg: app.globalData.rootURL + "USTT0406.png"
         });
       }
     } else {
       if (app.globalData.bp_name != "" && app.globalData.bc_name != "") {
         this.setData({
           enablecolor: true,
-          autoimg: app.globalData.rootURL +"USTT0405.png"
+          autoimg: app.globalData.rootURL + "USTT0405.png"
         });
       }
     }
@@ -260,9 +261,24 @@ Page({
     })
   },
   ResultTap: function() {
-    wx.navigateTo({
-      url: '../result/result'
-    })
+    if (app.globalData.bc_name == "") {
+
+      wx.navigateTo({
+        url: '../result/result'
+      })
+    } else {
+      if (this.data.flag == 0) {
+        wx.navigateTo({
+          url: '../result/result'
+        })
+      } else {
+        wx.showToast({
+          title: '请先点击 “ 自动上色 ” 按钮！',
+          icon: 'none',
+          duration: 2000 //持续的时间
+        })
+      }
+    }
   },
   //自动生成按钮事件（变色可用）
   enablebt: function() {
@@ -283,13 +299,16 @@ Page({
             that.setData({
               showFinishbt: true,
               Eimg: app.globalData.rURL + res.data.rName + that.data.imgformat,
-              Mimg:"",
-              Cimg:""
+              Mimg: "",
+              Cimg: ""
             });
 
           });
 
       } else {
+
+        // 布包点击自动上色按钮，判断条件
+        this.data.flag = 0;
 
         console.log("bp_name, bc_name:" + app.globalData.bp_name, app.globalData.bc_name)
         // 获取结果图名(p,c,id)
