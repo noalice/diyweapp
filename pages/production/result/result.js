@@ -134,26 +134,27 @@ Page({
       })
       this.data.imgformat = ".png";
       var that = this;
-
-      var txty = (that.data.h - 890 - 125) / 4 + 750 / 2+10;
-      var proy = (that.data.h - 1000 - 125) / 2;
-      
+      // TODO 计算高度自适应
+      var proy = (this.data.windowHeight - 30 - 40 - 40 - 375) / 2;
+      var prox = (this.data.windowWidth - 250)/2
+      var txty = proy + 375 + proy/4;
       utilApi.downloadimgPromise(app.globalData.rNameUrl)
         .then(res => {
         //画画布背景(灰色)
           contextC.setFillStyle('#e0e0e0');
-          contextC.fillRect(0, 0, this.data.windowWidth, (this.data.h - 60 - 80 - 80) * this.data.r);
+          // 貌似设置一个很大的值可以自动填满
+          contextC.fillRect(0, 0, this.data.windowWidth, 10000);
         // 画结果图 
           contextC.save();
-          contextC.translate((62.5 + 250 / 2) * this.data.r, (proy + 375 / 2) * this.data.r);
+          contextC.translate((prox + 250 / 2), (proy + 375 / 2));
           contextC.rotate(90 * Math.PI / 180);
-          contextC.drawImage(res.tempFilePath, (-375 / 2) * this.data.r, (-250 / 2) * this.data.r, 375 * this.data.r, 250 * this.data.r);
+          contextC.drawImage(res.tempFilePath, (-375 / 2) , (-250 / 2) , 375 , 250);
           contextC.restore();
           
           utilApi.downloadimgPromise(that.data.textimg[Math.floor(Math.random() * that.data.textimg.length)])
             .then(res => {
               // 画文字图片
-              contextC.drawImage(res.tempFilePath, 62.5 * this.data.r, txty * this.data.r, 250 * this.data.r, 35 * this.data.r);
+              contextC.drawImage(res.tempFilePath, prox, txty , 250 , 35);
               contextC.draw();
             });
 
@@ -170,47 +171,49 @@ Page({
       //120rpx 为文字图片的高度
       // 可以在这里调整位置 -往上调  +往下调
       var bagy = (this.data.h - 890 - 125) / 4 -20;
-      var txty = (this.data.h - 890 - 125) / 4 + 750 / 2 ;
-      var proy = (this.data.h - 890 - 125) / 4 + 350 / 2 - 30;
-
-      utilApi.downloadimgPromise(this.data.Bagimg)
+      var txty = bagy+396+bagy/2
+      var proy = (this.data.h - 890 - 125) / 4 + 350 / 2 - 40;
+      var that = this;
+      utilApi.downloadimgPromise(that.data.Bagimg)
         // 使用.then处理结果
         .then(res => {
           //画画布背景(灰色)
           contextB.setFillStyle('#e0e0e0');
-          contextB.fillRect(0, 0, this.data.windowWidth, (this.data.h - 60 - 80 - 80) * this.data.r);
-
+          contextB.fillRect(0, 0, that.data.windowWidth,10000);
           // 画背景包（x：125rpx）
-          contextB.drawImage(res.tempFilePath, 62.5 * this.data.r, bagy * this.data.r, 250 * this.data.r, 375 * this.data.r);
+          contextB.drawImage(res.tempFilePath, 55.5 * that.data.r, bagy * that.data.r, 264 * that.data.r, 396 * that.data.r);
+
+          utilApi.downloadimgPromise(that.data.textimg[Math.floor(Math.random() * that.data.textimg.length)])
+            // 使用.then处理结果
+            .then(res => {
+              // 画文字图片
+              contextB.drawImage(res.tempFilePath, 62.5 * that.data.r, txty * that.data.r, 250 * that.data.r, 35 * that.data.r);
+
+              if (app.globalData.bc_name == "") {
+                utilApi.downloadimgPromise(app.globalData.bagNoColorUrl)
+                  // 使用.then处理结果
+                  .then(res => {
+                    // 画结果图
+                    contextB.drawImage(res.tempFilePath, 91.5 * that.data.r, proy * that.data.r, 192 * that.data.r, 192 * that.data.r);
+                    contextB.draw();
+                  });
+
+              } else {
+
+                utilApi.downloadimgPromise(app.globalData.rNameUrl)
+                  // 使用.then处理结果
+                  .then(res => {
+                    // 画结果图
+                    contextB.drawImage(res.tempFilePath, 112.5 * that.data.r, proy * that.data.r, 150 * that.data.r, 150 * that.data.r);
+                    contextB.draw();
+                  });
+              }
+            });
         });
 
-      utilApi.downloadimgPromise(this.data.textimg[Math.floor(Math.random() * this.data.textimg.length)])
-        // 使用.then处理结果
-        .then(res => {
-          // 画文字图片
-          contextB.drawImage(res.tempFilePath, 62.5 * this.data.r, txty * this.data.r, 250 * this.data.r,35 * this.data.r)
-        });
+      
 
-      if (app.globalData.bc_name == "") {
 
-        utilApi.downloadimgPromise(app.globalData.bagNoColorUrl)
-          // 使用.then处理结果
-          .then(res => {
-            // 画结果图
-            contextB.drawImage(res.tempFilePath, 112.5 * this.data.r, proy * this.data.r, 150 * this.data.r, 150 * this.data.r);
-            contextB.draw();
-          });
-
-      } else {
-
-        utilApi.downloadimgPromise(app.globalData.rNameUrl)
-          // 使用.then处理结果
-          .then(res => {
-            // 画结果图
-            contextB.drawImage(res.tempFilePath, 112.5 * this.data.r, proy * this.data.r, 150 * this.data.r, 150 * this.data.r);
-            contextB.draw();
-          });
-      }
     }
 
   },
