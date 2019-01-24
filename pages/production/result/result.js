@@ -121,8 +121,8 @@ Page({
       app.globalData.rootURL + this.data.txtURL + this.data.tURL + "01.png",
       app.globalData.rootURL + this.data.txtURL + this.data.tURL + "02.png",
       app.globalData.rootURL + this.data.txtURL + this.data.tURL + "03.png",
-      // app.globalData.rootURL + this.data.txtURL + this.data.tURL  + "04.png",
-      // app.globalData.rootURL + this.data.txtURL + this.data.tURL  + "05.png",
+      app.globalData.rootURL + this.data.txtURL + this.data.tURL  + "04.png",
+      app.globalData.rootURL + this.data.txtURL + this.data.tURL  + "05.png",
     ];
     console.log("选择的文字图片路径：" + this.data.textimg[Math.floor(Math.random() * this.data.textimg.length)]);
 

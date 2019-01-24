@@ -9,16 +9,12 @@ page {
   background-size:100% 100%;
 }
 .rturn{
-  position: absolute;
   top:100rpx;
 
 }
 .production {
-  position: relative;
   flex-direction: column;
   align-items: center;
-  /* 按钮间距 无效 *//* padding:10px; */
-  top: 360rpx;
   display: flex;
   justify-content: center;
 }

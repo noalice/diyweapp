@@ -52,9 +52,9 @@ Page({
     // 里面滑片默认选择
     select: 0,
     selectce: -1, //选择图片记录(默认不选)
-    selectcm: 0,//默认第一个
+    selectcm: 0, //默认第一个
     selectcc: -1,
-    selectbp: 0,//默认第一个
+    selectbp: 0, //默认第一个
     selectbc: -1,
     drawName: "",
     showFinishbt: true, //展示完成按钮
@@ -62,6 +62,7 @@ Page({
     // 图片位置
     centerheight: 0,
     Eimgbottom: 0,
+    Pimgbottom:0,
     Cimgtop: 0,
     flag: -1, //判断布包选择了色块后是否点击了自动上色
   },
@@ -350,6 +351,7 @@ Page({
       Eimgbottom: (h - 1100) / 2 + 80,
       //（32rpx手动调的）
       Cimgtop: (h - 1000) / 2 - 32,
+      Pimgbottom:(h-20-100-150-60-60-750)/2
     })
 
     this.setData({
@@ -362,7 +364,7 @@ Page({
     app.globalData.cc_name = ''
 
     if (app.globalData.production == "C") {
-
+      //地毯默认可跳转结果页面
       this.data.flag = 0;
 
       //隐藏完成按钮
