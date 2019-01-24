@@ -64,11 +64,12 @@ Page({
     } else {
       url = app.globalData.rNameUrl
     }
-
+    console.log(url)
     utilApi.downloadimgPromise(url)
       // 使用.then处理结果
       .then(res => {
         // 保存结果图至相册
+        console.log("保存披肩！！！")
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
         })
@@ -87,6 +88,7 @@ Page({
     this.data.windowHeight = wx.getSystemInfoSync().windowHeight;
     this.data.windowWidth = wx.getSystemInfoSync().windowWidth;
     this.data.pixelRatio = wx.getSystemInfoSync().pixelRatio;
+    console.log("设备屏幕信息:" + this.data.windowHeight + "-" + this.data.windowWidth + "-" + this.data.pixelRatio);
     this.data.h = 750 * this.data.windowHeight / this.data.windowWidth;
     //相对单位，相对iPhone6的375px尺寸
     this.data.r = this.data.windowWidth / 375;
@@ -125,51 +127,44 @@ Page({
       app.globalData.rootURL + this.data.txtURL + this.data.tURL  + "05.png",
     ];
     console.log("选择的文字图片路径：" + this.data.textimg[Math.floor(Math.random() * this.data.textimg.length)]);
-
+    // 披肩（地毯）结果页面画布逻辑
     if (app.globalData.production == "C") {
-
       this.setData({
         tipimg: app.globalData.rootURL + "USKT0502.png"
       })
-
       this.data.imgformat = ".png";
-
       var that = this;
 
-      // 画图【单位自px，需要换算：在样式中你的canvas宽度650rpx，那么在canvas中绘制使用的宽度就是：（屏幕宽度 / 750）* 650)】
-      //width = （屏幕宽度 / 750）* 750 ;
-      //height = （屏幕高度 / 1334）* 500;
+      var txty = (that.data.h - 890 - 125) / 4 + 750 / 2+10;
+      var proy = (that.data.h - 1000 - 125) / 2;
+      
+      utilApi.downloadimgPromise(app.globalData.rNameUrl)
+        .then(res => {
+        //画画布背景(灰色)
+          contextC.setFillStyle('#e0e0e0');
+          contextC.fillRect(0, 0, this.data.windowWidth, (this.data.h - 60 - 80 - 80) * this.data.r);
+        // 画结果图 
+          contextC.save();
+          contextC.translate((62.5 + 250 / 2) * this.data.r, (proy + 375 / 2) * this.data.r);
+          contextC.rotate(90 * Math.PI / 180);
+          contextC.drawImage(res.tempFilePath, (-375 / 2) * this.data.r, (-250 / 2) * this.data.r, 375 * this.data.r, 250 * this.data.r);
+          contextC.restore();
+          
+          utilApi.downloadimgPromise(that.data.textimg[Math.floor(Math.random() * that.data.textimg.length)])
+            .then(res => {
+              // 画文字图片
+              contextC.drawImage(res.tempFilePath, 62.5 * this.data.r, txty * this.data.r, 250 * this.data.r, 35 * this.data.r);
+              contextC.draw();
+            });
 
-      //120rpx 为文字图片的高度
-      // var txty = (that.data.h - 890 - 125) / 4 + 750 / 2;
-      // var proy = (that.data.h - 890 - 125) / 4 + 350 / 2;
+        });
 
-      // utilApi.downloadimgPromise(app.globalData.rNameUrl)
-      //   // 使用.then处理结果
-      //   .then(res => {
-      //     // 画结果图
-      //     contextC.save();
-      //     contextC.translate(x, y);
-
-      //     contextC.rotate(90 * Math.PI / 180);
-      //     contextC.drawImage(res.tempFilePath, -250 / 2, -375 / 2, 250, 375);
-      //     contextC.restore();
-      //   });
-
-      // utilApi.downloadimgPromise(that.data.textimg[Math.floor(Math.random() * that.data.textimg.length)])
-      //   // 使用.then处理结果
-      //   .then(res => {
-      //     // 画文字图片
-      //     contextC.drawImage(res.tempFilePath, 62.5, txty, 250, 62.5)
-      //     contextC.draw();
-      //   });
-
+    // 布包结果页面画布逻辑
     } else {
 
       this.setData({
         tipimg: app.globalData.rootURL + "USKT0501.png"
       })
-
       this.data.imgformat = ".jpg";
 
       //120rpx 为文字图片的高度
@@ -183,7 +178,7 @@ Page({
         .then(res => {
           //画画布背景(灰色)
           contextB.setFillStyle('#e0e0e0');
-          contextB.fillRect(0, 0, this.data.windowWidth, (this.data.h - 60 - 80 - 120) * this.data.r);
+          contextB.fillRect(0, 0, this.data.windowWidth, (this.data.h - 60 - 80 - 80) * this.data.r);
 
           // 画背景包（x：125rpx）
           contextB.drawImage(res.tempFilePath, 62.5 * this.data.r, bagy * this.data.r, 250 * this.data.r, 375 * this.data.r);
@@ -193,7 +188,7 @@ Page({
         // 使用.then处理结果
         .then(res => {
           // 画文字图片
-          contextB.drawImage(res.tempFilePath, 62.5 * this.data.r, txty * this.data.r, 250 * this.data.r, 62.5 * this.data.r)
+          contextB.drawImage(res.tempFilePath, 62.5 * this.data.r, txty * this.data.r, 250 * this.data.r,35 * this.data.r)
         });
 
       if (app.globalData.bc_name == "") {
@@ -215,10 +210,8 @@ Page({
             contextB.drawImage(res.tempFilePath, 112.5 * this.data.r, proy * this.data.r, 150 * this.data.r, 150 * this.data.r);
             contextB.draw();
           });
-
       }
     }
-
 
   },
 
