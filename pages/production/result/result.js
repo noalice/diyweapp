@@ -16,7 +16,7 @@ Page({
     Bagimg: app.globalData.rootURL + "UGKP0002.png",
     imgformat: "",
     returnimg: app.globalData.rootURL + "USTT0501.png",
-    tipimg: app.globalData.rootURL + "USKT0501.png",
+    tipimg: '',
     h: 0, //动态获取到的屏幕展示高度
     r: 0, // 相对iphone6的相对单位
     centerh: "",
@@ -119,6 +119,11 @@ Page({
     console.log("选择的文字图片路径：" + this.data.textimg[Math.floor(Math.random() * this.data.textimg.length)]);
 
     if (app.globalData.production == "C") {
+
+      this.setData({
+        tipimg: app.globalData.rootURL + "USKT0502.png"
+      })
+
       this.data.imgformat = ".png";
 
       var that = this;
@@ -152,6 +157,11 @@ Page({
       //   });
 
     } else {
+
+      this.setData({
+        tipimg: app.globalData.rootURL + "USKT0501.png"
+      })
+
       this.data.imgformat = ".jpg";
 
       //120rpx 为文字图片的高度

@@ -19,6 +19,9 @@ Page({
 
   /* 点击屏幕回调函数(水波纹) */
   containerTap: function(res) {
+    //点击跳转判断
+    this.data.flag = 2;
+
     var that = this
     var x = res.touches[0].pageX;
     var y = res.touches[0].pageY + 85;
@@ -43,25 +46,26 @@ Page({
     //     rippleStyle2: 'top:' + y + 'px;left:' + x + 'px;-webkit-animation: ripple 0.6s ease-in-out;animation:ripple 0.6s linear 0.4s;'
     //   });
     // }, 1000)
-    
+
+    // 点击水波，跳转事件
+    setTimeout(function() {
+      wx.navigateTo({
+        url: '../production/theme/theme'
+      })
+    }, 1000)
+
+  },
+
+  //图片显示动画结束事件
+  animationend: function(event) {
+
     if (this.data.flag == 1) {
-      // 若干秒自动跳转至主题选择界面（动画完）
       setTimeout(function() {
         wx.navigateTo({
-          url: '../production/theme/theme'
+          url: '../production/theme/theme',
         })
       }, 1000)
     }
-  },
-  animationend: function(event) {
-    //页面跳转
-    this.data.flag = 2;
-
-    setTimeout(function() {
-      wx.navigateTo({
-        url: '../production/theme/theme',
-      })
-    }, 1000)
 
   },
   onLoad: function() {
