@@ -10,17 +10,11 @@ Page({
     inner: '',
     flag: 1 //判断页面是否已经跳转
   },
-  //事件处理函数（点击跳转函数bindViewTap注册）
-  // bindViewTap: function() {
-  //   wx.navigateTo({
-  //     url: '../production/theme/theme'
-  //   })
-  // },
 
   /* 点击屏幕回调函数(水波纹) */
   containerTap: function(res) {
-    //点击跳转判断
-    this.data.flag = 2;
+    //点击跳转判断(点击多次跳转一次)
+    this.data.flag++;
 
     var that = this
     var x = res.touches[0].pageX;
@@ -48,11 +42,13 @@ Page({
     // }, 1000)
 
     // 点击水波，跳转事件
-    setTimeout(function() {
-      wx.navigateTo({
-        url: '../production/theme/theme'
-      })
-    }, 1000)
+    if (this.data.flag == 2) {
+      setTimeout(function() {
+        wx.navigateTo({
+          url: '../production/theme/theme'
+        })
+      }, 1000)
+    }
 
   },
 

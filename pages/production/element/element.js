@@ -357,6 +357,9 @@ Page({
     });
 
     if (app.globalData.production == "C") {
+
+      this.data.flag = 0;
+      
       //隐藏完成按钮
       this.setData({
         showFinishbt: false,
