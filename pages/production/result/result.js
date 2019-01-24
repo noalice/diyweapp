@@ -19,9 +19,15 @@ Page({
     tipimg: '',
     h: 0, //动态获取到的屏幕展示高度
     r: 0, // 相对iphone6的相对单位
+    // 系统屏幕参数
+    windowWidth:0,
+    windowHeight:0,
+    pixelRatio:0,
     centerh: "",
     textimg: [],
-    txtURL: "UDKT"
+    txtURL: "UDKT",
+    // 画布背景高px
+    canvasHeight:0,
   },
 
   // 结果页面跳转
@@ -41,6 +47,7 @@ Page({
     wx.canvasToTempFilePath({
       canvasId: canvasId,
       fileType: 'jpg',
+      quality:1,
       success: function(res) {
         console.log(canvasId + "保存图片成功：" + res.tempFilePath)
         // 保存至相册
@@ -73,18 +80,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
     wx.showLoading({
       title: '加载中',
     })
-
     //wx.getSystemInfoSync().windowHeight单位px，h单位rpx（px到rpx转换）
-    this.data.h = 750 * wx.getSystemInfoSync().windowHeight / wx.getSystemInfoSync().windowWidth;
+    this.data.windowHeight = wx.getSystemInfoSync().windowHeight;
+    this.data.windowWidth = wx.getSystemInfoSync().windowWidth;
+    this.data.pixelRatio = wx.getSystemInfoSync().pixelRatio;
+    this.data.h = 750 * this.data.windowHeight / this.data.windowWidth;
     //相对单位，相对iPhone6的375px尺寸
-    this.data.r = wx.getSystemInfoSync().windowWidth / 375;
+    this.data.r = this.data.windowWidth / 375;
     this.setData({
       // 60-顶部返回 80-长按提示 logo-120
-      centerh: this.data.h - 60 - 80 - 120,
+      centerh: this.data.h - 60 - 80 - 80,
     })
     this.setData({
       production: app.globalData.production
@@ -165,16 +173,17 @@ Page({
       this.data.imgformat = ".jpg";
 
       //120rpx 为文字图片的高度
-      var bagy = (this.data.h - 890 - 125) / 4;
-      var txty = (this.data.h - 890 - 125) / 4 + 750 / 2;
-      var proy = (this.data.h - 890 - 125) / 4 + 350 / 2;
+      // 可以在这里调整位置 -往上调  +往下调
+      var bagy = (this.data.h - 890 - 125) / 4 -20;
+      var txty = (this.data.h - 890 - 125) / 4 + 750 / 2 ;
+      var proy = (this.data.h - 890 - 125) / 4 + 350 / 2 - 30;
 
       utilApi.downloadimgPromise(this.data.Bagimg)
         // 使用.then处理结果
         .then(res => {
           //画画布背景(灰色)
           contextB.setFillStyle('#e0e0e0');
-          contextB.fillRect(0, 0, wx.getSystemInfoSync().windowWidth, (this.data.h - 60 - 80 - 120) * this.data.r);
+          contextB.fillRect(0, 0, this.data.windowWidth, (this.data.h - 60 - 80 - 120) * this.data.r);
 
           // 画背景包（x：125rpx）
           contextB.drawImage(res.tempFilePath, 62.5 * this.data.r, bagy * this.data.r, 250 * this.data.r, 375 * this.data.r);

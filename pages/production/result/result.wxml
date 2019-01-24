@@ -12,6 +12,6 @@
 <view style="height:80rpx;width:500rpx;display:flex;align-items:center;float:right;">
   <image class='img' mode="aspectFill" src="{{tipimg}}" style='height:40rpx;' />
 </view>
-<view style='height:120rpx;width:750rpx;display:flex;'>
-<image src='https://www.vrwbg.com:8080/mini/image_resources/USKP0501.png' mode='aspectFit' style='height:65%;width:65%;margin:auto'></image>
+<view style='height:80rpx;width:750rpx;display:flex;'>
+<image src='https://www.vrwbg.com:8080/mini/image_resources/USKP0501.png' mode='aspectFit' style='height:70%;width:70%;margin:auto'></image>
 </view>
