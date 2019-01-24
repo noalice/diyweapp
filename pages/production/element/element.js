@@ -52,9 +52,9 @@ Page({
     // 里面滑片默认选择
     select: 0,
     selectce: -1, //选择图片记录(默认不选)
-    selectcm: -1,
+    selectcm: 0,//默认第一个
     selectcc: -1,
-    selectbp: -1,
+    selectbp: 0,//默认第一个
     selectbc: -1,
     drawName: "",
     showFinishbt: true, //展示完成按钮
@@ -356,10 +356,15 @@ Page({
       production: app.globalData.production
     });
 
+    //从结果页面返回时，参数清空
+    app.globalData.ce_name = ''
+    app.globalData.bc_name = ''
+    app.globalData.cc_name = ''
+
     if (app.globalData.production == "C") {
 
       this.data.flag = 0;
-      
+
       //隐藏完成按钮
       this.setData({
         showFinishbt: false,
