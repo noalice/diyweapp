@@ -61,9 +61,24 @@ Page({
     enablecolor: false, //自动生成颜色变换（可点击）
     // 图片位置
     centerheight: 0,
-    Eimgbottom: 0,
-    Pimgbottom:0,
-    Cimgtop: 0,
+    Eimgwidth: 0,
+    Eimgheight: 0,
+    Eimgwidth: 0,
+    Mimgheight: 0,
+    Mimgwidth: 0,
+    Cimgheight: 0,
+    Cimgwidth: 0,
+    //L：左 ；R：右 ；T：上 ；B：下
+    CimgleftLT: 0,
+    CimgtopLT: 0,
+    CimgleftLB: 0,
+    CimgtopLB: 0,
+    CimgleftRT: 0,
+    CimgtopRT: 0,
+    CimgleftRB: 0,
+    CimgtopRB: 0,
+    Eimgwidth: 0,
+    Pimgbottom: 0,
     flag: -1, //判断布包选择了色块后是否点击了自动上色
   },
 
@@ -345,14 +360,53 @@ Page({
     //wx.getSystemInfoSync().windowHeight单位px，h单位rpx（px到rpx转换）
     var h = 750 * wx.getSystemInfoSync().windowHeight / wx.getSystemInfoSync().windowWidth;
     this.setData({
-      //上面100rpx,下面150rpx的60rpx的60rpx
-      centerheight: h - 270,
-      // 上面的100rpx,下面的40rpx的150rpx的60rpx，中间的750rpx（80rpx手动调的）
-      Eimgbottom: (h - 1100) / 2 + 80,
-      //（32rpx手动调的）
-      Cimgtop: (h - 1000) / 2 - 32,
-      Pimgbottom:(h-20-100-150-60-60-750)/2
+      //下面153rpx的83rpx的83rpx,上面的间距20rpx,上面的按钮100rpx
+      centerheight: h - 153 - 83 - 83 - 20 - 100,
     })
+
+    if (this.data.centerheight > 750) {
+      this.setData({
+        Pimgwidth: 750,
+        Pimgbottom: (this.data.centerheight - 750) / 2,
+        Eimgwidth: 750,
+        Eimgheight: 500,
+        Mimgwidth: 650,
+        Mimgheight: 400,
+        Cimgwidth: 100,//角宽度为100rpx
+        //0.8*750 外面view的宽度,400为主题宽度
+        //L：左 ；R：右 ；T：上 ；B：下
+        CimgleftLT: (0.8 * 750 - 400) / 2,
+        CimgtopLT: (this.data.centerheight - 650) / 2,
+        CimgleftLB: (0.8 * 750 - 400) / 2,
+        CimgtopLB: (this.data.centerheight - 650) / 2 + 650 - 100,
+        CimgleftRT: (0.8 * 750 - 400) / 2 + 400 - 100,
+        CimgtopRT: (this.data.centerheight - 650) / 2,
+        CimgleftRB: (0.8 * 750 - 400) / 2 + 400 - 100,
+        CimgtopRB: (this.data.centerheight - 650) / 2 + 650 - 100,
+      })
+    } else {
+      this.setData({
+        //图片上下间隔10rpx
+        Pimgwidth: this.data.centerheight - 20,
+        Pimgbottom: 10,
+        Eimgwidth: this.data.centerheight - 20,
+        Eimgheight: (this.data.centerheight - 20) / 3 * 2,
+        // 边框和主题相差80rpx
+        Mimgwidth: this.data.centerheight - 20 - 80,
+        Mimgheight: (this.data.centerheight - 20) / 3 * 2 - 80,
+        Cimgwidth: 80,//角宽度为80rpx
+        //0.8*750 外面view的宽度, (this.data.centerheight - 20) / 3 * 2 - 100 为主题宽度
+        //L：左 ；R：右 ；T：上 ；B：下
+        CimgleftLT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2,
+        CimgtopLT: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2,
+        CimgleftLB: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2,
+        CimgtopLB: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2 + (this.data.centerheight - 20 - 80) - 80,
+        CimgleftRT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2 + ((this.data.centerheight - 20) / 3 * 2 - 80) - 80,
+        CimgtopRT: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2,
+        CimgleftRB: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2 + ((this.data.centerheight - 20) / 3 * 2 - 80) - 80,
+        CimgtopRB: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2 + (this.data.centerheight - 20 - 80) - 80,
+      })
+    }
 
     this.setData({
       production: app.globalData.production

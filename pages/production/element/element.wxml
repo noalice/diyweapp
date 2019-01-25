@@ -14,25 +14,23 @@
   考虑：屏幕位置或固定center宽度
   border:1px solid pink
 -->
-<view class="center" style='width:80%;height:{{centerheight}}rpx;position:relative;z-index:1;'>
+<view class="center" style='width:80%;height:{{centerheight}}rpx;position:relative;z-index:1;margin-top:120rpx;'>
 
   <block wx:if="{{production == 'C'}}">
-    <view style='width:550rpx;height:{{centerheight-160}}rpx;position:absolute;bottom:30rpx;background:#fff'>
-      <image mode="aspectFill" src="{{Eimg}}" style='transform:rotate(-90deg);width:750rpx;height:500rpx;left:-100rpx;bottom:{{Eimgbottom}}rpx;position:absolute;'></image>
-      <image mode="aspectFill" src="{{Mimg}}" style='transform:rotate(-90deg);width:650rpx;height:400rpx;position:absolute;left:-50rpx;bottom:{{Eimgbottom+50}}rpx;'></image>
+      <image mode="aspectFill" src="{{Eimg}}" style='transform:rotate(-90deg);width:{{Eimgwidth}}rpx;height:{{Eimgheight}}rpx;position:absolute;background:#fff;'></image>
+      <image mode="aspectFill" src="{{Mimg}}" style='transform:rotate(-90deg);width:{{Mimgwidth}}rpx;height:{{Mimgheight}}rpx;position:absolute;'></image>
       <!-- 左上 -->
-      <image mode="aspectFill" src="{{Cimg}}" style='width:100rpx;height:100rpx;position:absolute;left:75rpx;top:{{Cimgtop}}rpx;'></image>
+      <image mode="aspectFill" src="{{Cimg}}" style='width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftLT}}rpx;top:{{CimgtopLT}}rpx;'></image>
       <!-- 左下 -->
-      <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(-90deg);width:100rpx;height:100rpx;position:absolute;left:75rpx;top:{{Cimgtop+550}}rpx;'></image>
+      <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(-90deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftLB}}rpx;top:{{CimgtopLB}}rpx;'></image>
       <!-- 右上 -->
-      <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(90deg);width:100rpx;height:100rpx;position:absolute;left:375rpx;top:{{Cimgtop}}rpx;'></image>
+      <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(90deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRT}}rpx;top:{{CimgtopRT}}rpx;'></image>
       <!-- 右下 -->
-      <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(180deg);width:100rpx;height:100rpx;position:absolute;left:375rpx;top:{{Cimgtop+550}}rpx;'></image>
-    </view>
+      <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(180deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRB}}rpx;top:{{CimgtopRB}}rpx;'></image>
   </block>
 
   <block wx:else>
-    <image mode="aspectFill" src="{{Pimg}}" style='width:750rpx;height:750rpx;position:absolute;bottom:{{Pimgbottom}}rpx;'></image>
+    <image mode="aspectFill" src="{{Pimg}}" style='width:{{Pimgwidth}}rpx;height:{{Pimgwidth}}rpx;position:absolute;bottom:{{Pimgbottom}}rpx;'></image>
   </block>
 
 </view>
@@ -51,14 +49,14 @@
     问题：选择带框后，下一个tab会默认带框【解决：改变动画时长 duration="100"】
   -->
   <block wx:if="{{production == 'C'}}">
-    <swiper current="{{indexb}}" vertical="true" duration="100" style="height:150rpx;">
+    <swiper current="{{indexb}}" vertical="true" duration="100" style="height:153rpx;">
       <swiper-item wx:for="{{carpet}}" style="background:#ffffff;" catchtouchmove="stopTouchMove">
-        <view style="height:150rpx;">
+        <view style="height:153rpx;">
 
           <swiper current="0" display-multiple-items="5">
-            <swiper-item wx:for="{{imgURL}}" style="height:120rpx;margin:15rpx 18rpx;">
+            <swiper-item wx:for="{{imgURL}}" style="height:132rpx;margin:10rpx 18rpx;">
               <view style="height:120rpx;">
-                <image src="{{item}}" data-num="{{index}}" bindtap='swipclick' mode="aspectFit" style="width:120rpx;height:120rpx;" class="{{select==index?'border':''}}" />
+                <image src="{{item}}" data-num="{{index}}" bindtap='swipclick' mode="aspectFit" style="width:130rpx;height:130rpx;" class="{{select==index?'border':''}}" />
               </view>
             </swiper-item>
           </swiper>
@@ -69,14 +67,14 @@
   </block>
 
   <block wx:else>
-    <swiper current="{{indexb}}" vertical="true" duration="100" style="height:150rpx;">
+    <swiper current="{{indexb}}" vertical="true" duration="100" style="height:153rpx;">
       <swiper-item wx:for="{{bag}}" style="background:#ffffff;" catchtouchmove="stopTouchMove">
-        <view style="height:150rpx;">
+        <view style="height:153rpx;">
 
           <swiper current="0" display-multiple-items="5">
-            <swiper-item wx:for="{{imgURL}}" style="height:120rpx;margin:15rpx 18rpx;">
-              <view style=" height:120rpx;">
-                <image src="{{item}}" data-num="{{index}}" bindtap='swipclick' mode="aspectFit " style="width:120rpx;height:120rpx;" class="{{select==index?'border':''}}" />
+            <swiper-item wx:for="{{imgURL}}" style="height:132rpx;margin:10rpx 18rpx;">
+              <view style=" height:132rpx;">
+                <image src="{{item}}" data-num="{{index}}" bindtap='swipclick' mode="aspectFit " style="width:130rpx;height:130rpx;" class="{{select==index?'border':''}}" />
               </view>
             </swiper-item>
           </swiper>
@@ -96,23 +94,23 @@
     4.border-left:1px solid black 一个不见
   -->
   <block wx:if="{{production == 'C'}}">
-    <scroll-view scroll-x style="height:60rpx;width:100%;">
+    <scroll-view scroll-x style="height:83rpx;width:100%;">
       <view wx:for="{{carpet}}" style="width:33.3%;display:inline-block;">
-         <button bindtap='changeview' style="height:60rpx;background:{{index==indexb? '#550508' : '#a28081'}} url('{{item.url}}') no-repeat center center;border-left:1px solid black;border-right:1px solid black" data-current="{{index}}"></button>
+         <button bindtap='changeview' style="height:83rpx;background:{{index==indexb? '#550508' : '#a28081'}} url('{{item.url}}') no-repeat center center;border-left:1px solid black;border-right:1px solid black" data-current="{{index}}"></button>
       </view>
     </scroll-view>
   </block>
 
   <block wx:else>
-    <scroll-view scroll-x style="height:60rpx;width:100%;">
+    <scroll-view scroll-x style="height:83rpx;width:100%;">
       <view wx:for="{{bag}}" style="width:50%;display:inline-block;">
-        <button bindtap='changeview' style="height:60rpx;background:{{index==indexb? '#550508' : '#a28081'}} url('{{item.url}}') no-repeat center center;border-left:1px solid black;border-right:1px solid black" data-current="{{index}}"></button>
+        <button bindtap='changeview' style="height:83rpx;background:{{index==indexb? '#550508' : '#a28081'}} url('{{item.url}}') no-repeat center center;border-left:1px solid black;border-right:1px solid black" data-current="{{index}}"></button>
       </view>
     </scroll-view>
   </block>
 
   <!-- 确认按钮：展示结果图-->
-  <view style="height:60rpx;width:100%;">
+  <view style="height:83rpx;width:100%;">
     <button bindtap='enablebt' style="background:{{enablecolor==true?'#550508':'#e0e0e0'}} url('{{autoimg}}') no-repeat center center;">自动</button>
   </view>
 

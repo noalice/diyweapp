@@ -21,7 +21,7 @@ button::after {
 }
 
 button {
-  line-height: 60rpx;
+  line-height: 83rpx;
   /* 确认按钮 没有文字，背景图片也不显示，将文字调成透明 */
   color:rgba(0,0,0,0);
   /* 点击按钮，文字会变默认颜色，将字体设置为0 */
