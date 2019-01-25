@@ -3,6 +3,7 @@ page {
   position: fixed;
   margin: 0px;
 }
+
 .swiper-block {
   width: 100%;
 }
@@ -16,7 +17,6 @@ page {
 }
 
 /* 主题图片 */
-
 .slide-image {
   height: 200rpx;
   width: 200rpx;
@@ -28,7 +28,6 @@ page {
 }
 
 /* 主题文字 */
-
 .slide-text-image {
   height: 163rpx;
   width: 40rpx;
@@ -37,8 +36,7 @@ page {
   left: 10rpx;
 }
 
-/* 滑动位置变化及放大 */
-
+/* 滑动位置时图片放大位置移动效果 */
 .image-active {
   transform: scale(2) translateX(-40rpx);
   transition: all 0.3s ease-out 0s;

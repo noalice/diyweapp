@@ -1,5 +1,4 @@
 /**production.wxss**/
-
 page {
   width: 100%;
   height: 100%;
@@ -8,10 +7,12 @@ page {
   background-image:url('https://www.vrwbg.com:8080/mini/image_resources/UGKP0001.png');
   background-size:100% 100%;
 }
+
 .rturn{
   top:100rpx;
 
 }
+
 .production {
   flex-direction: column;
   align-items: center;
@@ -34,10 +35,12 @@ page {
   top: 100rpx;
   background: transparent;
 }
+
 /* 去掉默认边框 */
 button::after {
   border: none;
 }
+
 .pro-hover {
   transform: scale(0.8);
 }

@@ -1,13 +1,10 @@
 // pages/production/carpet.js
-
 var app = getApp()
 const utilApi = require('../../../utils/util.js')
-
 const contextC = wx.createCanvasContext('canvasC')
 const contextB = wx.createCanvasContext('canvasB')
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -17,7 +14,7 @@ Page({
     imgformat: "",
     returnimg: app.globalData.rootURL + "USTT0501.png",
     tipimg: '',
-    h: 0, //动态获取到的屏幕展示高度
+    h: 0, // 动态获取到的屏幕展示高度
     r: 0, // 相对iphone6的相对单位
     // 系统屏幕参数
     windowWidth:0,
@@ -29,15 +26,17 @@ Page({
     // 画布背景高px
     canvasHeight:0,
   },
-
-  // 结果页面跳转
+  /**
+   * 结果页面顶部返回按钮回调函数
+   */
   returnTap: function() {
     wx.navigateTo({
       url: '../element/element'
     })
   },
-
-  //长按图片保存图片
+  /**
+   * 长按保存画布及原图至手机相册
+   */
   longtap: function() {
     var canvasId = 'canvasC';
     if (app.globalData.production === 'B') {
@@ -49,35 +48,32 @@ Page({
       fileType: 'jpg',
       quality:1,
       success: function(res) {
-        console.log(canvasId + "保存图片成功：" + res.tempFilePath)
-        // 保存至相册
+        // 保存画布内容至相册
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
         })
       }
     }, this)
-    // TODO 结果图片名
+    // 布包可以直接点完成，可以不选颜色这里需要判断
     var url = "";
-    if (app.globalData.bc_name == "") {
+    if (app.globalData.bc_name === "" && app.globalData.production === 'B') {
       url = app.globalData.bagNoColorUrl
-
-    } else {
-      url = app.globalData.rNameUrl
+    } else{
+        url = app.globalData.rNameUrl;
     }
-
     utilApi.downloadimgPromise(url)
-      // 使用.then处理结果
       .then(res => {
         // 保存结果图至相册
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
         })
       });
-
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * 生命周期函数
+   * 监听页面加载
+   * 在页面加载时完成绘图功能
    */
   onLoad: function(options) {
     wx.showLoading({
@@ -87,6 +83,7 @@ Page({
     this.data.windowHeight = wx.getSystemInfoSync().windowHeight;
     this.data.windowWidth = wx.getSystemInfoSync().windowWidth;
     this.data.pixelRatio = wx.getSystemInfoSync().pixelRatio;
+    console.log("设备屏幕信息:" + this.data.windowHeight + "-" + this.data.windowWidth + "-" + this.data.pixelRatio);
     this.data.h = 750 * this.data.windowHeight / this.data.windowWidth;
     //相对单位，相对iPhone6的375px尺寸
     this.data.r = this.data.windowWidth / 375;
@@ -125,101 +122,88 @@ Page({
       app.globalData.rootURL + this.data.txtURL + this.data.tURL  + "05.png",
     ];
     console.log("选择的文字图片路径：" + this.data.textimg[Math.floor(Math.random() * this.data.textimg.length)]);
-
+    // 披肩（地毯）结果页面画布逻辑
     if (app.globalData.production == "C") {
-
       this.setData({
         tipimg: app.globalData.rootURL + "USKT0502.png"
       })
-
       this.data.imgformat = ".png";
-
       var that = this;
+      // 计算高度自适应
+      // TODO 针对平板等设备的自适应
+      var proy = (this.data.windowHeight - 30 - 40 - 40 - 375) / 2;
+      var prox = (this.data.windowWidth - 250)/2
+      var txty = proy + 375;
+      proy = proy/2;
+      utilApi.downloadimgPromise(app.globalData.rNameUrl)
+        .then(res => {
+          // 画画布背景(灰色)
+          contextC.setFillStyle('#e0e0e0');
+          // 设置一个很大的值可以自动填满画布区域做背景
+          contextC.fillRect(0, 0, this.data.windowWidth, 10000);
+          // 画结果图 
+          contextC.save();
+          contextC.translate((prox + 250 / 2), (proy + 375 / 2));
+          contextC.rotate(90 * Math.PI / 180);
+          contextC.drawImage(res.tempFilePath, (-375 / 2) , (-250 / 2) , 375 , 250);
+          contextC.restore();
+          
+          utilApi.downloadimgPromise(that.data.textimg[Math.floor(Math.random() * that.data.textimg.length)])
+            .then(res => {
+              // 画文字图片
+              contextC.drawImage(res.tempFilePath, prox, txty , 250 , 35);
+              contextC.draw();
+            });
+        });
 
-      // 画图【单位自px，需要换算：在样式中你的canvas宽度650rpx，那么在canvas中绘制使用的宽度就是：（屏幕宽度 / 750）* 650)】
-      //width = （屏幕宽度 / 750）* 750 ;
-      //height = （屏幕高度 / 1334）* 500;
-
-      //120rpx 为文字图片的高度
-      // var txty = (that.data.h - 890 - 125) / 4 + 750 / 2;
-      // var proy = (that.data.h - 890 - 125) / 4 + 350 / 2;
-
-      // utilApi.downloadimgPromise(app.globalData.rNameUrl)
-      //   // 使用.then处理结果
-      //   .then(res => {
-      //     // 画结果图
-      //     contextC.save();
-      //     contextC.translate(x, y);
-
-      //     contextC.rotate(90 * Math.PI / 180);
-      //     contextC.drawImage(res.tempFilePath, -250 / 2, -375 / 2, 250, 375);
-      //     contextC.restore();
-      //   });
-
-      // utilApi.downloadimgPromise(that.data.textimg[Math.floor(Math.random() * that.data.textimg.length)])
-      //   // 使用.then处理结果
-      //   .then(res => {
-      //     // 画文字图片
-      //     contextC.drawImage(res.tempFilePath, 62.5, txty, 250, 62.5)
-      //     contextC.draw();
-      //   });
-
+    // 布包结果页面画布逻辑 三层回调 保证绘图顺序
     } else {
-
       this.setData({
         tipimg: app.globalData.rootURL + "USKT0501.png"
       })
-
       this.data.imgformat = ".jpg";
-
       //120rpx 为文字图片的高度
       // 可以在这里调整位置 -往上调  +往下调
       var bagy = (this.data.h - 890 - 125) / 4 -20;
-      var txty = (this.data.h - 890 - 125) / 4 + 750 / 2 ;
-      var proy = (this.data.h - 890 - 125) / 4 + 350 / 2 - 30;
-
-      utilApi.downloadimgPromise(this.data.Bagimg)
+      var txty = bagy+396+bagy/2
+      var proy = (this.data.h - 890 - 125) / 4 + 350 / 2 - 40;
+      var that = this;
+    
+      utilApi.downloadimgPromise(that.data.Bagimg)
         // 使用.then处理结果
         .then(res => {
           //画画布背景(灰色)
           contextB.setFillStyle('#e0e0e0');
-          contextB.fillRect(0, 0, this.data.windowWidth, (this.data.h - 60 - 80 - 120) * this.data.r);
-
+          contextB.fillRect(0, 0, that.data.windowWidth,10000);
           // 画背景包（x：125rpx）
-          contextB.drawImage(res.tempFilePath, 62.5 * this.data.r, bagy * this.data.r, 250 * this.data.r, 375 * this.data.r);
+          contextB.drawImage(res.tempFilePath, 55.5 * that.data.r, bagy * that.data.r, 264 * that.data.r, 396 * that.data.r);
+
+          utilApi.downloadimgPromise(that.data.textimg[Math.floor(Math.random() * that.data.textimg.length)])
+            // 使用.then处理结果
+            .then(res => {
+              // 画文字图片
+              contextB.drawImage(res.tempFilePath, 62.5 * that.data.r, txty * that.data.r, 250 * that.data.r, 35 * that.data.r);
+              if (app.globalData.bc_name == "") {
+
+                utilApi.downloadimgPromise(app.globalData.bagNoColorUrl)
+                  .then(res => {
+                    // 画结果图
+                    contextB.drawImage(res.tempFilePath, 91.5 * that.data.r, proy * that.data.r, 192 * that.data.r, 192 * that.data.r);
+                    contextB.draw();
+                  });
+
+              } else {
+
+                utilApi.downloadimgPromise(app.globalData.rNameUrl)
+                  .then(res => {
+                    // 画结果图
+                    contextB.drawImage(res.tempFilePath, 112.5 * that.data.r, proy * that.data.r, 150 * that.data.r, 150 * that.data.r);
+                    contextB.draw();
+                  });
+              }
+            });
         });
-
-      utilApi.downloadimgPromise(this.data.textimg[Math.floor(Math.random() * this.data.textimg.length)])
-        // 使用.then处理结果
-        .then(res => {
-          // 画文字图片
-          contextB.drawImage(res.tempFilePath, 62.5 * this.data.r, txty * this.data.r, 250 * this.data.r, 62.5 * this.data.r)
-        });
-
-      if (app.globalData.bc_name == "") {
-
-        utilApi.downloadimgPromise(app.globalData.bagNoColorUrl)
-          // 使用.then处理结果
-          .then(res => {
-            // 画结果图
-            contextB.drawImage(res.tempFilePath, 112.5 * this.data.r, proy * this.data.r, 150 * this.data.r, 150 * this.data.r);
-            contextB.draw();
-          });
-
-      } else {
-
-        utilApi.downloadimgPromise(app.globalData.rNameUrl)
-          // 使用.then处理结果
-          .then(res => {
-            // 画结果图
-            contextB.drawImage(res.tempFilePath, 112.5 * this.data.r, proy * this.data.r, 150 * this.data.r, 150 * this.data.r);
-            contextB.draw();
-          });
-
-      }
     }
-
-
   },
 
   /**
