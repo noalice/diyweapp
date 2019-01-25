@@ -25,7 +25,7 @@ Page({
         motto:'用户已授权'
       })
       setTimeout(function () {
-        wx.navigateTo({
+        wx.redirectTo({
           url: '../animation/animation'
         })
       }, 1000);
@@ -39,7 +39,7 @@ Page({
           motto: '用户已授权'
         })
         setTimeout(function () {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../animation/animation'
           })
         }, 1000);
@@ -55,7 +55,7 @@ Page({
             motto: '用户已授权'
           })
           setTimeout(function () {
-            wx.navigateTo({
+            wx.redirectTo({
               url: '../animation/animation'
             })
           }, 1000);

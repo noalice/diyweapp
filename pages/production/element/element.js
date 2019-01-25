@@ -14,7 +14,7 @@ Page({
     //地毯
     carpet: [{
         "name": "主题",
-      "url": app.globalData.rootURL + "USTT0408.png"
+      "url": app.globalData.rootURL + "UGTT0001.png"
       },
       {
         "name": "边框",
@@ -28,7 +28,7 @@ Page({
     //布包
     bag: [{
         "name": "主题",
-      "url": app.globalData.rootURL + "USTT0409.png"
+      "url": app.globalData.rootURL + "UGTT0001.png"
       },
       {
         "name": "配色",
@@ -311,8 +311,14 @@ Page({
     //判断用户是否没有直接点击完成
     this.data.dissatisfaction = true;
 
-    if (this.data.enablecolor == true) {
+       if (this.data.enablecolor == true) {
       if (app.globalData.production == "C") {
+
+        wx.showToast({
+          title: '正在自动生成。。。',
+          icon: 'none',
+          duration: 2000 //持续的时间
+        })
 
         console.log("cc_name, ce_name, cm_name:" + app.globalData.cc_name, app.globalData.ce_name, app.globalData.cm_name)
         // 获取结果图名(c,e,m,id)
@@ -335,6 +341,12 @@ Page({
           });
 
       } else {
+
+        wx.showToast({
+          title: '正在自动上色。。。',
+          icon: 'none',
+          duration: 2000 //持续的时间
+        })
 
         // 布包点击自动上色按钮，判断条件
         this.data.flag = 0;

@@ -4,7 +4,9 @@
 <view class="button" style="position:absolute;z-index:2;">
   <!-- <button class="return" bindtap="ReturnTap" hover-class='hover'> 返回 </button>
   <button class="submit" bindtap="ResultTap" hover-class='hover'> 完成 </button> -->
-  <image mode="aspectFill" src="{{returnimg}}" class="return" bindtap="ReturnTap"></image>
+  <navigator url='../production' open-type="redirect">
+    <image mode="aspectFill" src="{{returnimg}}" class="return" ></image>
+  </navigator>
   <image wx:if="{{showFinishbt == true}}" mode="aspectFill" src="{{finishimg}}" class="submit" bindtap="ResultTap"></image>
 </view>
 
