@@ -14,7 +14,7 @@ Page({
     //地毯
     carpet: [{
         "name": "主题",
-        "url": app.globalData.rootURL + "UGTT0001.png"
+      "url": app.globalData.rootURL + "USTT0408.png"
       },
       {
         "name": "边框",
@@ -28,7 +28,7 @@ Page({
     //布包
     bag: [{
         "name": "主题",
-        "url": app.globalData.rootURL + "UGTT0001.png"
+        "url": app.globalData.rootURL + "USTT0409.png"
       },
       {
         "name": "配色",

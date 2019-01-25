@@ -51,7 +51,15 @@ Page({
         // 保存画布内容至相册
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
+          success(res) { 
+            wx.showToast({
+              title: '保存成功！',
+              icon: 'success',
+              duration: 1500,
+            })
+          }
         })
+        
       }
     }, this)
     // 布包可以直接点完成，可以不选颜色这里需要判断
