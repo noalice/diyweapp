@@ -197,7 +197,7 @@ Page({
                 utilApi.downloadimgPromise(app.globalData.rNameUrl)
                   .then(res => {
                     // 画结果图
-                    contextB.drawImage(res.tempFilePath, 112.5 * that.data.r, proy * that.data.r, 150 * that.data.r, 150 * that.data.r);
+                    contextB.drawImage(res.tempFilePath, 91.5 * that.data.r, proy * that.data.r, 192 * that.data.r, 192 * that.data.r);
                     contextB.draw();
                   });
               }
