@@ -14,7 +14,7 @@ Page({
     //地毯
     carpet: [{
         "name": "主题",
-      "url": app.globalData.rootURL + "UGTT0001.png"
+        "url": app.globalData.rootURL + "UGTT0001.png"
       },
       {
         "name": "边框",
@@ -28,7 +28,7 @@ Page({
     //布包
     bag: [{
         "name": "主题",
-      "url": app.globalData.rootURL + "UGTT0001.png"
+        "url": app.globalData.rootURL + "UGTT0001.png"
       },
       {
         "name": "配色",
@@ -185,6 +185,9 @@ Page({
         Eimg: '',
         Pimg: app.globalData.rootURL + app.globalData.bp_name + this.data.imgformat
       });
+
+      //重新判断满意度
+      this.data.dissatisfaction = false;
     }
 
     var str = this.data.imgName[this.data.select];
@@ -311,7 +314,7 @@ Page({
     //判断用户是否没有直接点击完成
     this.data.dissatisfaction = true;
 
-       if (this.data.enablecolor == true) {
+    if (this.data.enablecolor == true) {
       if (app.globalData.production == "C") {
 
         wx.showToast({
@@ -397,17 +400,17 @@ Page({
         Eimgheight: 500,
         Mimgwidth: 650,
         Mimgheight: 400,
-        Cimgwidth: 100, //角宽度为100rpx
+        Cimgwidth: 80, //角宽度为80rpx
         //0.8*750 外面view的宽度,400为主题宽度
         //L：左 ；R：右 ；T：上 ；B：下
         CimgleftLT: (0.8 * 750 - 400) / 2,
         CimgtopLT: (this.data.centerheight - 650) / 2,
         CimgleftLB: (0.8 * 750 - 400) / 2,
-        CimgtopLB: (this.data.centerheight - 650) / 2 + 650 - 100,
-        CimgleftRT: (0.8 * 750 - 400) / 2 + 400 - 100,
+        CimgtopLB: (this.data.centerheight - 650) / 2 + 650 - 80,
+        CimgleftRT: (0.8 * 750 - 400) / 2 + 400 - 80,
         CimgtopRT: (this.data.centerheight - 650) / 2,
-        CimgleftRB: (0.8 * 750 - 400) / 2 + 400 - 100,
-        CimgtopRB: (this.data.centerheight - 650) / 2 + 650 - 100,
+        CimgleftRB: (0.8 * 750 - 400) / 2 + 400 - 80,
+        CimgtopRB: (this.data.centerheight - 650) / 2 + 650 - 80,
       })
     } else {
       this.setData({
