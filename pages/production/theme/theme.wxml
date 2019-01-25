@@ -1,3 +1,4 @@
+<!-- 纵向的swiper组件 -->
 <view class="swiper" style="background-image:url('{{bkimg}}');background-size:100% 100%;">
   <swiper class="swiper-block" previous-margin="0rpx" next-margin="0rpx" current="0" bindchange="swiperChange" vertical="{{vertical}} " display-multiple-items="3" circular="true" style='height:{{bgHeight}}rpx;'>
     <block wx:for="{{imgUrls}}" wx:index="{{index}}">
@@ -11,4 +12,3 @@
     </block>
   </swiper>
 </view>
-
