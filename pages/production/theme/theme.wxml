@@ -5,8 +5,10 @@
       <swiper-item class="swiper-item">
         <view style="margin:0 auto;">
           <!-- aspectFill保持纵横比缩放 -->
-          <image mode="aspectFill" src="{{item.img}}" class="slide-image {{swiperIndex == index ? 'image-active' : ''}}" bindtap='swipclick' />
-          <image mode="aspectFill" src="{{item.text}}" class="slide-text-image  {{swiperIndex == index ? 'text-active' : ''}}"></image>
+          <navigator url='../production' open-type="redirect">
+            <image mode="aspectFill" src="{{item.img}}" class="slide-image {{swiperIndex == index ? 'image-active' : ''}}" bindtap='swipclick' />
+            <image mode="aspectFill" src="{{item.text}}" class="slide-text-image  {{swiperIndex == index ? 'text-active' : ''}}"></image>
+          </navigator>
         </view>
       </swiper-item>
     </block>

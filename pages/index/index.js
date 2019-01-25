@@ -11,7 +11,7 @@ Page({
   },
   // 事件处理函数（点击跳转函数bindViewTap注册）
   bindViewTap: function() {
-    wx.navigateTo({
+    wx.redirectTo({
       // url: '../logs/logs'
       // 点击跳转到动画页面
       url: '../animation/animation'

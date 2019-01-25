@@ -280,20 +280,20 @@ Page({
 
 
   //事件处理函数
-  ReturnTap: function() {
-    wx.navigateTo({
-      url: '../production'
-    })
-  },
+  // ReturnTap: function() {
+  //   wx.navigateTo({
+  //     url: '../production'
+  //   })
+  // },
   ResultTap: function() {
     if (app.globalData.bc_name == "") {
 
-      wx.navigateTo({
+      wx.redirectTo({
         url: '../result/result'
       })
     } else {
       if (this.data.flag == 0) {
-        wx.navigateTo({
+        wx.redirectTo({
           url: '../result/result'
         })
       } else {

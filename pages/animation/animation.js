@@ -44,7 +44,7 @@ Page({
     // 点击水波，跳转事件
     if (this.data.flag == 2) {
       setTimeout(function() {
-        wx.navigateTo({
+        wx.redirectTo({
           url: '../production/theme/theme'
         })
       }, 1000)
@@ -57,7 +57,7 @@ Page({
 
     if (this.data.flag == 1) {
       setTimeout(function() {
-        wx.navigateTo({
+        wx.redirectTo({
           url: '../production/theme/theme',
         })
       }, 1000)

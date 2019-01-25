@@ -29,11 +29,11 @@ Page({
   /**
    * 结果页面顶部返回按钮回调函数
    */
-  returnTap: function() {
-    wx.navigateTo({
-      url: '../element/element'
-    })
-  },
+  // returnTap: function() {
+  //   wx.navigateTo({
+  //     url: '../element/element'
+  //   })
+  // },
   /**
    * 长按保存画布及原图至手机相册
    */

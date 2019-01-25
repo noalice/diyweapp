@@ -1,6 +1,8 @@
 <!--pages/production/result.wxml-->
 <view style="height:60rpx">
-  <button bindtap='returnTap' class='bt' style="background-image:url('{{returnimg}}');background-size:100% 100%;" hover-class='hover'></button>
+  <navigator url='../element/element' open-type="redirect">
+    <button  class='bt' style="background-image:url('{{returnimg}}');background-size:100% 100%;" hover-class='hover'></button>
+  </navigator>
 </view>
 
 <!-- bindlongtap 长按事件-->
@@ -13,5 +15,5 @@
   <image class='img' mode="aspectFit" src="{{tipimg}}" style='height:50rpx;' />
 </view>
 <view style='height:80rpx;width:750rpx;display:flex;'>
-<image src='https://www.vrwbg.com:8080/mini/image_resources/USKP0501.png' mode='aspectFit' style='height:70%;width:70%;margin:auto'></image>
+  <image src='https://www.vrwbg.com:8080/mini/image_resources/USKP0501.png' mode='aspectFit' style='height:70%;width:70%;margin:auto'></image>
 </view>
