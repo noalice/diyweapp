@@ -8,7 +8,7 @@
 
   <view class='production' style="position:relative;top:{{centertop}}rpx;">
     <button bindtap='BagTap' class='pro1' style="background-image:url('{{pro1}}');background-size:100% 100%;" hover-class='pro-hover'></button>
-    <image src='https://www.vrwbg.com:8080/mini/image_resources/USKT0201.png' style='height:43rpx;weight:239rpx;position:relative;' mode='aspectFit'></image>
+    <image src='https://www.vrwbg.com:8080/mini/image_resources/USKT0201.png' style='height:43rpx;weight:239rpx;position:relative;top:18rpx;' mode='aspectFit'></image>
     <button bindtap='CatpetTap' class='pro2' style="background-image:url('{{pro2}}');background-size:100% 100%;" hover-class='pro-hover'></button>
     <image src='https://www.vrwbg.com:8080/mini/image_resources/USKT0202.png' style='height:43rpx;weight:239rpx;position:relative;top:118rpx;' mode='aspectFit'></image>
   </view>
