@@ -80,6 +80,7 @@ Page({
     Eimgwidth: 0,
     Pimgbottom: 0,
     flag: -1, //判断布包选择了色块后是否点击了自动上色
+    dissatisfaction: false, //用户不满意结果，重新选择，需要清空数据和原图
   },
 
   //根据tab，得到滑片索引（通过 data-current="{{index}}" 得到）
@@ -177,6 +178,14 @@ Page({
       select: e.currentTarget.dataset.num,
     });
     console.log("select里面滑片:" + this.data.select);
+
+    // 用户不满意，清除数据
+    if (this.data.dissatisfaction == true) {
+      this.setData({
+        Eimg: '',
+        Pimg: app.globalData.rootURL + app.globalData.bp_name + this.data.imgformat
+      });
+    }
 
     var str = this.data.imgName[this.data.select];
     // 字符串去掉首位的“u”，再在末尾补0
@@ -298,6 +307,10 @@ Page({
   },
   //自动生成按钮事件（变色可用）
   enablebt: function() {
+
+    //判断用户是否没有直接点击完成
+    this.data.dissatisfaction = true;
+
     if (this.data.enablecolor == true) {
       if (app.globalData.production == "C") {
 
@@ -372,7 +385,7 @@ Page({
         Eimgheight: 500,
         Mimgwidth: 650,
         Mimgheight: 400,
-        Cimgwidth: 100,//角宽度为100rpx
+        Cimgwidth: 100, //角宽度为100rpx
         //0.8*750 外面view的宽度,400为主题宽度
         //L：左 ；R：右 ；T：上 ；B：下
         CimgleftLT: (0.8 * 750 - 400) / 2,
@@ -394,7 +407,7 @@ Page({
         // 边框和主题相差80rpx
         Mimgwidth: this.data.centerheight - 20 - 80,
         Mimgheight: (this.data.centerheight - 20) / 3 * 2 - 80,
-        Cimgwidth: 80,//角宽度为80rpx
+        Cimgwidth: 80, //角宽度为80rpx
         //0.8*750 外面view的宽度, (this.data.centerheight - 20) / 3 * 2 - 100 为主题宽度
         //L：左 ；R：右 ；T：上 ；B：下
         CimgleftLT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2,

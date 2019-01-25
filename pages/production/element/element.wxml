@@ -30,7 +30,7 @@
   </block>
 
   <block wx:else>
-    <image mode="aspectFill" src="{{Pimg}}" style='width:{{Pimgwidth}}rpx;height:{{Pimgwidth}}rpx;position:absolute;bottom:{{Pimgbottom}}rpx;'></image>
+    <image mode="aspectFill" src="{{Pimg}}" style='width:{{Pimgwidth}}rpx;height:{{Pimgwidth}}rpx;position:absolute;bottom:{{Pimgbottom}}rpx;background:#fff;'></image>
   </block>
 
 </view>
@@ -96,7 +96,7 @@
   <block wx:if="{{production == 'C'}}">
     <scroll-view scroll-x style="height:83rpx;width:100%;">
       <view wx:for="{{carpet}}" style="width:33.3%;display:inline-block;">
-         <button bindtap='changeview' style="height:83rpx;background:{{index==indexb? '#550508' : '#a28081'}} url('{{item.url}}') no-repeat center center;border-left:1px solid black;border-right:1px solid black" data-current="{{index}}"></button>
+         <button bindtap='changeview' style="height:83rpx;background:{{index==indexb? '#550508' : '#a28081'}} url('{{item.url}}') no-repeat center center;border-left:1px solid #fff;border-right:1px solid #fff" data-current="{{index}}"></button>
       </view>
     </scroll-view>
   </block>
@@ -104,14 +104,14 @@
   <block wx:else>
     <scroll-view scroll-x style="height:83rpx;width:100%;">
       <view wx:for="{{bag}}" style="width:50%;display:inline-block;">
-        <button bindtap='changeview' style="height:83rpx;background:{{index==indexb? '#550508' : '#a28081'}} url('{{item.url}}') no-repeat center center;border-left:1px solid black;border-right:1px solid black" data-current="{{index}}"></button>
+        <button bindtap='changeview' style="height:83rpx;background:{{index==indexb? '#550508' : '#a28081'}} url('{{item.url}}') no-repeat center center;border-left:1px solid #fff;border-right:1px solid #fff" data-current="{{index}}"></button>
       </view>
     </scroll-view>
   </block>
 
   <!-- 确认按钮：展示结果图-->
   <view style="height:83rpx;width:100%;">
-    <button bindtap='enablebt' style="background:{{enablecolor==true?'#550508':'#e0e0e0'}} url('{{autoimg}}') no-repeat center center;">自动</button>
+    <button bindtap='enablebt' style="background:{{enablecolor==true?'#550508':'#e0e0e0'}} url('{{autoimg}}') no-repeat center center;border-top:1px solid #fff">自动</button>
   </view>
 
 </view>
