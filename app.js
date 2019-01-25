@@ -5,18 +5,13 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    var openId = 
+    //var openId = 
     console.log("onLaunch")
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log('临时的code' + res.code);
-        // 获取到临时凭证code
-        if (res.code) {
-          console.log('向服务器发送请求')
-          // 目前的url仅做测试
-          
+        if (res.code) {   
           wx.request({
             // 自己服务器的接口
             url: 'https://www.vrwbg.com:8080/mini/getOpenId',
@@ -29,10 +24,8 @@ App({
             // 登录成功 返回json对象
 
             success: function(res) {
-              console.log('返回的openId:' + res.data.openId);
               getApp().globalData.openId = res.data.openId;
             }
-
           })
           
         } else {
@@ -51,7 +44,6 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
