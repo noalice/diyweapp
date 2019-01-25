@@ -57,8 +57,8 @@ Page({
     // wx.getSystemInfoSync().windowHeight单位px，h单位rpx（px到rpx转换）
     var h = 750 * wx.getSystemInfoSync().windowHeight / wx.getSystemInfoSync().windowWidth;
     this.setData({
-    // 137rpx按钮，43rpx图片，100rpx间距
-      centertop: (h-43*2-137*2-100)/2
+    // 高度 113rpx按钮，43rpx图片，100rpx间距
+      centertop: (h-43*2-113*2-100)/2
     });
   },
   // 监听页面初次渲染完成
