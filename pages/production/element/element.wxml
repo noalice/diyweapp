@@ -5,7 +5,7 @@
   <!-- <button class="return" bindtap="ReturnTap" hover-class='hover'> 返回 </button>
   <button class="submit" bindtap="ResultTap" hover-class='hover'> 完成 </button> -->
   <navigator url='../production' open-type="redirect">
-    <image mode="aspectFill" src="{{returnimg}}" class="return" ></image>
+    <image mode="aspectFill" src="{{returnimg}}" class="return"></image>
   </navigator>
   <image wx:if="{{showFinishbt == true}}" mode="aspectFill" src="{{finishimg}}" class="submit" bindtap="ResultTap"></image>
 </view>
@@ -19,16 +19,16 @@
 <view class="center" style='width:80%;height:{{centerheight}}rpx;position:relative;z-index:1;margin-top:120rpx;'>
 
   <block wx:if="{{production == 'C'}}">
-      <image mode="aspectFill" src="{{Eimg}}" style='transform:rotate(-90deg);width:{{Eimgwidth}}rpx;height:{{Eimgheight}}rpx;position:absolute;background:#fff;'></image>
-      <image mode="aspectFill" src="{{Mimg}}" style='transform:rotate(-90deg);width:{{Mimgwidth}}rpx;height:{{Mimgheight}}rpx;position:absolute;'></image>
-      <!-- 左上 -->
-      <image mode="aspectFill" src="{{Cimg}}" style='width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftLT}}rpx;top:{{CimgtopLT}}rpx;'></image>
-      <!-- 左下 -->
-      <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(-90deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftLB}}rpx;top:{{CimgtopLB}}rpx;'></image>
-      <!-- 右上 -->
-      <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(90deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRT}}rpx;top:{{CimgtopRT}}rpx;'></image>
-      <!-- 右下 -->
-      <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(180deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRB}}rpx;top:{{CimgtopRB}}rpx;'></image>
+    <image mode="aspectFill" src="{{Eimg}}" style='transform:rotate(-90deg);width:{{Eimgwidth}}rpx;height:{{Eimgheight}}rpx;position:absolute;background:#fff;'></image>
+    <image mode="aspectFill" src="{{Mimg}}" style='transform:rotate(-90deg);width:{{Mimgwidth}}rpx;height:{{Mimgheight}}rpx;position:absolute;'></image>
+    <!-- 左上 -->
+    <image mode="aspectFill" src="{{Cimg}}" style='width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftLT}}rpx;top:{{CimgtopLT}}rpx;'></image>
+    <!-- 左下 -->
+    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(-90deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftLB}}rpx;top:{{CimgtopLB}}rpx;'></image>
+    <!-- 右上 -->
+    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(90deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRT}}rpx;top:{{CimgtopRT}}rpx;'></image>
+    <!-- 右下 -->
+    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(180deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRB}}rpx;top:{{CimgtopRB}}rpx;'></image>
   </block>
 
   <block wx:else>
@@ -98,7 +98,7 @@
   <block wx:if="{{production == 'C'}}">
     <scroll-view scroll-x style="height:83rpx;width:100%;">
       <view wx:for="{{carpet}}" style="width:33.3%;display:inline-block;">
-         <button bindtap='changeview' style="height:83rpx;background:{{index==indexb? '#550508' : '#a28081'}} url('{{item.url}}') no-repeat;background-size:100% 100%;border-left:1px solid #fff;border-right:1px solid #fff" data-current="{{index}}"></button>
+        <button bindtap='changeview' style="height:83rpx;background:{{index==indexb? '#550508' : '#a28081'}} url('{{item.url}}') no-repeat;background-size:100% 100%;border-left:1px solid #fff;border-right:1px solid #fff" data-current="{{index}}"></button>
       </view>
     </scroll-view>
   </block>

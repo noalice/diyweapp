@@ -14,7 +14,7 @@ Page({
     //地毯
     carpet: [{
         "name": "主题",
-      "url": app.globalData.rootURL + "USTT0408.png"
+        "url": app.globalData.rootURL + "USTT0408.png"
       },
       {
         "name": "边框",
@@ -188,6 +188,10 @@ Page({
 
       //重新判断满意度
       this.data.dissatisfaction = false;
+
+      app.globalData.cc_name = "";
+      app.globalData.ce_name = "";
+      app.globalData.cm_name = ""
     }
 
     var str = this.data.imgName[this.data.select];
@@ -262,7 +266,6 @@ Page({
       }
     }
 
-
     //判断完成度
     if (app.globalData.production == "C") {
       if (app.globalData.cc_name != "" && app.globalData.ce_name != "" && app.globalData.cm_name != "") {
@@ -270,12 +273,20 @@ Page({
           enablecolor: true,
           autoimg: app.globalData.rootURL + "USTT0406.png"
         });
+      }else{
+        this.setData({
+          enablecolor: false,
+        });
       }
     } else {
       if (app.globalData.bp_name != "" && app.globalData.bc_name != "") {
         this.setData({
           enablecolor: true,
           autoimg: app.globalData.rootURL + "USTT0405.png"
+        });
+      } else {
+        this.setData({
+          enablecolor: false,
         });
       }
     }
