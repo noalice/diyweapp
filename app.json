@@ -14,7 +14,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "手机小程序",
+    "navigationBarTitleText": "文化图案创艺秀",
     "navigationBarTextStyle":"black"
   },
   "networkTimeout": {

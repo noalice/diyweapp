@@ -504,8 +504,8 @@ Page({
           Mimg: app.globalData.rootURL + 'C03MI010' + this.data.imgformat
         });
         //默认获取元素图名
-        app.globalData.cm_name = 'C02MI010'
-        app.globalData.bp_name = 'B02PI010'
+        app.globalData.cm_name = 'C03MI010'
+        app.globalData.bp_name = 'B03PI010'
         //布包没有色块默认路径
         app.globalData.bagNoColorUrl = this.data.Pimg
         break;
@@ -517,8 +517,8 @@ Page({
           Mimg: app.globalData.rootURL + 'C04MI010' + this.data.imgformat
         });
         //默认获取元素图名
-        app.globalData.cm_name = 'C02MI010'
-        app.globalData.bp_name = 'B02PI010'
+        app.globalData.cm_name = 'C04MI010'
+        app.globalData.bp_name = 'B04PI010'
         //布包没有色块默认路径
         app.globalData.bagNoColorUrl = this.data.Pimg
         break;
@@ -530,8 +530,8 @@ Page({
           Mimg: app.globalData.rootURL + 'C05MI010' + this.data.imgformat
         });
         //默认获取元素图名
-        app.globalData.cm_name = 'C02MI010'
-        app.globalData.bp_name = 'B02PI010'
+        app.globalData.cm_name = 'C05MI010'
+        app.globalData.bp_name = 'B05PI010'
         //布包没有色块默认路径
         app.globalData.bagNoColorUrl = this.data.Pimg
         break;

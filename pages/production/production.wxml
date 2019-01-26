@@ -4,7 +4,7 @@
 
   <!-- 返回按钮 -->
   <view style='height:1px;z-index:3;position:absolute;top:120rpx;left:120rpx;' class="return">
-    <navigator url='./theme/theme' open-type="redirect">
+    <navigator url='./theme/theme' open-type="redirect" hover-class='none'>
       <image mode="aspectFill" src="{{returnimg}}" style="width:120rpx;height:60rpx"></image>
     </navigator>
   </view>
