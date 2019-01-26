@@ -4,7 +4,7 @@ page {
   height: 100%;
   position: fixed;
   margin: 0px;
-  background-image:url('https://www.vrwbg.com:8080/mini/image_resources/UGKP0001.png');
+  background-image:url('https://vrwbg-1256403542.image.myqcloud.com/mini/data/UGKP0001.png');
   background-size:100% 100%;
 }
 
