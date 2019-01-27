@@ -15,5 +15,5 @@
   <image class='img' mode="aspectFit" src="{{tipimg}}" style='height:50rpx;' />
 </view>
 <view style='height:80rpx;width:750rpx;display:flex;'>
-  <image src='https://vrwbg-1256403542.image.myqcloud.com/mini/data/USKP0501.png' mode='aspectFit' style='height:70%;width:70%;margin:auto'></image>
+  <image src='https://www.vrwbg.com:8080/mini/image_resources/USKP0501.png' mode='aspectFit' style='height:70%;width:70%;margin:auto'></image>
 </view>

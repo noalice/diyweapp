@@ -63,8 +63,8 @@ App({
     // 主题
     theme: 0,
     //服务器图片root路径(有的图片路径写死了)
-    // rootURL: "https://www.vrwbg.com:8080/mini/image_resources/",
-    rootURL: "https://vrwbg-1256403542.image.myqcloud.com/mini/data/",
+    rootURL: "https://www.vrwbg.com:8080/mini/image_resources/",
+    // rootURL: "https://vrwbg-1256403542.image.myqcloud.com/mini/data/",
     // openId
     openId: "",
     //结果root路径

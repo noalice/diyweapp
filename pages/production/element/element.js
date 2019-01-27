@@ -415,13 +415,13 @@ Page({
         //0.8*750 外面view的宽度,400为主题宽度
         //L：左 ；R：右 ；T：上 ；B：下
         CimgleftLT: (0.8 * 750 - 400) / 2,
-        CimgtopLT: (this.data.centerheight - 650) / 2,
-        CimgleftLB: (0.8 * 750 - 400) / 2,
-        CimgtopLB: (this.data.centerheight - 650) / 2 + 650 - 80,
-        CimgleftRT: (0.8 * 750 - 400) / 2 + 400 - 80,
-        CimgtopRT: (this.data.centerheight - 650) / 2,
-        CimgleftRB: (0.8 * 750 - 400) / 2 + 400 - 80,
-        CimgtopRB: (this.data.centerheight - 650) / 2 + 650 - 80,
+        CimgtopLT: (this.data.centerheight - 650) / 2+1,
+        CimgleftLB: (0.8 * 750 - 400) / 2 ,
+        CimgtopLB: (this.data.centerheight - 650) / 2 + 650 - 80 +2,
+        CimgleftRT: (0.8 * 750 - 400) / 2 + 400 - 80+2 ,
+        CimgtopRT: (this.data.centerheight - 650) / 2 +1,
+        CimgleftRB: (0.8 * 750 - 400) / 2 + 400 - 80 +2,
+        CimgtopRB: (this.data.centerheight - 650) / 2 + 650 - 80 +2,
       })
     } else {
       this.setData({
