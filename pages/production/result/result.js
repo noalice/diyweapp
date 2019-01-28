@@ -17,23 +17,26 @@ Page({
     h: 0, // 动态获取到的屏幕展示高度
     r: 0, // 相对iphone6的相对单位
     // 系统屏幕参数
-    windowWidth:0,
-    windowHeight:0,
-    pixelRatio:0,
+    windowWidth: 0,
+    windowHeight: 0,
+    pixelRatio: 0,
     centerh: "",
     textimg: [],
     txtURL: "UDKT",
     // 画布背景高px
-    canvasHeight:0,
+    canvasHeight: 0,
   },
   /**
    * 结果页面顶部返回按钮回调函数
    */
-  // returnTap: function() {
-  //   wx.navigateTo({
-  //     url: '../element/element'
-  //   })
-  // },
+  returnTap: function() {
+    //由结果页面返回元素界面
+    app.globalData.is_return = true;
+
+    wx.redirectTo({
+      url: '../element/element'
+    })
+  },
   /**
    * 长按保存画布及原图至手机相册
    */
@@ -46,12 +49,12 @@ Page({
     wx.canvasToTempFilePath({
       canvasId: canvasId,
       fileType: 'jpg',
-      quality:1,
+      quality: 1,
       success: function(res) {
         // 保存画布内容至相册
         wx.saveImageToPhotosAlbum({
           filePath: res.tempFilePath,
-          success(res) { 
+          success(res) {
             wx.showToast({
               title: '保存成功！',
               icon: 'success',
@@ -59,15 +62,15 @@ Page({
             })
           }
         })
-        
+
       }
     }, this)
     // 布包可以直接点完成，可以不选颜色这里需要判断
     var url = "";
     if (app.globalData.bc_name === "" && app.globalData.production === 'B') {
       url = app.globalData.bagNoColorUrl
-    } else{
-        url = app.globalData.rNameUrl;
+    } else {
+      url = app.globalData.rNameUrl;
     }
     utilApi.downloadimgPromise(url)
       .then(res => {
@@ -126,8 +129,8 @@ Page({
       app.globalData.rootURL + this.data.txtURL + this.data.tURL + "01.png",
       app.globalData.rootURL + this.data.txtURL + this.data.tURL + "02.png",
       app.globalData.rootURL + this.data.txtURL + this.data.tURL + "03.png",
-      app.globalData.rootURL + this.data.txtURL + this.data.tURL  + "04.png",
-      app.globalData.rootURL + this.data.txtURL + this.data.tURL  + "05.png",
+      app.globalData.rootURL + this.data.txtURL + this.data.tURL + "04.png",
+      app.globalData.rootURL + this.data.txtURL + this.data.tURL + "05.png",
     ];
     console.log("选择的文字图片路径：" + this.data.textimg[Math.floor(Math.random() * this.data.textimg.length)]);
     // 披肩（地毯）结果页面画布逻辑
@@ -140,9 +143,9 @@ Page({
       // 计算高度自适应
       // TODO 针对平板等设备的自适应
       var proy = (this.data.windowHeight - 30 - 40 - 40 - 375) / 2;
-      var prox = (this.data.windowWidth - 250)/2
+      var prox = (this.data.windowWidth - 250) / 2
       var txty = proy + 375;
-      proy = proy/2;
+      proy = proy / 2;
       utilApi.downloadimgPromise(app.globalData.rNameUrl)
         .then(res => {
           // 画画布背景(灰色)
@@ -153,18 +156,18 @@ Page({
           contextC.save();
           contextC.translate((prox + 250 / 2), (proy + 375 / 2));
           contextC.rotate(90 * Math.PI / 180);
-          contextC.drawImage(res.tempFilePath, (-375 / 2) , (-250 / 2) , 375 , 250);
+          contextC.drawImage(res.tempFilePath, (-375 / 2), (-250 / 2), 375, 250);
           contextC.restore();
-          
+
           utilApi.downloadimgPromise(that.data.textimg[Math.floor(Math.random() * that.data.textimg.length)])
             .then(res => {
               // 画文字图片
-              contextC.drawImage(res.tempFilePath, prox, txty , 250 , 35);
+              contextC.drawImage(res.tempFilePath, prox, txty, 250, 35);
               contextC.draw();
             });
         });
 
-    // 布包结果页面画布逻辑 三层回调 保证绘图顺序
+      // 布包结果页面画布逻辑 三层回调 保证绘图顺序
     } else {
       this.setData({
         tipimg: app.globalData.rootURL + "USKT0501.png"
@@ -172,17 +175,17 @@ Page({
       this.data.imgformat = ".jpg";
       //120rpx 为文字图片的高度
       // 可以在这里调整位置 -往上调  +往下调
-      var bagy = (this.data.h - 890 - 125) / 4 -20;
-      var txty = bagy+396+bagy/2
+      var bagy = (this.data.h - 890 - 125) / 4 - 20;
+      var txty = bagy + 396 + bagy / 2
       var proy = (this.data.h - 890 - 125) / 4 + 350 / 2 - 40;
       var that = this;
-    
+
       utilApi.downloadimgPromise(that.data.Bagimg)
         // 使用.then处理结果
         .then(res => {
           //画画布背景(灰色)
           contextB.setFillStyle('#e0e0e0');
-          contextB.fillRect(0, 0, that.data.windowWidth,10000);
+          contextB.fillRect(0, 0, that.data.windowWidth, 10000);
           // 画背景包（x：125rpx）
           contextB.drawImage(res.tempFilePath, 55.5 * that.data.r, bagy * that.data.r, 264 * that.data.r, 396 * that.data.r);
 

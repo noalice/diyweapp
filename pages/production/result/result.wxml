@@ -1,8 +1,6 @@
 <!--pages/production/result.wxml-->
 <view style="height:60rpx">
-  <navigator url='../element/element' open-type="redirect">
-    <button  class='bt' style="background-image:url('{{returnimg}}');background-size:100% 100%;"></button>
-  </navigator>
+    <button  class='bt' style="background-image:url('{{returnimg}}');background-size:100% 100%;" bindtap='returnTap'></button>
 </view>
 
 <!-- bindlongtap 长按事件-->

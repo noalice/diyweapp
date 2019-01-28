@@ -71,7 +71,6 @@ Page({
     // wx.navigateTo({
     //   url: '../production'
     // })
-
   },
 
   // 页面初始化

@@ -51,11 +51,6 @@ Page({
     imgName: [],
     // 里面滑片默认选择
     select: 0,
-    selectce: -1, //选择图片记录(默认不选)
-    selectcm: 0, //默认第一个
-    selectcc: -1,
-    selectbp: 0, //默认第一个
-    selectbc: -1,
     drawName: "",
     showFinishbt: true, //展示完成按钮
     enablecolor: false, //自动生成颜色变换（可点击）
@@ -80,7 +75,7 @@ Page({
     Eimgwidth: 0,
     Pimgbottom: 0,
     flag: -1, //判断布包选择了色块后是否点击了自动上色
-    dissatisfaction: false, //用户不满意结果，重新选择，需要清空数据和原图
+    dissatisfaction: false, //用户不满意结果，重新选择
   },
 
   //根据tab，得到滑片索引（通过 data-current="{{index}}" 得到）
@@ -88,7 +83,7 @@ Page({
     this.setData({
       indexb: e.currentTarget.dataset.current,
     });
-    console.log("外部滑片indexb:" + this.data.indexb);
+    // console.log("外部滑片indexb:" + this.data.indexb);
 
     if (this.data.select == 0) {
       //不带默认选择框
@@ -102,14 +97,14 @@ Page({
         this.data.eURL = "M";
 
         this.setData({
-          select: this.data.selectcm,
+          select: app.globalData.selectcm,
         });
       }
       if (this.data.indexb == 1) {
         this.data.eURL = "E";
 
         this.setData({
-          select: this.data.selectce,
+          select: app.globalData.selectce,
         });
 
       }
@@ -117,7 +112,7 @@ Page({
         this.data.eURL = "C";
 
         this.setData({
-          select: this.data.selectcc,
+          select: app.globalData.selectcc,
         });
       }
     } else {
@@ -125,14 +120,14 @@ Page({
         this.data.eURL = "P";
 
         this.setData({
-          select: this.data.selectbp,
+          select: app.globalData.selectbp,
         });
       }
       if (this.data.indexb == 1) {
         this.data.eURL = "C";
 
         this.setData({
-          select: this.data.selectbc,
+          select: app.globalData.selectbc,
         });
       }
     }
@@ -177,77 +172,85 @@ Page({
     this.setData({
       select: e.currentTarget.dataset.num,
     });
-    console.log("select里面滑片:" + this.data.select);
+    // console.log("select里面滑片:" + this.data.select);
 
     // 用户不满意，清除数据
     if (this.data.dissatisfaction == true) {
+      if (app.globalData.production == "B") {
+        //用户不满意，重新选择元素，布包需要重新判断点击完成按钮的条件
+        this.data.flag = -1;
+      } else {
+        //用户不满意，重新选择元素，地毯（披肩）需要隐藏完成按钮
+        this.setData({
+          showFinishbt: false,
+        });
+      }
+
       this.setData({
-        Eimg: '',
+        Eimg: app.globalData.rootURL + app.globalData.ce_name + this.data.imgformat,
         Pimg: app.globalData.rootURL + app.globalData.bp_name + this.data.imgformat
       });
 
       //重新判断满意度
       this.data.dissatisfaction = false;
-
-      app.globalData.cc_name = "";
-      app.globalData.ce_name = "";
-      app.globalData.cm_name = ""
     }
+
 
     var str = this.data.imgName[this.data.select];
     // 字符串去掉首位的“u”，再在末尾补0
     // 字符串长度 str.toString().length
     str = str.substr(1) + "0";
     this.data.drawName = str;
-    console.log("需要绘画图片名称:" + this.data.drawName);
+    // console.log("需要绘画图片名称:" + this.data.drawName);
 
     if (app.globalData.production == "C") {
       if (this.data.indexb == 0) {
         app.globalData.cm_name = this.data.drawName;
-        console.log("滑片0 cm_name：" + app.globalData.cm_name);
+        // console.log("滑片0 cm_name：" + app.globalData.cm_name);
 
         //记录选择里面滑片
-        this.data.selectcm = this.data.select;
+        app.globalData.selectcm = this.data.select;
 
         //页面使用
         this.setData({
           Mimg: app.globalData.rootURL + this.data.drawName + this.data.imgformat
         });
-        console.log("Mimg：" + this.data.Mimg);
+        // console.log("Mimg：" + this.data.Mimg);
       }
 
       if (this.data.indexb == 1) {
         app.globalData.ce_name = this.data.drawName;
-        console.log("滑片1 ce_name：" + app.globalData.ce_name);
+        // console.log("滑片1 ce_name：" + app.globalData.ce_name);
 
         //记录选择里面滑片
-        this.data.selectce = this.data.select;
+        app.globalData.selectce = this.data.select;
 
         this.setData({
           Eimg: app.globalData.rootURL + this.data.drawName + this.data.imgformat
         });
-        console.log("Eimg：" + this.data.Eimg);
+        // console.log("Eimg：" + this.data.Eimg);
       }
 
       if (this.data.indexb == 2) {
         app.globalData.cc_name = this.data.drawName;
-        console.log("滑片2 cc_name：" + app.globalData.cc_name);
+        // console.log("滑片2 cc_name：" + app.globalData.cc_name);
 
         //记录选择里面滑片
-        this.data.selectcc = this.data.select;
+        app.globalData.selectcc = this.data.select;
 
         this.setData({
           Cimg: app.globalData.rootURL + this.data.drawName + this.data.imgformat
         });
-        console.log("Cimg：" + this.data.Cimg);
+        // console.log("Cimg：" + this.data.Cimg);
       }
     } else {
+
       if (this.data.indexb == 0) {
         app.globalData.bp_name = this.data.drawName;
-        console.log("滑片0 bp_name：" + app.globalData.bp_name);
+        // console.log("滑片0 bp_name：" + app.globalData.bp_name);
 
         //记录选择里面滑片
-        this.data.selectbp = this.data.select;
+        app.globalData.selectbp = this.data.select;
 
         //布包没有选择色块的图片路径记录
         app.globalData.bagNoColorUrl = app.globalData.rootURL + this.data.drawName + this.data.imgformat;
@@ -255,14 +258,14 @@ Page({
         this.setData({
           Pimg: app.globalData.rootURL + this.data.drawName + this.data.imgformat
         });
-        console.log("Pimg：" + this.data.Pimg);
+        // console.log("Pimg：" + this.data.Pimg);
       }
       if (this.data.indexb == 1) {
         app.globalData.bc_name = this.data.drawName;
-        console.log("滑片1 bc_name：" + app.globalData.bc_name);
+        // console.log("滑片1 bc_name：" + app.globalData.bc_name);
 
         //记录选择里面滑片
-        this.data.selectbc = this.data.select;
+        app.globalData.selectbc = this.data.select;
       }
     }
 
@@ -273,7 +276,7 @@ Page({
           enablecolor: true,
           autoimg: app.globalData.rootURL + "USTT0406.png"
         });
-      }else{
+      } else {
         this.setData({
           enablecolor: false,
         });
@@ -294,11 +297,24 @@ Page({
 
 
   //事件处理函数
-  // ReturnTap: function() {
-  //   wx.navigateTo({
-  //     url: '../production'
-  //   })
-  // },
+  ReturnTap: function() {
+    // 点击返回按钮，清空参数
+    app.globalData.ce_name = "";
+    app.globalData.cm_name = "";
+    app.globalData.cc_name = "";
+    app.globalData.bp_name = "";
+    app.globalData.bc_name = "";
+    // 点击返回按钮，清空选择
+    app.globalData.selectce = -1; //选择图片记录(默认不选)
+    app.globalData.selectcm = 0; //默认第一个
+    app.globalData.selectcc = -1;
+    app.globalData.selectbp = 0; //默认第一个
+    app.globalData.selectbc = -1;
+
+    wx.redirectTo({
+      url: '../production'
+    })
+  },
   ResultTap: function() {
     if (app.globalData.bc_name == "") {
 
@@ -306,6 +322,7 @@ Page({
         url: '../result/result'
       })
     } else {
+      //判断是否可以点击完成按钮
       if (this.data.flag == 0) {
         wx.redirectTo({
           url: '../result/result'
@@ -334,13 +351,13 @@ Page({
           duration: 2000 //持续的时间
         })
 
-        console.log("cc_name, ce_name, cm_name:" + app.globalData.cc_name, app.globalData.ce_name, app.globalData.cm_name)
+        // console.log("cc_name, ce_name, cm_name:" + app.globalData.cc_name, app.globalData.ce_name, app.globalData.cm_name)
         // 获取结果图名(c,e,m,id)
         var that = this;
         utilApi.requestPromiseCp(app.globalData.cc_name, app.globalData.ce_name, app.globalData.cm_name, app.globalData.openId)
           // 使用.then处理结果
           .then(res => {
-            console.log("结果图rName：" + res.data.rName)
+            // console.log("结果图rName：" + res.data.rName)
 
             // 获取结果图路径
             app.globalData.rNameUrl = app.globalData.rURL + res.data.rName + that.data.imgformat
@@ -348,8 +365,6 @@ Page({
             that.setData({
               showFinishbt: true,
               Eimg: app.globalData.rURL + res.data.rName + that.data.imgformat,
-              Mimg: "",
-              Cimg: ""
             });
 
           });
@@ -365,13 +380,13 @@ Page({
         // 布包点击自动上色按钮，判断条件
         this.data.flag = 0;
 
-        console.log("bp_name, bc_name:" + app.globalData.bp_name, app.globalData.bc_name)
+        // console.log("bp_name, bc_name:" + app.globalData.bp_name, app.globalData.bc_name)
         // 获取结果图名(p,c,id)
         var that = this;
         utilApi.requestPromiseBp(app.globalData.bp_name, app.globalData.bc_name, app.globalData.openId)
           // 使用.then处理结果
           .then(res => {
-            console.log("结果图rName：" + res.data.rName)
+            // console.log("结果图rName：" + res.data.rName)
 
             // 获取结果图路径
             app.globalData.rNameUrl = app.globalData.rURL + res.data.rName + that.data.imgformat
@@ -392,6 +407,10 @@ Page({
    */
   onLoad: function(options) {
 
+    console.log("cc_name, ce_name, cm_name , bp_name , bc_name:" + app.globalData.cc_name, app.globalData.ce_name, app.globalData.cm_name, app.globalData.bp_name, app.globalData.bc_name)
+    console.log("Pimg, Eimg , Mimg , Cimg:" + this.data.Pimg, this.data.Eimg, this.data.Mimg, this.data.Cimg)
+    console.log("flag , dissatisfaction，is_return:" + this.data.flag, this.data.dissatisfaction, app.globalData.is_return)
+
     wx.showLoading({
       title: '加载中',
     })
@@ -409,19 +428,19 @@ Page({
         Pimgbottom: (this.data.centerheight - 750) / 2,
         Eimgwidth: 750,
         Eimgheight: 500,
-        Mimgwidth: 650,
-        Mimgheight: 400,
+        Mimgwidth: 625,
+        Mimgheight: 375,
         Cimgwidth: 80, //角宽度为80rpx
         //0.8*750 外面view的宽度,400为主题宽度
         //L：左 ；R：右 ；T：上 ；B：下
-        CimgleftLT: (0.8 * 750 - 400) / 2,
-        CimgtopLT: (this.data.centerheight - 650) / 2+1,
-        CimgleftLB: (0.8 * 750 - 400) / 2 ,
-        CimgtopLB: (this.data.centerheight - 650) / 2 + 650 - 80 +2,
-        CimgleftRT: (0.8 * 750 - 400) / 2 + 400 - 80+2 ,
-        CimgtopRT: (this.data.centerheight - 650) / 2 +1,
-        CimgleftRB: (0.8 * 750 - 400) / 2 + 400 - 80 +2,
-        CimgtopRB: (this.data.centerheight - 650) / 2 + 650 - 80 +2,
+        CimgleftLT: (0.8 * 750 - 375) / 2,
+        CimgtopLT: (this.data.centerheight - 625) / 2,
+        CimgleftLB: (0.8 * 750 - 375) / 2,
+        CimgtopLB: (this.data.centerheight - 625) / 2 + 625 - 80 + 2,
+        CimgleftRT: (0.8 * 750 - 375) / 2 + 375 - 80 + 2,
+        CimgtopRT: (this.data.centerheight - 625) / 2,
+        CimgleftRB: (0.8 * 750 - 375) / 2 + 375 - 80 + 2,
+        CimgtopRB: (this.data.centerheight - 625) / 2 + 625 - 80 + 2,
       })
     } else {
       this.setData({
@@ -451,10 +470,6 @@ Page({
       production: app.globalData.production
     });
 
-    //从结果页面返回时，参数清空
-    app.globalData.ce_name = ''
-    app.globalData.bc_name = ''
-    app.globalData.cc_name = ''
 
     if (app.globalData.production == "C") {
       //地毯默认可跳转结果页面
@@ -483,71 +498,97 @@ Page({
     switch (app.globalData.theme) {
       case 1:
         this.data.tURL = "01"
-        // 默认展示图
-        this.setData({
-          Pimg: app.globalData.rootURL + 'B01PI010' + this.data.imgformat,
-          Mimg: app.globalData.rootURL + 'C01MI010' + this.data.imgformat
-        });
-        //默认获取元素图名
-        app.globalData.cm_name = 'C01MI010'
-        app.globalData.bp_name = 'B01PI010'
-        //布包没有色块默认路径
-        app.globalData.bagNoColorUrl = this.data.Pimg
+        if (app.globalData.is_return == false) {
+          // 顺序进入默认展示图
+          this.setData({
+            Pimg: app.globalData.rootURL + 'B01PI010' + this.data.imgformat,
+            Mimg: app.globalData.rootURL + 'C01MI010' + this.data.imgformat
+          });
+          //默认获取元素图名
+          app.globalData.cm_name = 'C01MI010'
+          app.globalData.bp_name = 'B01PI010'
+        }
         break;
       case 2:
         this.data.tURL = "02"
-        // 默认展示图
-        this.setData({
-          Pimg: app.globalData.rootURL + 'B02PI010' + this.data.imgformat,
-          Mimg: app.globalData.rootURL + 'C02MI010' + this.data.imgformat
-        });
-        //默认获取元素图名
-        app.globalData.cm_name = 'C02MI010'
-        app.globalData.bp_name = 'B02PI010'
-        //布包没有色块默认路径
-        app.globalData.bagNoColorUrl = this.data.Pimg
+        if (app.globalData.is_return == false) {
+          // 顺序进入默认展示图
+          this.setData({
+            Pimg: app.globalData.rootURL + 'B02PI010' + this.data.imgformat,
+            Mimg: app.globalData.rootURL + 'C02MI010' + this.data.imgformat
+          });
+          //默认获取元素图名
+          app.globalData.cm_name = 'C02MI010'
+          app.globalData.bp_name = 'B02PI010'
+        }
         break;
       case 3:
         this.data.tURL = "03"
-        // 默认展示图
-        this.setData({
-          Pimg: app.globalData.rootURL + 'B03PI010' + this.data.imgformat,
-          Mimg: app.globalData.rootURL + 'C03MI010' + this.data.imgformat
-        });
-        //默认获取元素图名
-        app.globalData.cm_name = 'C03MI010'
-        app.globalData.bp_name = 'B03PI010'
-        //布包没有色块默认路径
-        app.globalData.bagNoColorUrl = this.data.Pimg
+        if (app.globalData.is_return == false) {
+          // 顺序进入默认展示图
+          this.setData({
+            Pimg: app.globalData.rootURL + 'B03PI010' + this.data.imgformat,
+            Mimg: app.globalData.rootURL + 'C03MI010' + this.data.imgformat
+          });
+          //默认获取元素图名
+          app.globalData.cm_name = 'C03MI010'
+          app.globalData.bp_name = 'B03PI010'
+        }
         break;
       case 4:
         this.data.tURL = "04"
-        // 默认展示图
-        this.setData({
-          Pimg: app.globalData.rootURL + 'B04PI010' + this.data.imgformat,
-          Mimg: app.globalData.rootURL + 'C04MI010' + this.data.imgformat
-        });
-        //默认获取元素图名
-        app.globalData.cm_name = 'C04MI010'
-        app.globalData.bp_name = 'B04PI010'
-        //布包没有色块默认路径
-        app.globalData.bagNoColorUrl = this.data.Pimg
+        if (app.globalData.is_return == false) {
+          // 顺序进入默认展示图
+          this.setData({
+            Pimg: app.globalData.rootURL + 'B04PI010' + this.data.imgformat,
+            Mimg: app.globalData.rootURL + 'C04MI010' + this.data.imgformat
+          });
+          //默认获取元素图名
+          app.globalData.cm_name = 'C04MI010'
+          app.globalData.bp_name = 'B04PI010'
+
+        }
         break;
       case 5:
         this.data.tURL = "05"
-        // 默认展示图
-        this.setData({
-          Pimg: app.globalData.rootURL + 'B05PI010' + this.data.imgformat,
-          Mimg: app.globalData.rootURL + 'C05MI010' + this.data.imgformat
-        });
-        //默认获取元素图名
-        app.globalData.cm_name = 'C05MI010'
-        app.globalData.bp_name = 'B05PI010'
-        //布包没有色块默认路径
-        app.globalData.bagNoColorUrl = this.data.Pimg
+        if (app.globalData.is_return == false) {
+          // 顺序进入默认展示图
+          this.setData({
+            Pimg: app.globalData.rootURL + 'B05PI010' + this.data.imgformat,
+            Mimg: app.globalData.rootURL + 'C05MI010' + this.data.imgformat
+          });
+          //默认获取元素图名
+          app.globalData.cm_name = 'C05MI010'
+          app.globalData.bp_name = 'B05PI010'
+        }
         break;
       default:
         break;
+    }
+
+    //由结果页面返回
+    if (app.globalData.is_return == true) {
+      this.setData({
+        Pimg: app.globalData.rootURL + app.globalData.bp_name + this.data.imgformat,
+        Mimg: app.globalData.rootURL + app.globalData.cm_name + this.data.imgformat,
+        Eimg: app.globalData.rootURL + app.globalData.ce_name + this.data.imgformat,
+        Cimg: app.globalData.rootURL + app.globalData.cc_name + this.data.imgformat
+      });
+      if (app.globalData.production == "C" && this.data.indexb == 0) {
+        this.setData({
+          //地毯（披肩）需要隐藏完成按钮
+          showFinishbt: false,
+          select: app.globalData.selectcm,
+        });
+      }
+      if (app.globalData.production == "B" && this.data.indexb == 0) {
+        this.setData({
+          select: app.globalData.selectbp,
+        });
+      }
+    } else {
+      //布包没有色块默认路径
+      app.globalData.bagNoColorUrl = this.data.Pimg
     }
 
     this.data.imgName = [

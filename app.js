@@ -76,7 +76,14 @@ App({
     bp_name: "",//布包参数记录
     bc_name: "",
     rNameUrl:"",//结果图路径记录
-    bagNoColorUrl:""//布包没有选择色块的图片路径记录
+    bagNoColorUrl:"",//布包没有选择色块的图片路径记录
+    is_return:false,//判断重新加载的元素界面是否是由解雇页面返回的
+    //元素页面元素选择记录
+    selectce: -1, //选择图片记录(默认不选)
+    selectcm: 0, //默认第一个
+    selectcc: -1,
+    selectbp: 0, //默认第一个
+    selectbc: -1,
   },
   // 页面转发按钮
   onShareAppMessage: function() {

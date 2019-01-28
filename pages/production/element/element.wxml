@@ -4,9 +4,7 @@
 <view class="button" style="position:absolute;z-index:2;">
   <!-- <button class="return" bindtap="ReturnTap" hover-class='hover'> 返回 </button>
   <button class="submit" bindtap="ResultTap" hover-class='hover'> 完成 </button> -->
-  <navigator url='../production' open-type="redirect">
-    <image mode="aspectFill" src="{{returnimg}}" class="return"></image>
-  </navigator>
+  <image mode="aspectFill" src="{{returnimg}}" class="return" bindtap="ReturnTap"></image>
   <image wx:if="{{showFinishbt == true}}" mode="aspectFill" src="{{finishimg}}" class="submit" bindtap="ResultTap"></image>
 </view>
 
@@ -19,7 +17,8 @@
 <view class="center" style='width:80%;height:{{centerheight}}rpx;position:relative;z-index:1;margin-top:120rpx;'>
 
   <block wx:if="{{production == 'C'}}">
-    <image mode="aspectFill" src="{{Eimg}}" style='transform:rotate(-90deg);width:{{Eimgwidth}}rpx;height:{{Eimgheight}}rpx;position:absolute;background:#fff;'></image>
+    <!-- 白底板 -->
+    <view style='width:{{Eimgheight}}rpx;height:{{Eimgwidth}}rpx;position:absolute;background:#fff;'></view>
     <image mode="aspectFill" src="{{Mimg}}" style='transform:rotate(-90deg);width:{{Mimgwidth}}rpx;height:{{Mimgheight}}rpx;position:absolute;'></image>
     <!-- 左上 -->
     <image mode="aspectFill" src="{{Cimg}}" style='width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftLT}}rpx;top:{{CimgtopLT}}rpx;'></image>
@@ -29,6 +28,7 @@
     <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(90deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRT}}rpx;top:{{CimgtopRT}}rpx;'></image>
     <!-- 右下 -->
     <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(180deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRB}}rpx;top:{{CimgtopRB}}rpx;'></image>
+    <image mode="aspectFill" src="{{Eimg}}" style='transform:rotate(-90deg);width:{{Eimgwidth}}rpx;height:{{Eimgheight}}rpx;position:absolute;'></image>
   </block>
 
   <block wx:else>

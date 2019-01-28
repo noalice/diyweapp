@@ -18,8 +18,11 @@ Page({
    */
   CatpetTap: function() {
     // 地毯参数
-    app.globalData.production = "C",
-      console.log("production：" + app.globalData.production);
+    app.globalData.production = "C";
+    //顺序进入元素界面
+    app.globalData.is_return = false;
+    // console.log("production：" + app.globalData.production);
+    
     // wx.navigateTo({
     //   url: './element/element'
     // })
@@ -30,12 +33,15 @@ Page({
    */
   BagTap: function() {
     // 布包参数
-    app.globalData.production = "B",
-      console.log("production：" + app.globalData.production);
+    app.globalData.production = "B";
+    //顺序进入元素界面
+    app.globalData.is_return = false;
+    // console.log("production：" + app.globalData.production);
 
     // wx.navigateTo({
     //   url: './element/element'
     // })
+
   },
 
   /**
