@@ -41,6 +41,8 @@ Page({
     Eimg: "",
     Mimg: "",
     Cimg: "",
+    Rimg: "",
+    is_rimg: false, //判断是否为地毯（披肩）结果图，是就添加白色背景
     Pimg: "",
     // image URL
     pURL: "",
@@ -187,7 +189,8 @@ Page({
       }
 
       this.setData({
-        Eimg: app.globalData.rootURL + app.globalData.ce_name + this.data.imgformat,
+        Rimg: "",
+        is_rimg: false,
         Pimg: app.globalData.rootURL + app.globalData.bp_name + this.data.imgformat
       });
 
@@ -364,7 +367,8 @@ Page({
             // 展示结果图（显示完成按钮）
             that.setData({
               showFinishbt: true,
-              Eimg: app.globalData.rURL + res.data.rName + that.data.imgformat,
+              Rimg: app.globalData.rURL + res.data.rName + that.data.imgformat,
+              is_rimg: true
             });
 
           });
@@ -429,18 +433,19 @@ Page({
         Eimgwidth: 750,
         Eimgheight: 500,
         Mimgwidth: 625,
-        Mimgheight: 375,
+        Mimgheight: 375 + 2, //加2偏差
         Cimgwidth: 80, //角宽度为80rpx
         //0.8*750 外面view的宽度,400为主题宽度
         //L：左 ；R：右 ；T：上 ；B：下
         CimgleftLT: (0.8 * 750 - 375) / 2,
         CimgtopLT: (this.data.centerheight - 625) / 2,
         CimgleftLB: (0.8 * 750 - 375) / 2,
-        CimgtopLB: (this.data.centerheight - 625) / 2 + 625 - 80 + 2,
-        CimgleftRT: (0.8 * 750 - 375) / 2 + 375 - 80 + 2,
+        CimgtopLB: (this.data.centerheight - 625) / 2 + 625 - 80 + 3,
+        //加3偏差
+        CimgleftRT: (0.8 * 750 - 375) / 2 + 375 - 80 + 3,
         CimgtopRT: (this.data.centerheight - 625) / 2,
-        CimgleftRB: (0.8 * 750 - 375) / 2 + 375 - 80 + 2,
-        CimgtopRB: (this.data.centerheight - 625) / 2 + 625 - 80 + 2,
+        CimgleftRB: (0.8 * 750 - 375) / 2 + 375 - 80 + 3,
+        CimgtopRB: (this.data.centerheight - 625) / 2 + 625 - 80 + 3,
       })
     } else {
       this.setData({
@@ -455,14 +460,16 @@ Page({
         Cimgwidth: 80, //角宽度为80rpx
         //0.8*750 外面view的宽度, (this.data.centerheight - 20) / 3 * 2 - 100 为主题宽度
         //L：左 ；R：右 ；T：上 ；B：下
-        CimgleftLT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2,
+        //加1偏差
+        CimgleftLT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2 + 1,
         CimgtopLT: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2,
-        CimgleftLB: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2,
-        CimgtopLB: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2 + (this.data.centerheight - 20 - 80) - 80,
-        CimgleftRT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2 + ((this.data.centerheight - 20) / 3 * 2 - 80) - 80,
+        CimgleftLB: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2 + 1,
+        CimgtopLB: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2 + (this.data.centerheight - 20 - 80) - 80 + 2,
+        //加2偏差
+        CimgleftRT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2 + ((this.data.centerheight - 20) / 3 * 2 - 80) - 80 + 3,
         CimgtopRT: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2,
-        CimgleftRB: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2 + ((this.data.centerheight - 20) / 3 * 2 - 80) - 80,
-        CimgtopRB: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2 + (this.data.centerheight - 20 - 80) - 80,
+        CimgleftRB: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2 + ((this.data.centerheight - 20) / 3 * 2 - 80) - 80 + 3,
+        CimgtopRB: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2 + (this.data.centerheight - 20 - 80) - 80 + 2,
       })
     }
 

@@ -17,18 +17,17 @@
 <view class="center" style='width:80%;height:{{centerheight}}rpx;position:relative;z-index:1;margin-top:120rpx;'>
 
   <block wx:if="{{production == 'C'}}">
-    <!-- 白底板 -->
-    <view style='width:{{Eimgheight}}rpx;height:{{Eimgwidth}}rpx;position:absolute;background:#fff;'></view>
+    <image mode="aspectFill" src="{{Eimg}}" style='transform:rotate(-90deg);width:{{Eimgwidth}}rpx;height:{{Eimgheight}}rpx;position:absolute;background:#fff;'></image>
     <image mode="aspectFill" src="{{Mimg}}" style='transform:rotate(-90deg);width:{{Mimgwidth}}rpx;height:{{Mimgheight}}rpx;position:absolute;'></image>
     <!-- 左上 -->
     <image mode="aspectFill" src="{{Cimg}}" style='width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftLT}}rpx;top:{{CimgtopLT}}rpx;'></image>
     <!-- 左下 -->
-    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(-90deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftLB}}rpx;top:{{CimgtopLB}}rpx;'></image>
+    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotateX(180deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftLB}}rpx;top:{{CimgtopLB}}rpx;'></image>
     <!-- 右上 -->
-    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(90deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRT}}rpx;top:{{CimgtopRT}}rpx;'></image>
+    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotateY(180deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRT}}rpx;top:{{CimgtopRT}}rpx;'></image>
     <!-- 右下 -->
-    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotate(180deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRB}}rpx;top:{{CimgtopRB}}rpx;'></image>
-    <image mode="aspectFill" src="{{Eimg}}" style='transform:rotate(-90deg);width:{{Eimgwidth}}rpx;height:{{Eimgheight}}rpx;position:absolute;'></image>
+    <image mode="aspectFill" src="{{Cimg}}" style='transform:rotateX(180deg) rotateY(180deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRB}}rpx;top:{{CimgtopRB}}rpx;'></image>
+    <image mode="aspectFill" src="{{Rimg}}" style='transform:rotate(-90deg);width:{{Eimgwidth}}rpx;height:{{Eimgheight}}rpx;position:absolute;{{is_rimg==true?"background:#fff":""}};'></image>
   </block>
 
   <block wx:else>

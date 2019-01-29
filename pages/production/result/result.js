@@ -13,6 +13,7 @@ Page({
     Bagimg: app.globalData.rootURL + "UGKP0002.png",
     imgformat: "",
     returnimg: app.globalData.rootURL + "USTT0501.png",
+    logoimg: app.globalData.rootURL + "USKP0501.png",
     tipimg: '',
     h: 0, // 动态获取到的屏幕展示高度
     r: 0, // 相对iphone6的相对单位
@@ -173,12 +174,42 @@ Page({
         tipimg: app.globalData.rootURL + "USKT0501.png"
       })
       this.data.imgformat = ".jpg";
-      //120rpx 为文字图片的高度
-      // 可以在这里调整位置 -往上调  +往下调
-      var bagy = (this.data.h - 890 - 125) / 4 - 20;
-      var txty = bagy + 396 + bagy / 2
-      var proy = (this.data.h - 890 - 125) / 4 + 350 / 2 - 40;
+
+      // 默认文字图片高70rpx，包高750rpx，间隙20rpx
+      var bagx, bagy, bagw, bagh;
+      var txtx, txty, txtw, txth;
+      var prox, proy, prow;
       var that = this;
+      if (this.data.centerh > (750 + 70 + 20)) {
+        bagw = 500 / 2 * that.data.r;
+        bagh = 750 / 2 * that.data.r;
+        //750rpx为微信默认iPhone6宽
+        bagx = (750 - 500) / 2 / 2 * that.data.r;
+        bagy = (this.data.centerh - 750 - 70 - 20) / 2 / 2 * that.data.r;
+        txtw = 500 / 2 * that.data.r;
+        txth = 70 / 2 * that.data.r;
+        txtx = (750 - 500) / 2 / 2 * that.data.r;
+        txty = ((this.data.centerh - 750 - 70 - 20) / 2 + 750 + 20) / 2 * that.data.r;
+        //结果图宽400rpx，包身高576rpx（比为4.6的5.3----结果图偏上）
+        prow = 400 / 2 * that.data.r;
+        prox = (750 - 400) / 2 / 2 * that.data.r;
+        proy = ((this.data.centerh - 750 - 70 - 20) / 2 + 750 - 576 + (576 - 400) / 2) / 2 * that.data.r;
+      } else {
+        // 文字图片高42rpx，包高600rpx，间隙20rpx
+        bagw = 400 / 2 * that.data.r;
+        bagh = 600 / 2 * that.data.r;
+        //750rpx为微信默认iPhone6宽
+        bagx = (750 - 400) / 2 / 2 * that.data.r;
+        bagy = (this.data.centerh - 600 - 56 - 20) / 2 / 2 * that.data.r;
+        txtw = 400 / 2 * that.data.r;
+        txth = 56 / 2 * that.data.r;
+        txtx = (750 - 400) / 2 / 2 * that.data.r;
+        txty = ((this.data.centerh - 600 - 56 - 20) / 2 + 600 + 20) / 2 * that.data.r;
+        //结果图宽320rpx,包身高460rpx
+        prow = 320 / 2 * that.data.r;
+        prox = (750 - 320) / 2 / 2 * that.data.r;
+        proy = ((this.data.centerh - 600 - 56- 20) / 2 + 600 - 460 + (460 - 320) / 2) / 2 * that.data.r;
+      }
 
       utilApi.downloadimgPromise(that.data.Bagimg)
         // 使用.then处理结果
@@ -186,20 +217,20 @@ Page({
           //画画布背景(灰色)
           contextB.setFillStyle('#e0e0e0');
           contextB.fillRect(0, 0, that.data.windowWidth, 10000);
-          // 画背景包（x：125rpx）
-          contextB.drawImage(res.tempFilePath, 55.5 * that.data.r, bagy * that.data.r, 264 * that.data.r, 396 * that.data.r);
+          // 画背景包（宽500rpx；高750rpx）
+          contextB.drawImage(res.tempFilePath, bagx, bagy, bagw, bagh);
 
           utilApi.downloadimgPromise(that.data.textimg[Math.floor(Math.random() * that.data.textimg.length)])
             // 使用.then处理结果
             .then(res => {
               // 画文字图片
-              contextB.drawImage(res.tempFilePath, 62.5 * that.data.r, txty * that.data.r, 250 * that.data.r, 35 * that.data.r);
+              contextB.drawImage(res.tempFilePath, txtx, txty, txtw, txth);
               if (app.globalData.bc_name == "") {
 
                 utilApi.downloadimgPromise(app.globalData.bagNoColorUrl)
                   .then(res => {
                     // 画结果图
-                    contextB.drawImage(res.tempFilePath, 91.5 * that.data.r, proy * that.data.r, 192 * that.data.r, 192 * that.data.r);
+                    contextB.drawImage(res.tempFilePath, prox, proy, prow, prow);
                     contextB.draw();
                   });
 
@@ -208,7 +239,7 @@ Page({
                 utilApi.downloadimgPromise(app.globalData.rNameUrl)
                   .then(res => {
                     // 画结果图
-                    contextB.drawImage(res.tempFilePath, 91.5 * that.data.r, proy * that.data.r, 192 * that.data.r, 192 * that.data.r);
+                    contextB.drawImage(res.tempFilePath, prox, proy, prow, prow);
                     contextB.draw();
                   });
               }
