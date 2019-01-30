@@ -432,19 +432,19 @@ Page({
         Pimgbottom: (this.data.centerheight - 750) / 2,
         Eimgwidth: 750,
         Eimgheight: 500,
-        Mimgwidth: 625,
-        Mimgheight: 375 + 2, //加2偏差
+        Mimgwidth: 625 + 6,
+        Mimgheight: 375 + 6, //加7偏差
         Cimgwidth: 80, //角宽度为80rpx
         //0.8*750 外面view的宽度,400为主题宽度
         //L：左 ；R：右 ；T：上 ；B：下
-        CimgleftLT: (0.8 * 750 - 375) / 2,
-        CimgtopLT: (this.data.centerheight - 625) / 2,
-        CimgleftLB: (0.8 * 750 - 375) / 2,
+        CimgleftLT: (0.8 * 750 - 375) / 2 - 2,
+        CimgtopLT: (this.data.centerheight - 625) / 2 - 2,
+        CimgleftLB: (0.8 * 750 - 375) / 2 - 2,
         CimgtopLB: (this.data.centerheight - 625) / 2 + 625 - 80 + 3,
         //加3偏差
-        CimgleftRT: (0.8 * 750 - 375) / 2 + 375 - 80 + 3,
-        CimgtopRT: (this.data.centerheight - 625) / 2,
-        CimgleftRB: (0.8 * 750 - 375) / 2 + 375 - 80 + 3,
+        CimgleftRT: (0.8 * 750 - 375) / 2 + 375 - 80 + 4,
+        CimgtopRT: (this.data.centerheight - 625) / 2 - 2,
+        CimgleftRB: (0.8 * 750 - 375) / 2 + 375 - 80 + 4,
         CimgtopRB: (this.data.centerheight - 625) / 2 + 625 - 80 + 3,
       })
     } else {
@@ -460,10 +460,9 @@ Page({
         Cimgwidth: 80, //角宽度为80rpx
         //0.8*750 外面view的宽度, (this.data.centerheight - 20) / 3 * 2 - 100 为主题宽度
         //L：左 ；R：右 ；T：上 ；B：下
-        //加1偏差
-        CimgleftLT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2 + 1,
+        CimgleftLT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2,
         CimgtopLT: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2,
-        CimgleftLB: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2 + 1,
+        CimgleftLB: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2,
         CimgtopLB: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2 + (this.data.centerheight - 20 - 80) - 80 + 2,
         //加2偏差
         CimgleftRT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2 + ((this.data.centerheight - 20) / 3 * 2 - 80) - 80 + 3,
