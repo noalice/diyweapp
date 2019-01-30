@@ -102,8 +102,6 @@ Page({
     this.setData({
       // 60-顶部返回 80-长按提示 logo-120
       centerh: this.data.h - 60 - 80 - 80,
-    })
-    this.setData({
       production: app.globalData.production
     })
 

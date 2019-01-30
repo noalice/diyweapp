@@ -135,32 +135,32 @@ Page({
     }
 
     this.data.imgName = [
-        this.data.pURL + this.data.tURL + this.data.eURL + "I01",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I02",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I03",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I04",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I05",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I06",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I07",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I08",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I09",
-        this.data.pURL + this.data.tURL + this.data.eURL + "I10",
-      ],
+      this.data.pURL + this.data.tURL + this.data.eURL + "I01",
+      this.data.pURL + this.data.tURL + this.data.eURL + "I02",
+      this.data.pURL + this.data.tURL + this.data.eURL + "I03",
+      this.data.pURL + this.data.tURL + this.data.eURL + "I04",
+      this.data.pURL + this.data.tURL + this.data.eURL + "I05",
+      this.data.pURL + this.data.tURL + this.data.eURL + "I06",
+      this.data.pURL + this.data.tURL + this.data.eURL + "I07",
+      this.data.pURL + this.data.tURL + this.data.eURL + "I08",
+      this.data.pURL + this.data.tURL + this.data.eURL + "I09",
+      this.data.pURL + this.data.tURL + this.data.eURL + "I10",
+    ]
 
-      this.setData({
-        imgURL: [
-          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I01.png",
-          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I02.png",
-          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I03.png",
-          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I04.png",
-          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I05.png",
-          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I06.png",
-          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I07.png",
-          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I08.png",
-          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I09.png",
-          app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I10.png",
-        ]
-      })
+    this.setData({
+      imgURL: [
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I01.png",
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I02.png",
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I03.png",
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I04.png",
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I05.png",
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I06.png",
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I07.png",
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I08.png",
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I09.png",
+        app.globalData.rootURL + this.data.pURL + this.data.tURL + this.data.eURL + "I10.png",
+      ]
+    })
 
     // console.log("事件点击加载获取图片路径：" + this.data.imgURL);
     // console.log("图片名称：" + this.data.imgName[0]);
@@ -173,6 +173,9 @@ Page({
   swipclick: function(e) {
     this.setData({
       select: e.currentTarget.dataset.num,
+      Rimg: "",
+      is_rimg: false,
+      Pimg: app.globalData.rootURL + app.globalData.bp_name + this.data.imgformat
     });
     // console.log("select里面滑片:" + this.data.select);
 
@@ -187,13 +190,6 @@ Page({
           showFinishbt: false,
         });
       }
-
-      this.setData({
-        Rimg: "",
-        is_rimg: false,
-        Pimg: app.globalData.rootURL + app.globalData.bp_name + this.data.imgformat
-      });
-
       //重新判断满意度
       this.data.dissatisfaction = false;
     }
@@ -424,6 +420,7 @@ Page({
     this.setData({
       //下面153rpx的83rpx的83rpx,上面的间距20rpx,上面的按钮100rpx
       centerheight: h - 153 - 83 - 83 - 20 - 100,
+      production: app.globalData.production
     })
 
     if (this.data.centerheight > 750) {
@@ -471,11 +468,6 @@ Page({
         CimgtopRB: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2 + (this.data.centerheight - 20 - 80) - 80 + 2,
       })
     }
-
-    this.setData({
-      production: app.globalData.production
-    });
-
 
     if (app.globalData.production == "C") {
       //地毯默认可跳转结果页面

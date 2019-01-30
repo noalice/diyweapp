@@ -69,7 +69,12 @@ function downloadimgPromise(imgURL) {
   return new Promise((resolve, reject) => {
     wx.downloadFile({
       url: imgURL,
-      success: res => resolve(res)
+      success: res => resolve(res),
+      fail: res => wx.showToast({
+        title: '网络状态不好，请返回重试',
+        icon: 'none',
+        duration: 2000 //持续的时间
+      })
     })
   })
 }
