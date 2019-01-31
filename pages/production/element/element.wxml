@@ -27,7 +27,7 @@
     <image mode="aspectFill" src="{{Cimg}}" style='transform:rotateY(180deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRT}}rpx;top:{{CimgtopRT}}rpx;'></image>
     <!-- 右下 -->
     <image mode="aspectFill" src="{{Cimg}}" style='transform:rotateX(180deg) rotateY(180deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRB}}rpx;top:{{CimgtopRB}}rpx;'></image>
-    <image mode="aspectFill" src="{{Rimg}}" style='transform:rotate(-90deg);width:{{Eimgwidth}}rpx;height:{{Eimgheight}}rpx;position:absolute;{{is_rimg==true?"background:#fff":""}};'></image>
+    <image wx:if='{{Rimg !=""}}' mode="aspectFill" src="{{Rimg}}" style='transform:rotate(-90deg);width:{{Eimgwidth}}rpx;height:{{Eimgheight}}rpx;position:absolute;{{is_rimg==true?"background:#fff":""}};'></image>
   </block>
 
   <block wx:else>

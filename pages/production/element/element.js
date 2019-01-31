@@ -78,6 +78,9 @@ Page({
     Pimgbottom: 0,
     flag: -1, //判断布包选择了色块后是否点击了自动上色
     dissatisfaction: false, //用户不满意结果，重新选择
+    once_auto: 1, //自动生成按钮只可点击一次
+    no_choosetip: 0, //双击配色按钮，可以取消，判断提示次数
+    index_s: 0 //记录布包上一次的外面滑片的选择,默认为主题
   },
 
   //根据tab，得到滑片索引（通过 data-current="{{index}}" 得到）
@@ -124,14 +127,44 @@ Page({
         this.setData({
           select: app.globalData.selectbp,
         });
+
+        //记录布包上一次的外面滑片的选择
+        this.data.index_s = 0;
       }
+
+      //双击配色按钮可取消配色，只选择原图
+      if (this.data.indexb == 1 && this.data.index_s == 1) {
+        // 清空选择
+        this.setData({
+          enablecolor: false,
+        });
+        // 清空配色参数
+        app.globalData.bc_name = ""
+        app.globalData.selectbc = -1
+      }
+
       if (this.data.indexb == 1) {
         this.data.eURL = "C";
+
+        if (this.data.no_choosetip == 0) {
+          wx.showToast({
+            title: '双击 “ 配色 ” 按钮可取消配色，只选择原图',
+            icon: 'none',
+            duration: 2000 //持续的时间
+          })
+
+          // 重置
+          this.data.no_choosetip++;
+        }
 
         this.setData({
           select: app.globalData.selectbc,
         });
+
+        //记录布包上一次的外面滑片的选择
+        this.data.index_s = 1;
       }
+
     }
 
     this.data.imgName = [
@@ -194,6 +227,8 @@ Page({
       this.data.dissatisfaction = false;
     }
 
+    // 初始化自动按钮点击情况
+    this.data.once_auto = 1;
 
     var str = this.data.imgName[this.data.select];
     // 字符串去掉首位的“u”，再在末尾补0
@@ -265,6 +300,7 @@ Page({
 
         //记录选择里面滑片
         app.globalData.selectbc = this.data.select;
+
       }
     }
 
@@ -310,20 +346,20 @@ Page({
     app.globalData.selectbp = 0; //默认第一个
     app.globalData.selectbc = -1;
 
-    wx.redirectTo({
+    wx.reLaunch({
       url: '../production'
     })
   },
   ResultTap: function() {
     if (app.globalData.bc_name == "") {
 
-      wx.redirectTo({
+      wx.reLaunch({
         url: '../result/result'
       })
     } else {
       //判断是否可以点击完成按钮
       if (this.data.flag == 0) {
-        wx.redirectTo({
+        wx.reLaunch({
           url: '../result/result'
         })
       } else {
@@ -338,67 +374,85 @@ Page({
   //自动生成按钮事件（变色可用）
   enablebt: function() {
 
+    wx.showToast({
+      title: '按钮暂时不可点击，请选择足够的样式使按钮变色',
+      icon: 'none',
+      duration: 1500 //持续的时间
+    })
+
     //判断用户是否没有直接点击完成
     this.data.dissatisfaction = true;
+    // 重置布包上一次外面滑片选择记录
+    this.data.index_s = 0;
+    // 判断是否为二次点击
+    if (this.data.enablecolor == true && this.data.once_auto >= 2) {
+      wx.showToast({
+        title: '图案已经存在，请选择其他样式',
+        icon: 'none',
+        duration: 1500 //持续的时间
+      })
+    }
 
-    if (this.data.enablecolor == true) {
-      if (app.globalData.production == "C") {
+    if (this.data.once_auto == 1) {
 
-        wx.showToast({
-          title: '正在自动生成。。。',
-          icon: 'none',
-          duration: 2000 //持续的时间
-        })
+      if (this.data.enablecolor == true) {
+        if (app.globalData.production == "C") {
 
-        // console.log("cc_name, ce_name, cm_name:" + app.globalData.cc_name, app.globalData.ce_name, app.globalData.cm_name)
-        // 获取结果图名(c,e,m,id)
-        var that = this;
-        utilApi.requestPromiseCp(app.globalData.cc_name, app.globalData.ce_name, app.globalData.cm_name, app.globalData.openId)
-          // 使用.then处理结果
-          .then(res => {
-            // console.log("结果图rName：" + res.data.rName)
+          wx.showToast({
+            title: '正在自动生成。。。',
+            icon: 'none',
+            duration: 1500 //持续的时间
+          })
 
-            // 获取结果图路径
-            app.globalData.rNameUrl = app.globalData.rURL + res.data.rName + that.data.imgformat
-            // 展示结果图（显示完成按钮）
-            that.setData({
-              showFinishbt: true,
-              Rimg: app.globalData.rURL + res.data.rName + that.data.imgformat,
-              is_rimg: true
+          // console.log("cc_name, ce_name, cm_name:" + app.globalData.cc_name, app.globalData.ce_name, app.globalData.cm_name)
+          // 获取结果图名(c,e,m,id)
+          var that = this;
+          utilApi.requestPromiseCp(app.globalData.cc_name, app.globalData.ce_name, app.globalData.cm_name, app.globalData.openId)
+            // 使用.then处理结果
+            .then(res => {
+              // console.log("结果图rName：" + res.data.rName)
+
+              // 获取结果图路径
+              app.globalData.rNameUrl = app.globalData.rURL + res.data.rName + that.data.imgformat
+              // 展示结果图（显示完成按钮）
+              that.setData({
+                showFinishbt: true,
+                Rimg: app.globalData.rURL + res.data.rName + that.data.imgformat,
+                is_rimg: true
+              });
+
             });
 
-          });
+        } else {
 
-      } else {
+          wx.showToast({
+            title: '正在自动上色。。。',
+            icon: 'none',
+            duration: 1500 //持续的时间
+          })
 
-        wx.showToast({
-          title: '正在自动上色。。。',
-          icon: 'none',
-          duration: 2000 //持续的时间
-        })
+          // 布包点击自动上色按钮，判断条件
+          this.data.flag = 0;
 
-        // 布包点击自动上色按钮，判断条件
-        this.data.flag = 0;
+          // console.log("bp_name, bc_name:" + app.globalData.bp_name, app.globalData.bc_name)
+          // 获取结果图名(p,c,id)
+          var that = this;
+          utilApi.requestPromiseBp(app.globalData.bp_name, app.globalData.bc_name, app.globalData.openId)
+            // 使用.then处理结果
+            .then(res => {
+              // console.log("结果图rName：" + res.data.rName)
 
-        // console.log("bp_name, bc_name:" + app.globalData.bp_name, app.globalData.bc_name)
-        // 获取结果图名(p,c,id)
-        var that = this;
-        utilApi.requestPromiseBp(app.globalData.bp_name, app.globalData.bc_name, app.globalData.openId)
-          // 使用.then处理结果
-          .then(res => {
-            // console.log("结果图rName：" + res.data.rName)
-
-            // 获取结果图路径
-            app.globalData.rNameUrl = app.globalData.rURL + res.data.rName + that.data.imgformat
-            // 展示结果图
-            that.setData({
-              Pimg: app.globalData.rURL + res.data.rName + that.data.imgformat
+              // 获取结果图路径
+              app.globalData.rNameUrl = app.globalData.rURL + res.data.rName + that.data.imgformat
+              // 展示结果图
+              that.setData({
+                Pimg: app.globalData.rURL + res.data.rName + that.data.imgformat
+              });
             });
-
-          });
-
+        }
       }
-
+      // 判断是否点击自动生成按钮
+      this.data.once_auto++;
     }
   },
 
@@ -407,9 +461,9 @@ Page({
    */
   onLoad: function(options) {
 
-    console.log("cc_name, ce_name, cm_name , bp_name , bc_name:" + app.globalData.cc_name, app.globalData.ce_name, app.globalData.cm_name, app.globalData.bp_name, app.globalData.bc_name)
-    console.log("Pimg, Eimg , Mimg , Cimg:" + this.data.Pimg, this.data.Eimg, this.data.Mimg, this.data.Cimg)
-    console.log("flag , dissatisfaction，is_return:" + this.data.flag, this.data.dissatisfaction, app.globalData.is_return)
+    // console.log("cc_name, ce_name, cm_name , bp_name , bc_name:" + app.globalData.cc_name, app.globalData.ce_name, app.globalData.cm_name, app.globalData.bp_name, app.globalData.bc_name)
+    // console.log("Pimg, Eimg , Mimg , Cimg:" + this.data.Pimg, this.data.Eimg, this.data.Mimg, this.data.Cimg)
+    // console.log("flag , dissatisfaction，is_return:" + this.data.flag, this.data.dissatisfaction, app.globalData.is_return)
 
     wx.showLoading({
       title: '加载中',
@@ -437,12 +491,12 @@ Page({
         CimgleftLT: (0.8 * 750 - 375) / 2 - 2,
         CimgtopLT: (this.data.centerheight - 625) / 2 - 2,
         CimgleftLB: (0.8 * 750 - 375) / 2 - 2,
-        CimgtopLB: (this.data.centerheight - 625) / 2 + 625 - 80 + 3,
-        //加3偏差
+        CimgtopLB: (this.data.centerheight - 625) / 2 + 625 - 80 + 4,
+        //加4偏差
         CimgleftRT: (0.8 * 750 - 375) / 2 + 375 - 80 + 4,
         CimgtopRT: (this.data.centerheight - 625) / 2 - 2,
         CimgleftRB: (0.8 * 750 - 375) / 2 + 375 - 80 + 4,
-        CimgtopRB: (this.data.centerheight - 625) / 2 + 625 - 80 + 3,
+        CimgtopRB: (this.data.centerheight - 625) / 2 + 625 - 80 + 4,
       })
     } else {
       this.setData({
@@ -451,21 +505,21 @@ Page({
         Pimgbottom: 10,
         Eimgwidth: this.data.centerheight - 20,
         Eimgheight: (this.data.centerheight - 20) / 3 * 2,
-        // 边框和主题相差80rpx
-        Mimgwidth: this.data.centerheight - 20 - 80,
-        Mimgheight: (this.data.centerheight - 20) / 3 * 2 - 80,
+        // 边框和主题相差100rpx
+        Mimgwidth: this.data.centerheight - 20 - 100,
+        Mimgheight: (this.data.centerheight - 20) / 3 * 2 - 100,
         Cimgwidth: 80, //角宽度为80rpx
         //0.8*750 外面view的宽度, (this.data.centerheight - 20) / 3 * 2 - 100 为主题宽度
         //L：左 ；R：右 ；T：上 ；B：下
-        CimgleftLT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2,
-        CimgtopLT: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2,
-        CimgleftLB: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2,
-        CimgtopLB: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2 + (this.data.centerheight - 20 - 80) - 80 + 2,
+        CimgleftLT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 100)) / 2,
+        CimgtopLT: (this.data.centerheight - (this.data.centerheight - 20 - 100)) / 2,
+        CimgleftLB: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 100)) / 2,
+        CimgtopLB: (this.data.centerheight - (this.data.centerheight - 20 - 100)) / 2 + (this.data.centerheight - 20 - 100) - 80 + 2,
         //加2偏差
-        CimgleftRT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2 + ((this.data.centerheight - 20) / 3 * 2 - 80) - 80 + 3,
-        CimgtopRT: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2,
-        CimgleftRB: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 80)) / 2 + ((this.data.centerheight - 20) / 3 * 2 - 80) - 80 + 3,
-        CimgtopRB: (this.data.centerheight - (this.data.centerheight - 20 - 80)) / 2 + (this.data.centerheight - 20 - 80) - 80 + 2,
+        CimgleftRT: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 100)) / 2 + ((this.data.centerheight - 20) / 3 * 2 - 100) - 80 + 3,
+        CimgtopRT: (this.data.centerheight - (this.data.centerheight - 20 - 100)) / 2,
+        CimgleftRB: (0.8 * 750 - ((this.data.centerheight - 20) / 3 * 2 - 100)) / 2 + ((this.data.centerheight - 20) / 3 * 2 - 100) - 80 + 3,
+        CimgtopRB: (this.data.centerheight - (this.data.centerheight - 20 - 100)) / 2 + (this.data.centerheight - 20 - 100) - 80 + 2,
       })
     }
 
@@ -620,10 +674,29 @@ Page({
     // console.log("页面加载获取图片路径：" + this.data.imgURL);
     // console.log("图片名称：" + this.data.imgName[0]);
 
+    // 转发群
+    // wx.showShareMenu({
+    //   withShareTicket: true
+    // })
+
   },
   // 监听页面初次渲染完成
   onReady: function() {
     wx.hideLoading()
   },
+
+  // 页面转发按钮
+  // onShareAppMessage: function () {
+  //   return {
+  //     // title: '自定义分享标题',    
+  //     title: '',
+  //     // desc: '自定义分享描述',
+  //     desc: '',
+  //     // path: '/page/user?id=123'  【小程序分享页面的路径 （目前该路径'/page/user?id=123'是指代的用户id）】
+  //     path: '/page/user?id=123',
+  //     // 自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5: 4
+  //     imageUrl: '',
+  //   }
+  // }
 
 })

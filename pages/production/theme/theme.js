@@ -89,11 +89,30 @@ Page({
         })
       }
     })
+
+    // 转发群
+    // wx.showShareMenu({
+    //   withShareTicket: true
+    // })
   },
   
   // 监听页面初次渲染完成
   onReady: function() {
     wx.hideLoading()
   },
+
+  // 页面转发按钮
+  // onShareAppMessage: function () {
+  //   return {
+  //     // title: '自定义分享标题',    
+  //     title: '',
+  //     // desc: '自定义分享描述',
+  //     desc: '',
+  //     // path: '/page/user?id=123'  【小程序分享页面的路径 （目前该路径'/page/user?id=123'是指代的用户id）】
+  //     path: '/page/user?id=123',
+  //     // 自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5: 4
+  //     imageUrl: '',
+  //   }
+  // }
 
 })

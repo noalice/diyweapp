@@ -4,12 +4,9 @@
     "pages/index/index",
     "pages/animation/animation",
     "pages/production/production",
-
     "pages/production/theme/theme",
     "pages/production/element/element",
-    "pages/production/result/result",
-
-    "pages/logs/logs"
+    "pages/production/result/result"
   ],
   "window":{
     "backgroundTextStyle":"light",

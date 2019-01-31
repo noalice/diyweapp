@@ -12,6 +12,15 @@ page {
   margin-top: 20rpx;
 }
 
+/* 图片出现动画 */
+image{
+  animation: fadeIn 1s both;
+}
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 /* 去掉按钮边框 */
 
 button::after {

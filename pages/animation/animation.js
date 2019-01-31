@@ -5,9 +5,12 @@ const app = getApp()
 Page({
   data: {
     bkimg: app.globalData.rootURL + 'UGKP0001.png', //背景图片
-    end: '',
+    patternimg: app.globalData.rootURL + 'USKP0102.png',
+    rippleStyle: '',
+    rippleStyle1: '',
+    // end: '',
     outer: '',
-    inner: '',
+    // inner: '',
     flag: 1 //判断页面是否已经跳转
   },
 
@@ -19,21 +22,18 @@ Page({
     var that = this
     var x = res.touches[0].pageX;
     var y = res.touches[0].pageY + 85;
-    this.setData({
-      rippleStyle: '',
-      rippleStyle1: ''
-    });
+
     setTimeout(function() {
       that.setData({
         rippleStyle: 'top:' + y + 'px;left:' + x + 'px;-webkit-animation: ripple 0.6s ease-in-out;animation:ripple 0.6s linear;'
       });
-    }, 200)
+    }, 400)
 
     setTimeout(function() {
       that.setData({
         rippleStyle1: 'top:' + y + 'px;left:' + x + 'px;-webkit-animation: ripple 0.6s ease-in-out;animation:ripple 0.6s linear 0.2s;'
       });
-    }, 200)
+    }, 400)
 
     // setTimeout(function() {
     //   that.setData({
@@ -44,10 +44,10 @@ Page({
     // 点击水波，跳转事件
     if (this.data.flag == 2) {
       setTimeout(function() {
-        wx.redirectTo({
+        wx.reLaunch({
           url: '../production/theme/theme'
         })
-      }, 1000)
+      }, 2000)
     }
 
   },
@@ -56,18 +56,27 @@ Page({
   animationend: function(event) {
 
     if (this.data.flag == 1) {
-      setTimeout(function() {
-        wx.redirectTo({
-          url: '../production/theme/theme',
-        })
-      }, 1000)
+      // setTimeout(function() {
+      wx.reLaunch({
+        url: '../production/theme/theme',
+      })
+      // }, 100)
     }
 
   },
   onLoad: function() {
+
+    setTimeout(function() {
+      wx.showToast({
+        title: '可单击页面跳过动画',
+        icon: 'none',
+        duration: 2050 //持续的时间
+      })
+    }, 500)
+
     this.setData({
       outer: 'outer',
-      inner: 'inner',
+      // inner: 'inner',
     })
   }
 })

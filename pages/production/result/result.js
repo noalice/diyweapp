@@ -34,7 +34,7 @@ Page({
     //由结果页面返回元素界面
     app.globalData.is_return = true;
 
-    wx.redirectTo({
+    wx.reLaunch({
       url: '../element/element'
     })
   },
@@ -91,6 +91,13 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
+
+    wx.showToast({
+      title: '正在绘图，请稍等！！！',
+      icon: 'none',
+      duration: 2000 //持续的时间
+    })
+
     //wx.getSystemInfoSync().windowHeight单位px，h单位rpx（px到rpx转换）
     this.data.windowHeight = wx.getSystemInfoSync().windowHeight;
     this.data.windowWidth = wx.getSystemInfoSync().windowWidth;
@@ -148,7 +155,8 @@ Page({
       utilApi.downloadimgPromise(app.globalData.rNameUrl)
         .then(res => {
           // 画画布背景(灰色)
-          contextC.setFillStyle('#e0e0e0');
+          // contextC.setFillStyle('#e0e0e0');
+          contextC.fillStyle = "#e0e0e0";
           // 设置一个很大的值可以自动填满画布区域做背景
           contextC.fillRect(0, 0, this.data.windowWidth, 10000);
           // 画结果图 
@@ -206,14 +214,15 @@ Page({
         //结果图宽320rpx,包身高460rpx
         prow = 320 / 2 * that.data.r;
         prox = (750 - 320) / 2 / 2 * that.data.r;
-        proy = ((this.data.centerh - 600 - 56- 20) / 2 + 600 - 460 + (460 - 320) / 2) / 2 * that.data.r;
+        proy = ((this.data.centerh - 600 - 56 - 20) / 2 + 600 - 460 + (460 - 320) / 2) / 2 * that.data.r;
       }
 
       utilApi.downloadimgPromise(that.data.Bagimg)
         // 使用.then处理结果
         .then(res => {
           //画画布背景(灰色)
-          contextB.setFillStyle('#e0e0e0');
+          // contextB.setFillStyle('#e0e0e0');//此接口要废弃
+          contextB.fillStyle = "#e0e0e0";
           contextB.fillRect(0, 0, that.data.windowWidth, 10000);
           // 画背景包（宽500rpx；高750rpx）
           contextB.drawImage(res.tempFilePath, bagx, bagy, bagw, bagh);
@@ -244,6 +253,11 @@ Page({
             });
         });
     }
+
+    // 转发群
+    // wx.showShareMenu({
+    //   withShareTicket: true
+    // })
   },
 
   /**
@@ -291,7 +305,17 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
-  }
+  // 页面转发按钮
+  // onShareAppMessage: function() {
+  //   return {
+  //     // title: '自定义分享标题',    
+  //     title: '',
+  //     // desc: '自定义分享描述',
+  //     desc: '',
+  //     // path: '/page/user?id=123'  【小程序分享页面的路径 （目前该路径'/page/user?id=123'是指代的用户id）】
+  //     path: '/page/user?id=123',
+  //     // 自定义图片路径，可以是本地文件路径、代码包文件路径或者网络图片路径，支持PNG及JPG，不传入 imageUrl 则使用默认截图。显示图片长宽比是 5: 4
+  //     imageUrl: '',
+  //   }
+  // }
 })

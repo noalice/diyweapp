@@ -13,7 +13,7 @@
 		"uglifyFileName": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.3",
+	"libVersion": "2.5.2",
 	"appid": "wx02e8a5b4f47f726e",
 	"projectname": "diyweapp",
 	"debugOptions": {

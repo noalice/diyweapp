@@ -6,7 +6,7 @@
         <swiper-item class="swiper-item">
           <view style="margin:0 auto;">
             <!-- aspectFill保持纵横比缩放 -->
-            <navigator url='../production' open-type="redirect" hover-class='none'>
+            <navigator url='../production' open-type="reLaunch" hover-class='none'>
               <image mode="aspectFill" src="{{item.img}}" class="slide-image {{swiperIndex == index ? 'image-active' : ''}}" bindtap='swipclick' />
               <image mode="aspectFill" src="{{item.text}}" class="slide-text-image  {{swiperIndex == index ? 'text-active' : ''}}"></image>
             </navigator>

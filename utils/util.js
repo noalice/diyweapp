@@ -73,7 +73,7 @@ function downloadimgPromise(imgURL) {
       fail: res => wx.showToast({
         title: '网络状态不好，请返回重试',
         icon: 'none',
-        duration: 2000 //持续的时间
+        duration: 4000 //持续的时间
       })
     })
   })
