@@ -66,13 +66,13 @@ Page({
   },
   onLoad: function() {
 
-    setTimeout(function() {
-      wx.showToast({
-        title: '可单击页面跳过动画',
-        icon: 'none',
-        duration: 2050 //持续的时间
-      })
-    }, 500)
+    // setTimeout(function() {
+    //   wx.showToast({
+    //     title: '可单击页面跳过动画',
+    //     icon: 'none',
+    //     duration: 2050 //持续的时间
+    //   })
+    // }, 500)
 
     this.setData({
       outer: 'outer',

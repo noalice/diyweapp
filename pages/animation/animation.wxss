@@ -160,7 +160,8 @@ page {
 }
 
 .outer {
-  animation: fade-in 15s both;
+  animation: fade-in 6s both;
+  animation-delay: 1s;
 }
 
 /* .animtion-inner{
@@ -190,7 +191,7 @@ page {
   }
 
    100% {
-    opacity: 0.1;
+    opacity: 0;
   }
 }
 
