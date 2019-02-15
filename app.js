@@ -11,7 +11,7 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-    console.log("onLaunch")
+    // console.log("onLaunch")
     // 登录
     wx.login({
       success: res => {
@@ -30,6 +30,24 @@ App({
 
             success: function(res) {
               getApp().globalData.openId = res.data.openId;
+              console.log('*************用户openId：' + getApp().globalData.openId)
+            },
+            fail: function(res) {
+              console.log('*************openId获取失败');
+              // 带确认按钮的提示弹窗
+              // wx.showModal({
+              //   title: '提示',
+              //   content: '网络状态不好，请重试！！！',
+              //   showCancel: false,
+              //   confirmText: "重新加载",
+              //   success: function(res) {
+              //     if (res.confirm) { //这里是点击了确定以后
+              //       // console.log('用户点击确定')
+              //     } else { //这里是点击了取消以后
+              //       // console.log('用户点击取消')
+              //     }
+              //   }
+              // })
             }
           })
 
@@ -89,6 +107,7 @@ App({
     selectcc: -1,
     selectbp: 0, //默认第一个
     selectbc: -1,
+    successRimg: false, //点击自动按钮，获取结果图片成功
   },
 
 

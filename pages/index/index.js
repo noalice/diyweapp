@@ -12,11 +12,13 @@ Page({
   },
   // 事件处理函数（点击跳转函数bindViewTap注册）
   bindViewTap: function() {
-    wx.reLaunch({
-      // url: '../logs/logs'
-      // 点击跳转到动画页面
-      url: '../animation/animation'
-    })
+    if (app.globalData.openId != '') {
+      wx.reLaunch({
+        // url: '../logs/logs'
+        // 点击跳转到动画页面
+        url: '../animation/animation'
+      })
+    }
   },
   onLoad: function() {
     // 转发群
@@ -24,7 +26,8 @@ Page({
     //   withShareTicket: true
     // })
 
-
+    //判断openid是否获取成功
+    // if (app.globalData.openId != '') {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -69,6 +72,7 @@ Page({
         }
       })
     }
+    // }
   },
 
   getUserInfo: function(e) {

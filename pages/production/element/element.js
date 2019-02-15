@@ -133,11 +133,14 @@ Page({
       }
 
       //双击配色按钮可取消配色，只选择原图
-      if (this.data.indexb == 1 && this.data.index_s == 1) {
-        // 清空选择
+      //添加判断 app.globalData.bc_name != "" ，阻止自动按钮灰色时的页面再次渲染
+      //问题：从结果页面返回时，双击配色取消，自动按钮会闪动
+      if (this.data.indexb == 1 && this.data.index_s == 1 && app.globalData.bc_name != "") {
+        // 自动按钮颜色
         this.setData({
           enablecolor: false,
         });
+
         // 清空配色参数
         app.globalData.bc_name = ""
         app.globalData.selectbc = -1
@@ -146,11 +149,31 @@ Page({
       if (this.data.indexb == 1) {
         this.data.eURL = "C";
 
-        if (this.data.no_choosetip == 0) {
-          wx.showToast({
-            title: '双击 “ 配色 ” 按钮可取消配色，只选择原图',
-            icon: 'none',
-            duration: 2000 //持续的时间
+        //添加判断 app.globalData.is_return ==false ，阻止从结果页面返回时重复提示
+        if (this.data.no_choosetip == 0 && app.globalData.is_return == false) {
+          // 提示弹窗
+          // wx.showToast({
+          //   title: '双击 “ 配色 ” 按钮可取消配色，只选择原图',
+          //   icon: 'none',
+          //   duration: 2000 //持续的时间
+          // })
+
+          // 带确认按钮的提示弹窗
+          wx.showModal({
+            title: '提示',
+            content: '双击 “ 配色 ” 按钮可取消配色，只选择原图',
+            showCancel: false, //是否显示取消按钮-----》false去掉取消按钮
+            // cancelText: "否", //默认是“取消”
+            // cancelColor: 'skyblue', //取消文字的颜色
+            // confirmText: "是", //默认是“确定”,如果为空则没有显示
+            // confirmColor: 'skyblue', //确定文字的颜色
+            // success: function(res) {
+            //   if (res.confirm) { //这里是点击了确定以后
+            //     console.log('用户点击确定')
+            //   } else { //这里是点击了取消以后
+            //     console.log('用户点击取消')
+            //   }
+            // }
           })
 
           // 重置
@@ -204,6 +227,10 @@ Page({
   },
 
   swipclick: function(e) {
+
+    //记录布包上一次的外面滑片的选择
+    this.data.index_s = 0;
+
     this.setData({
       select: e.currentTarget.dataset.num,
       Rimg: "",
@@ -375,9 +402,9 @@ Page({
   enablebt: function() {
 
     wx.showToast({
-      title: '按钮暂时不可点击，请选择足够的样式使按钮变色',
+      title: '按钮暂时不可点击，请选择足够的样式使按钮变色！！！',
       icon: 'none',
-      duration: 1500 //持续的时间
+      duration: 2000 //持续的时间
     })
 
     //判断用户是否没有直接点击完成
@@ -387,9 +414,9 @@ Page({
     // 判断是否为二次点击
     if (this.data.enablecolor == true && this.data.once_auto >= 2) {
       wx.showToast({
-        title: '图案已经存在，请选择其他样式',
+        title: '图案已经存在，请选择其他样式！！！',
         icon: 'none',
-        duration: 1500 //持续的时间
+        duration: 2000 //持续的时间
       })
     }
 
@@ -398,10 +425,14 @@ Page({
       if (this.data.enablecolor == true) {
         if (app.globalData.production == "C") {
 
-          wx.showToast({
-            title: '正在自动生成。。。',
-            icon: 'none',
-            duration: 1500 //持续的时间
+          // wx.showToast({
+          //   title: '正在自动生成。。。',
+          //   icon: 'none',
+          //   duration: 1500 //持续的时间
+          // })
+
+          wx.showLoading({
+            title: '正在自动生成',
           })
 
           // console.log("cc_name, ce_name, cm_name:" + app.globalData.cc_name, app.globalData.ce_name, app.globalData.cm_name)
@@ -420,15 +451,23 @@ Page({
                 Rimg: app.globalData.rURL + res.data.rName + that.data.imgformat,
                 is_rimg: true
               });
+              // 图片加载完毕，取消提示
+              if (that.data.is_rimg == true) {
+                wx.hideLoading()
+              }
 
             });
 
         } else {
 
-          wx.showToast({
-            title: '正在自动上色。。。',
-            icon: 'none',
-            duration: 1500 //持续的时间
+          // wx.showToast({
+          //   title: '正在自动上色。。。',
+          //   icon: 'none',
+          //   duration: 1500 //持续的时间
+          // })
+
+          wx.showLoading({
+            title: '正在自动上色',
           })
 
           // 布包点击自动上色按钮，判断条件
@@ -448,11 +487,20 @@ Page({
               that.setData({
                 Pimg: app.globalData.rURL + res.data.rName + that.data.imgformat
               });
+
+              that.data.is_rimg = true;
+              // 图片加载完毕，取消提示
+              if (that.data.is_rimg == true) {
+                wx.hideLoading()
+              }
+
             });
         }
       }
-      // 判断是否点击自动生成按钮
-      this.data.once_auto++;
+      // 判断是否点击自动生成按钮（成功获取结果图，没有网络问题）
+      if (app.globalData.successRimg == true) {
+        this.data.once_auto++;
+      }
     }
   },
 

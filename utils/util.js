@@ -34,7 +34,18 @@ function requestPromiseBp(pName, cName, openId) {
         cName: cName,
       },
       url: "https://www.vrwbg.com:8080/mini/create-bp",
-      success: res => resolve(res)
+      success: res => {
+        resolve(res);
+        getApp().globalData.successRimg=true;
+      },
+      fail: res => {
+        // wx.hideLoading();
+        wx.showToast({
+          title: '网络状态不好，请重试！！！',
+          icon: 'none',
+          duration: 4000 //持续的时间
+        })
+      }
     })
   })
 }
@@ -55,7 +66,18 @@ function requestPromiseCp(cName, eName, mName, openId) {
         openId: openId
       },
       url: "https://www.vrwbg.com:8080/mini/create-cp",
-      success: res => resolve(res)
+      success: res => {
+        resolve(res);
+        getApp().globalData.successRimg = true;
+      },
+      fail: res => {
+        // wx.hideLoading();
+        wx.showToast({
+          title: '网络状态不好，请重试！！！',
+          icon: 'none',
+          duration: 4000 //持续的时间
+        })
+      }
     })
   })
 }
@@ -70,11 +92,12 @@ function downloadimgPromise(imgURL) {
     wx.downloadFile({
       url: imgURL,
       success: res => resolve(res),
-      fail: res => wx.showToast({
-        title: '网络状态不好，请返回重试',
-        icon: 'none',
-        duration: 4000 //持续的时间
-      })
+      fail: res =>
+        wx.showToast({
+          title: '网络状态不好，请返回重试！！！',
+          icon: 'none',
+          duration: 4000 //持续的时间
+        })
     })
   })
 }
