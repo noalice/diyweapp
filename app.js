@@ -1,4 +1,9 @@
 //app.js
+/**
+ * 页面改动：2019.2.28 新增需求
+ * 添加一个独立的主题6《多彩民族风》
+ * 产品类型新增取值N
+ */
 App({
   onLaunch: function() {
     // 转发群
@@ -81,9 +86,9 @@ App({
 
   globalData: {
     userInfo: null,
-    // 产品类型
+    // 产品类型 取值范围 C（披肩）、B（布包）、N（多彩民族风）
     production: "",
-    // 主题
+    // 主题序号 取值范围 1-6
     theme: 0,
     //服务器图片root路径
     // rootURL: "https://www.vrwbg.com:8080/mini/image_resources/",

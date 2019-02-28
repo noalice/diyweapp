@@ -1,9 +1,17 @@
 // pages/production/result.js
+/**
+ * 页面改动：2019.2.28 新增需求
+ * 新增一个主题《多彩民族风》
+ * 点击《多彩民族风》时跳转的页面与其他5个页面不一样
+ * 其app.globalData.theme取值为6，需要单独做判断
+ * 目前共6个主题
+ */
 const app = getApp()
 
 /*保证是中间图案的放大*/
 function chageIndex(index) {
-  if (index == 4) {
+  // TODO index == 4 -> index == 5
+  if (index == 5) {
     return 0;
   } else {
     return ++index;
@@ -39,6 +47,11 @@ Page({
         img: app.globalData.rootURL + 'USTP0305.png',
         text: app.globalData.rootURL + 'USTT0305.png'
       },
+      // TODO 新增主题图片
+      {
+        img:"",
+        text:""
+      }
     ],
     
     // 背景图
@@ -68,6 +81,9 @@ Page({
   // 轮播图点击事件(问题：点击任意位置均为放大主题)
   swipclick: function(e) {
     app.globalData.theme = this.data.swiperIndex + 1;
+    if(app.globalData.theme == 6){
+      // TODO
+    }
     // wx.navigateTo({
     //   url: '../production'
     // })

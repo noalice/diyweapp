@@ -1,6 +1,10 @@
 <!--pages/production/element/element.wxml-->
-
-<!-- 按钮 -->
+<!--
+  页面改动：2019.2.28 新增需求 
+  添加《多彩民族风》主题下的元素选择界面
+  目前element.wxml页面共有地毯、布包、民族风三套交互样式
+-->
+<!-- 顶部按钮 -->
 <view class="button" style="position:absolute;z-index:2;">
   <!-- <button class="return" bindtap="ReturnTap" hover-class='hover'> 返回 </button>
   <button class="submit" bindtap="ResultTap" hover-class='hover'> 完成 </button> -->
@@ -16,6 +20,7 @@
 -->
 <view class="center" style='width:80%;height:{{centerheight}}rpx;position:relative;z-index:1;margin-top:120rpx;'>
 
+  <!-- 披肩中begin-->
   <block wx:if="{{production == 'C'}}">
     <image mode="aspectFill" src="{{Eimg}}" style='transform:rotate(-90deg);width:{{Eimgwidth}}rpx;height:{{Eimgheight}}rpx;position:absolute;background:#fff;'></image>
     <image mode="aspectFill" src="{{Mimg}}" style='transform:rotate(-90deg);width:{{Mimgwidth}}rpx;height:{{Mimgheight}}rpx;position:absolute;'></image>
@@ -29,14 +34,19 @@
     <image mode="aspectFill" src="{{Cimg}}" style='transform:rotateX(180deg) rotateY(180deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRB}}rpx;top:{{CimgtopRB}}rpx;'></image>
     <image wx:if='{{Rimg !=""}}' mode="aspectFill" src="{{Rimg}}" style='transform:rotate(-90deg);width:{{Eimgwidth}}rpx;height:{{Eimgheight}}rpx;position:absolute;{{is_rimg==true?"background:#fff":""}};'></image>
   </block>
+<!-- 披肩中end -->
 
+<!-- 包包中begin -->
   <block wx:else>
     <image mode="aspectFill" src="{{Pimg}}" style='width:{{Pimgwidth}}rpx;height:{{Pimgwidth}}rpx;position:absolute;bottom:{{Pimgbottom}}rpx;background:#fff;'></image>
   </block>
+<!-- 包包中end -->
 
+<!-- 民族风中TODO -->
 </view>
 
 
+<!-- 底部选择栏 共有地毯（C）、布包（B）、-->
 <view class="bottom">
 
   <!-- 选择栏 -->
@@ -49,6 +59,8 @@
 
     问题：选择带框后，下一个tab会默认带框【解决：改变动画时长 duration="100"】
   -->
+
+<!-- 披肩底部（1）begin -->
   <block wx:if="{{production == 'C'}}">
     <swiper current="{{indexb}}" vertical="true" duration="100" style="height:153rpx;">
       <swiper-item wx:for="{{carpet}}" style="background:#ffffff;" catchtouchmove="stopTouchMove">
@@ -66,7 +78,9 @@
       </swiper-item>
     </swiper>
   </block>
+<!-- 披肩底部（1）end -->
 
+<!-- 布包底部（1）begin -->
   <block wx:else>
     <swiper current="{{indexb}}" vertical="true" duration="100" style="height:153rpx;">
       <swiper-item wx:for="{{bag}}" style="background:#ffffff;" catchtouchmove="stopTouchMove">
@@ -84,6 +98,7 @@
       </swiper-item>
     </swiper>
   </block>
+<!-- 布包底部（1）end -->
 
   <!-- 按钮：地毯（边框，四角，中心）；布包（图案，颜色） -->
   <!-- 
@@ -94,6 +109,8 @@
     3.view 点击hover-class 无效【解决：样式 加 !important】，但点击完后回原色
     4.border-left:1px solid black 一个不见
   -->
+
+<!-- 披肩底部（2）begin -->
   <block wx:if="{{production == 'C'}}">
     <scroll-view scroll-x style="height:83rpx;width:100%;">
       <view wx:for="{{carpet}}" style="width:33.3%;display:inline-block;">
@@ -101,7 +118,9 @@
       </view>
     </scroll-view>
   </block>
+<!-- 披肩底部（2）end -->
 
+<!-- 布包底部（2）begin -->
   <block wx:else>
     <scroll-view scroll-x style="height:83rpx;width:100%;">
       <view wx:for="{{bag}}" style="width:50%;display:inline-block;">
@@ -109,8 +128,13 @@
       </view>
     </scroll-view>
   </block>
+<!-- 布包底部（2）end -->
+
+<!-- 民族风TODO-->
+
 
   <!-- 确认按钮：展示结果图-->
+  <!-- TODO -->
   <view style="height:83rpx;width:100%;">
     <button bindtap='enablebt' style="background:{{enablecolor==true?'#550508':'#e0e0e0'}} url('{{autoimg}}') no-repeat ;background-size:100% 100%;border-top:1px solid #fff">自动</button>
   </view>

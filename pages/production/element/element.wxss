@@ -3,6 +3,7 @@
 page {
   display: flex;
   justify-content: center;
+  /* 整个页面背景为灰色 */
   background: #e0e0e0;
 }
 
