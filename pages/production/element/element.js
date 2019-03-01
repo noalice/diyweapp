@@ -3,6 +3,16 @@
 var app = getApp()
 const utilApi = require('../../../utils/util.js')
 
+/**
+ * 产生随机整数，包含下限值，包括上限值
+ * @param {Number} lower 下限
+ * @param {Number} upper 上限
+ * @return {Number} 返回在下限到上限之间的一个随机整数
+ */
+function random(lower, upper) {
+  return Math.floor(Math.random() * (upper - lower + 1)) + lower;
+}  
+
 Page({
 
   /**
@@ -51,6 +61,8 @@ Page({
     Rimg: "",
     is_rimg: false, //判断是否为地毯（披肩）结果图，是就添加白色背景
     Pimg: "",
+    // 民族
+    Nimg: app.globalData.rootURL + "N06MI010.png",
     // image URL
     pURL: "",
     tURL: "",
@@ -75,7 +87,15 @@ Page({
       app.globalData.rootURL + "N06MI050.png",
       app.globalData.rootURL + "N06MI060.png",
     ],
-
+    nationalIcons:[],
+    icon0: "",
+    icon1: "",
+    icon2: "",
+    icon3: "",
+    icon4: "",
+    icon5: "",
+    icon6: "",
+    icon7: "",
     // 里面滑片默认选择
     select: 0,
     drawName: "",
@@ -260,8 +280,13 @@ Page({
       select: e.currentTarget.dataset.num,
       Rimg: "",
       is_rimg: false,
-      Pimg: app.globalData.rootURL + app.globalData.bp_name + this.data.imgformat
+      Pimg: app.globalData.rootURL + app.globalData.bp_name + this.data.imgformat,
+      Nimg: this.data.nImgName[this.data.select]
     });
+
+    if(app.globalData.production === 'N'){
+      console.log("多彩民族"+this.data.Nimg);
+    }
     // console.log("select里面滑片:" + this.data.select);
 
     // 用户不满意，清除数据
@@ -287,8 +312,14 @@ Page({
     // 字符串长度 str.toString().length
     str = str.substr(1) + "0";
     this.data.drawName = str;
-    // console.log("需要绘画图片名称:" + this.data.drawName);
+    console.log("需要绘画图片名称:" + this.data.drawName);
 
+    // 民族风
+    if (app.globalData.production == "N"){
+
+   }
+
+    // 披肩
     if (app.globalData.production == "C") {
       if (this.data.indexb == 0) {
         app.globalData.cm_name = this.data.drawName;
@@ -329,7 +360,9 @@ Page({
         });
         // console.log("Cimg：" + this.data.Cimg);
       }
-    } else {
+    } 
+    
+    if (app.globalData.production == "B")  {
 
       if (this.data.indexb == 0) {
         app.globalData.bp_name = this.data.drawName;
@@ -368,7 +401,9 @@ Page({
           enablecolor: false,
         });
       }
-    } else {
+    } 
+    
+    if (app.globalData.production == "B")  {
       if (app.globalData.bp_name != "" && app.globalData.bc_name != "") {
         this.setData({
           enablecolor: true,
@@ -381,9 +416,11 @@ Page({
       }
     }
     
-    // TODO民族风
+    // TODO民族风满意度
     if(app.globalData.production == 'N'){
-
+      this.setData({
+        autoimg: app.globalData.rootURL + "USTT0406.png",
+      });
     } 
   },
 
@@ -428,6 +465,42 @@ Page({
       }
     }
   },
+ //多彩民族风时的按钮
+ nRandomButton:function(){
+   console.log("民族风按钮");
+
+   var length = app.globalData.nationalIcons.length;
+   for(var i = 0;i < length; i++){
+     var temp = random(0,48);
+     var str = "https://vrwbg-1256403542.image.myqcloud.com/mini/data/N06PI";
+     if(temp < 10){
+       str = str + "00"+temp;
+     }
+     
+     if(temp < 100 && temp >=10){
+       str = str + "0" + temp;
+     }
+
+     if(temp > 100){
+       str = str + temp;
+     }
+     app.globalData.nationalIcons[i] = str+".png";
+     console.log(app.globalData.nationalIcons[i]);
+   }
+   
+   this.setData({
+     nationalIcons: app.globalData.nationalIcons,
+     icon0: app.globalData.nationalIcons[0],
+     icon1: app.globalData.nationalIcons[1],
+     icon2: app.globalData.nationalIcons[2],
+     icon3: app.globalData.nationalIcons[3],
+     icon4: app.globalData.nationalIcons[4],
+     icon5: app.globalData.nationalIcons[5],
+     icon6: app.globalData.nationalIcons[6],
+     icon7: app.globalData.nationalIcons[7],
+   });
+ },
+
   //自动生成按钮事件（变色可用）
   enablebt: function() {
 
@@ -626,6 +699,13 @@ Page({
       this.data.imgformat = ".jpg";
     }
 
+    if (app.globalData.production == "N"){
+      this.setData({
+        autoimg: app.globalData.rootURL + "USTT0406.png"
+      });
+    }
+
+    // 根据所选主题调整URL
     switch (app.globalData.theme) {
       case 1:
         this.data.tURL = "01"
@@ -692,6 +772,9 @@ Page({
           app.globalData.cm_name = 'C05MI010'
           app.globalData.bp_name = 'B05PI010'
         }
+        break;
+      case 6:
+        this.data.tURL = "06";
         break;
       default:
         break;

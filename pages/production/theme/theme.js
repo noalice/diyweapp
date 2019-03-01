@@ -49,7 +49,7 @@ Page({
       // TODO 新增主题图片
       {
         img: app.globalData.rootURL +'USTP0306.png',
-        text: app.globalData.rootURL +'USTT0306.png'
+        text: app.globalData.rootURL +'USTT0307.png'
       }
     ],
     

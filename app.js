@@ -115,6 +115,12 @@ App({
     selectbp: 0, //默认第一个
     selectbc: -1,
     successRimg: false, //点击自动按钮，获取结果图片成功
+    
+    // 记录民族主题布包上的图标URL
+    nationalIcons:[
+      "","","","",
+      "","","",""
+    ],
   },
 
 

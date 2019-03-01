@@ -44,7 +44,30 @@
 
   <!-- 民族风中样式TODO -->
   <block wx:if="{{production == 'N'}}">
-    <image mode="aspectFill" src="{{Pimg}}" style='width:{{Pimgwidth}}rpx;height:{{Pimgwidth}}rpx;position:absolute;bottom:{{Pimgbottom}}rpx;background:#fff;'></image>
+    <image mode="aspectFill" src="{{Nimg}}" style='width:750rpx;height:861rpx;position:absolute;bottom:{{Pimgbottom}}rpx;background:#fff;'>
+    </image>
+<!-------------------------------------------8个图标------------------------------------------>
+<!-------------------------------------------1----------------------------------------------->
+        <image mode='aspectFit' src="{{icon0}}" style='width:48rpx;height:48rpx;z-index:10;top:500rpx;left:200rpx;position:absolute;' ></image>
+
+        <image mode='aspectFit' src="{{icon1}}" style='width:48rpx;height:48rpx;z-index:10;top:555rpx;left:200rpx;position:absolute;' ></image>
+<!-------------------------------------------1----------------------------------------------->
+<!-------------------------------------------2----------------------------------------------->
+        <image mode='aspectFit' src="{{icon2}}" style='width:48rpx;height:48rpx;z-index:10;top:500rpx;left:255rpx;position:absolute;' ></image>
+
+        <image mode='aspectFit' src="{{icon3}}" style='width:48rpx;height:48rpx;z-index:10;top:555rpx;left:255rpx;position:absolute;' ></image>
+<!-------------------------------------------2----------------------------------------------->
+<!-------------------------------------------3----------------------------------------------->
+        <image mode='aspectFit' src="{{icon4}}" style='width:48rpx;height:48rpx;z-index:10;top:500rpx;left:310rpx;position:absolute;' ></image>
+
+        <image mode='aspectFit' src="{{icon5}}" style='width:48rpx;height:48rpx;z-index:10;top:555rpx;left:310rpx;position:absolute;' ></image>
+<!-------------------------------------------3----------------------------------------------->
+<!-------------------------------------------4----------------------------------------------->
+        <image mode='aspectFit' src="{{icon6}}" style='width:48rpx;height:48rpx;z-index:10;top:500rpx;left:365rpx;position:absolute;' ></image>
+
+        <image mode='aspectFit' src="{{icon7}}" style='width:48rpx;height:48rpx;z-index:10;top:555rpx;left:365rpx;position:absolute;' ></image>
+<!-------------------------------------------4----------------------------------------------->
+
   </block>
 
 </view>
@@ -158,15 +181,32 @@
   <block wx:if="{{production == 'N'}}">
     <scroll-view scroll-x style="height:83rpx;width:100%;">
       <view wx:for="{{nationality}}" style="width:100%;display:inline-block;">
-        <button bindtap='changeview' style="height:83rpx;background:{{index==indexb? '#550508' : '#a28081'}} url('{{item.url}}') no-repeat;background-size:100% 100%;border-left:1px solid #fff;border-right:1px solid #fff" data-current="{{index}}"></button>
+            <!-- background:{{index==indexb? '#550508' : '#a28081'}} -->
+        <button bindtap='changeview' style="height:83rpx;background:#ffffff url('{{item.url}}') no-repeat;background-size:100% 100%;border-left:1px solid #fff;border-right:1px solid #fff" data-current="{{index}}"></button>
       </view>
     </scroll-view>
   </block>
 
-  <!-- 确认按钮：展示结果图-->
-  <!-- TODO -->
-  <view style="height:83rpx;width:100%;">
+  <block wx:if="{{production == 'B'}}">
+    <view style="height:83rpx;width:100%;">
     <button bindtap='enablebt' style="background:{{enablecolor==true?'#550508':'#e0e0e0'}} url('{{autoimg}}') no-repeat ;background-size:100% 100%;border-top:1px solid #fff">自动</button>
   </view>
+  </block>
+
+    <block wx:if="{{production == 'C'}}">
+    <view style="height:83rpx;width:100%;">
+    <button bindtap='enablebt' style="background:{{enablecolor==true?'#550508':'#e0e0e0'}} url('{{autoimg}}') no-repeat ;background-size:100% 100%;border-top:1px solid #fff">自动</button>
+  </view>
+  </block>
+
+  <!-- 确认按钮：展示结果图-->
+  <!-- TODO -->
+  <block wx:if="{{production == 'N'}}">
+    <view style="height:83rpx;width:100%;">
+    <button bindtap='nRandomButton' style="background:#550508 url('{{autoimg}}') no-repeat ;background-size:100% 100%;border-top:1px solid #fff">自动</button>
+  </view>
+  </block>
+
+
 
 </view>
