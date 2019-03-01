@@ -10,7 +10,6 @@ const app = getApp()
 
 /*保证是中间图案的放大*/
 function chageIndex(index) {
-  // TODO index == 4 -> index == 5
   if (index == 5) {
     return 0;
   } else {
@@ -49,8 +48,8 @@ Page({
       },
       // TODO 新增主题图片
       {
-        img:"",
-        text:""
+        img: app.globalData.rootURL +'USTP0306.png',
+        text: app.globalData.rootURL +'USTT0306.png'
       }
     ],
     
@@ -82,7 +81,8 @@ Page({
   swipclick: function(e) {
     app.globalData.theme = this.data.swiperIndex + 1;
     if(app.globalData.theme == 6){
-      // TODO
+      console.log("选择主题多彩民族风");
+      app.globalData.production = 'N';
     }
     // wx.navigateTo({
     //   url: '../production'

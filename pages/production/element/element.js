@@ -35,6 +35,13 @@ Page({
         "url": app.globalData.rootURL + "USTT0403.png"
       }
     ],
+    // 民族风
+    nationality:[
+      {
+        "name":"布包样式",
+        "url": app.globalData.rootURL+"USTT0410.png",
+      }
+    ],
     returnimg: app.globalData.rootURL + "UGTP0002.png",
     finishimg: app.globalData.rootURL + "UGTP0001.png",
     autoimg: '',
@@ -51,6 +58,24 @@ Page({
     imgformat: "",
     imgURL: [],
     imgName: [],
+    // 民族图
+    nImgURL: [
+      app.globalData.rootURL + "UN06MI01.png",
+      app.globalData.rootURL + "UN06MI02.png",
+      app.globalData.rootURL + "UN06MI03.png",
+      app.globalData.rootURL + "UN06MI04.png",
+      app.globalData.rootURL + "UN06MI05.png",
+      app.globalData.rootURL + "UN06MI06.png",
+    ],
+    nImgName: [
+      app.globalData.rootURL + "N06MI010.png",
+      app.globalData.rootURL + "N06MI020.png",
+      app.globalData.rootURL + "N06MI030.png",
+      app.globalData.rootURL + "N06MI040.png",
+      app.globalData.rootURL + "N06MI050.png",
+      app.globalData.rootURL + "N06MI060.png",
+    ],
+
     // 里面滑片默认选择
     select: 0,
     drawName: "",
@@ -355,6 +380,11 @@ Page({
         });
       }
     }
+    
+    // TODO民族风
+    if(app.globalData.production == 'N'){
+
+    } 
   },
 
 
@@ -520,8 +550,9 @@ Page({
     //wx.getSystemInfoSync().windowHeight单位px，h单位rpx（px到rpx转换）
     var h = 750 * wx.getSystemInfoSync().windowHeight / wx.getSystemInfoSync().windowWidth;
     this.setData({
-      //下面153rpx的83rpx的83rpx,上面的间距20rpx,上面的按钮100rpx
+      // 下面153rpx的83rpx的83rpx,上面的间距20rpx,上面的按钮100rpx
       centerheight: h - 153 - 83 - 83 - 20 - 100,
+      // production 用于页面判断
       production: app.globalData.production
     })
 

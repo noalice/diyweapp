@@ -34,15 +34,19 @@
     <image mode="aspectFill" src="{{Cimg}}" style='transform:rotateX(180deg) rotateY(180deg);width:{{Cimgwidth}}rpx;height:{{Cimgwidth}}rpx;position:absolute;left:{{CimgleftRB}}rpx;top:{{CimgtopRB}}rpx;'></image>
     <image wx:if='{{Rimg !=""}}' mode="aspectFill" src="{{Rimg}}" style='transform:rotate(-90deg);width:{{Eimgwidth}}rpx;height:{{Eimgheight}}rpx;position:absolute;{{is_rimg==true?"background:#fff":""}};'></image>
   </block>
-<!-- 披肩中end -->
+  <!-- 披肩中end -->
 
-<!-- 包包中begin -->
-  <block wx:else>
+  <!-- 包包中begin -->
+  <block wx:if="{{production == 'B'}}">
     <image mode="aspectFill" src="{{Pimg}}" style='width:{{Pimgwidth}}rpx;height:{{Pimgwidth}}rpx;position:absolute;bottom:{{Pimgbottom}}rpx;background:#fff;'></image>
   </block>
-<!-- 包包中end -->
+  <!-- 包包中end -->
 
-<!-- 民族风中TODO -->
+  <!-- 民族风中样式TODO -->
+  <block wx:if="{{production == 'N'}}">
+    <image mode="aspectFill" src="{{Pimg}}" style='width:{{Pimgwidth}}rpx;height:{{Pimgwidth}}rpx;position:absolute;bottom:{{Pimgbottom}}rpx;background:#fff;'></image>
+  </block>
+
 </view>
 
 
@@ -60,7 +64,7 @@
     问题：选择带框后，下一个tab会默认带框【解决：改变动画时长 duration="100"】
   -->
 
-<!-- 披肩底部（1）begin -->
+  <!-- 披肩底部（1）begin -->
   <block wx:if="{{production == 'C'}}">
     <swiper current="{{indexb}}" vertical="true" duration="100" style="height:153rpx;">
       <swiper-item wx:for="{{carpet}}" style="background:#ffffff;" catchtouchmove="stopTouchMove">
@@ -78,10 +82,10 @@
       </swiper-item>
     </swiper>
   </block>
-<!-- 披肩底部（1）end -->
+  <!-- 披肩底部（1）end -->
 
-<!-- 布包底部（1）begin -->
-  <block wx:else>
+  <!-- 布包底部（1）begin -->
+  <block wx:if="{{production == 'B'}}">
     <swiper current="{{indexb}}" vertical="true" duration="100" style="height:153rpx;">
       <swiper-item wx:for="{{bag}}" style="background:#ffffff;" catchtouchmove="stopTouchMove">
         <view style="height:153rpx;">
@@ -98,7 +102,27 @@
       </swiper-item>
     </swiper>
   </block>
-<!-- 布包底部（1）end -->
+  <!-- 布包底部（1）end -->
+
+  <!-- TODO 民族底部（1）begin-->
+  <block wx:if="{{production == 'N'}}">
+    <swiper current="{{indexb}}" vertical="true" duration="100" style="height:153rpx;">
+      <swiper-item wx:for="{{bag}}" style="background:#ffffff;" catchtouchmove="stopTouchMove">
+        <view style="height:153rpx;">
+
+          <swiper current="0" display-multiple-items="5">
+            <swiper-item wx:for="{{nImgURL}}" style="height:132rpx;margin:10rpx 18rpx;">
+              <view style=" height:132rpx;">
+                <image src="{{item}}" data-num="{{index}}" bindtap='swipclick' mode="aspectFit " style="width:130rpx;height:130rpx;" class="{{select==index?'border':''}}" />
+              </view>
+            </swiper-item>
+          </swiper>
+
+        </view>
+      </swiper-item>
+    </swiper>
+  </block>
+  <!-- TODO 民族底部（1）end-->
 
   <!-- 按钮：地毯（边框，四角，中心）；布包（图案，颜色） -->
   <!-- 
@@ -110,7 +134,7 @@
     4.border-left:1px solid black 一个不见
   -->
 
-<!-- 披肩底部（2）begin -->
+  <!-- 披肩底部（2）begin -->
   <block wx:if="{{production == 'C'}}">
     <scroll-view scroll-x style="height:83rpx;width:100%;">
       <view wx:for="{{carpet}}" style="width:33.3%;display:inline-block;">
@@ -118,20 +142,26 @@
       </view>
     </scroll-view>
   </block>
-<!-- 披肩底部（2）end -->
+  <!-- 披肩底部（2）end -->
 
-<!-- 布包底部（2）begin -->
-  <block wx:else>
+  <!-- 布包底部（2）begin -->
+  <block wx:if="{{production == 'B'}}">
     <scroll-view scroll-x style="height:83rpx;width:100%;">
       <view wx:for="{{bag}}" style="width:50%;display:inline-block;">
         <button bindtap='changeview' style="height:83rpx;background:{{index==indexb? '#550508' : '#a28081'}} url('{{item.url}}') no-repeat;background-size:100% 100%;border-left:1px solid #fff;border-right:1px solid #fff" data-current="{{index}}"></button>
       </view>
     </scroll-view>
   </block>
-<!-- 布包底部（2）end -->
+  <!-- 布包底部（2）end -->
 
-<!-- 民族风TODO-->
-
+  <!-- 民族风TODO-->
+  <block wx:if="{{production == 'N'}}">
+    <scroll-view scroll-x style="height:83rpx;width:100%;">
+      <view wx:for="{{nationality}}" style="width:100%;display:inline-block;">
+        <button bindtap='changeview' style="height:83rpx;background:{{index==indexb? '#550508' : '#a28081'}} url('{{item.url}}') no-repeat;background-size:100% 100%;border-left:1px solid #fff;border-right:1px solid #fff" data-current="{{index}}"></button>
+      </view>
+    </scroll-view>
+  </block>
 
   <!-- 确认按钮：展示结果图-->
   <!-- TODO -->

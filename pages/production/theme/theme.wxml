@@ -6,10 +6,20 @@
         <swiper-item class="swiper-item">
           <view style="margin:0 auto;">
             <!-- aspectFill保持纵横比缩放 -->
-            <navigator url='../production' open-type="reLaunch" hover-class='none'>
-              <image mode="aspectFill" src="{{item.img}}" class="slide-image {{swiperIndex == index ? 'image-active' : ''}}" bindtap='swipclick' />
-              <image mode="aspectFill" src="{{item.text}}" class="slide-text-image  {{swiperIndex == index ? 'text-active' : ''}}"></image>
-            </navigator>
+            <!-- 主题6民族风做特殊判断 -->
+            <block wx:if="{{index == 5}}">
+              <navigator url='../element/element' open-type="reLaunch" hover-class='none'>
+                <image mode="aspectFill" src="{{item.img}}" class="slide-image {{swiperIndex == index ? 'image-active' : ''}}" bindtap='swipclick' />
+                <image mode="aspectFill" src="{{item.text}}" class="slide-text-image  {{swiperIndex == index ? 'text-active' : ''}}"></image>
+              </navigator>
+            </block>
+            <!-- 主题1 - 5 -->
+            <block wx:else>
+              <navigator url='../production' open-type="reLaunch" hover-class='none'>
+                <image mode="aspectFill" src="{{item.img}}" class="slide-image {{swiperIndex == index ? 'image-active' : ''}}" bindtap='swipclick' />
+                <image mode="aspectFill" src="{{item.text}}" class="slide-text-image  {{swiperIndex == index ? 'text-active' : ''}}"></image>
+              </navigator>
+            </block>
           </view>
         </swiper-item>
       </block>

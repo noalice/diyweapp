@@ -103,6 +103,8 @@ App({
     cm_name: "",
     bp_name: "", //布包参数记录
     bc_name: "",
+    np_name:"", // 民族参数记录
+    nc_name:"",
     rNameUrl: "", //结果图路径记录
     bagNoColorUrl: "", //布包没有选择色块的图片路径记录
     is_return: false, //判断重新加载的元素界面是否是由解雇页面返回的
