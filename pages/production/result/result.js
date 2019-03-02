@@ -3,7 +3,7 @@ var app = getApp()
 const utilApi = require('../../../utils/util.js')
 const contextC = wx.createCanvasContext('canvasC')
 const contextB = wx.createCanvasContext('canvasB')
-
+const contextN = wx.createCanvasContext('canvasN')
 Page({
   /**
    * 页面的初始数据
@@ -46,6 +46,9 @@ Page({
     if (app.globalData.production === 'B') {
       canvasId = 'canvasB';
     }
+    if(app.globalData.production === 'N'){
+      canvasId = 'canvasN';
+    }
     // 将画布保存至临时文件
     wx.canvasToTempFilePath({
       canvasId: canvasId,
@@ -67,19 +70,23 @@ Page({
       }
     }, this)
     // 布包可以直接点完成，可以不选颜色这里需要判断
-    var url = "";
-    if (app.globalData.bc_name === "" && app.globalData.production === 'B') {
-      url = app.globalData.bagNoColorUrl
-    } else {
-      url = app.globalData.rNameUrl;
+    if(app.globalData.production != 'N'){
+
+      var url = "";
+      if (app.globalData.bc_name === "" && app.globalData.production === 'B') {
+        url = app.globalData.bagNoColorUrl
+      } else {
+        url = app.globalData.rNameUrl;
+      }
+      utilApi.downloadimgPromise(url)
+        .then(res => {
+          // 保存结果图至相册
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,
+          })
+        });
     }
-    utilApi.downloadimgPromise(url)
-      .then(res => {
-        // 保存结果图至相册
-        wx.saveImageToPhotosAlbum({
-          filePath: res.tempFilePath,
-        })
-      });
+
   },
 
   /**
@@ -138,9 +145,9 @@ Page({
       app.globalData.rootURL + this.data.txtURL + this.data.tURL + "04.png",
       app.globalData.rootURL + this.data.txtURL + this.data.tURL + "05.png",
     ];
-    console.log("选择的文字图片路径：" + this.data.textimg[Math.floor(Math.random() * this.data.textimg.length)]);
+    //console.log("选择的文字图片路径：" + this.data.textimg[Math.floor(Math.random() * this.data.textimg.length)]);
     // 披肩（地毯）结果页面画布逻辑
-    if (app.globalData.production == "C") {
+    if (app.globalData.production === "C") {
       this.setData({
         tipimg: app.globalData.rootURL + "USKT0502.png"
       })
@@ -174,8 +181,9 @@ Page({
             });
         });
 
-      // 布包结果页面画布逻辑 三层回调 保证绘图顺序
-    } else {
+    }
+    // 布包结果页面画布逻辑 三层回调 保证绘图顺序
+    if (app.globalData.production === 'B') {
       this.setData({
         tipimg: app.globalData.rootURL + "USKT0501.png"
       })
@@ -251,6 +259,82 @@ Page({
                   });
               }
             });
+        });
+    }
+
+    if (app.globalData.production === 'N') {
+      this.setData({
+        tipimg: app.globalData.rootURL + "USKT0503.png"
+      })
+      this.data.imgformat = ".jpg";
+
+      // 默认文字图片高70rpx，包高750rpx，间隙20rpx
+      var bagx, bagy, bagw, bagh;
+      var prox, proy, prow;
+      var that = this;
+      if (this.data.centerh > (750 + 70 + 20)) {
+        bagw = 750 / 2 * that.data.r;
+        bagh = 861 / 2 * that.data.r;
+        //750rpx为微信默认iPhone6宽
+        bagx = (750 - 750) / 2 / 2 * that.data.r;
+        bagy = (this.data.centerh - 750 - 70 - 20) / 2 / 2 * that.data.r;
+        //结果图宽400rpx，包身高576rpx（比为4.6的5.3----结果图偏上）
+        prow = 400 / 2 * that.data.r;
+        prox = (750 - 400) / 2 / 2 * that.data.r;
+        proy = ((this.data.centerh - 750 - 70 - 20) / 2 + 750 - 576 + (576 - 400) / 2) / 2 * that.data.r;
+      } else {
+        // 平板设备自适应
+        // 文字图片高42rpx，包高600rpx，间隙20rpx
+        bagw = 400 / 2 * that.data.r;
+        bagh = 600 / 2 * that.data.r;
+        //750rpx为微信默认iPhone6宽
+        bagx = (750 - 400) / 2 / 2 * that.data.r;
+        bagy = (this.data.centerh - 600 - 56 - 20) / 2 / 2 * that.data.r;
+
+        //结果图宽320rpx,包身高460rpx
+        prow = 320 / 2 * that.data.r;
+        prox = (750 - 320) / 2 / 2 * that.data.r;
+        proy = ((this.data.centerh - 600 - 56 - 20) / 2 + 600 - 460 + (460 - 320) / 2) / 2 * that.data.r;
+      }
+      console.log("结果绘制：" + app.globalData.nselectImg);
+      utilApi.downloadimgPromise(app.globalData.nselectImg)
+        // 使用.then处理结果
+        .then(res => {
+          //画画布背景(灰色)
+          contextB.setFillStyle('#e0e0e0'); //此接口要废弃
+          contextN.fillStyle = "#e0e0e0";
+          contextN.fillRect(0, 0, that.data.windowWidth, 10000);
+          //画背景包（宽500rpx；高750rpx）
+          contextN.drawImage(res.tempFilePath, bagx, bagy, bagw, bagh);
+          // 八个小图标
+          utilApi.downloadimgPromise(app.globalData.nationalIcons[0]).then(res => {
+            contextN.drawImage(res.tempFilePath, 10, 10, 48, 48);
+            utilApi.downloadimgPromise(app.globalData.nationalIcons[1]).then(res => {
+              contextN.drawImage(res.tempFilePath, 60, 10, 48, 48);
+              utilApi.downloadimgPromise(app.globalData.nationalIcons[2]).then(res => {
+                contextN.drawImage(res.tempFilePath, 110, 10, 48, 48);
+                utilApi.downloadimgPromise(app.globalData.nationalIcons[3]).then(res => {
+                  contextN.drawImage(res.tempFilePath, 160, 10, 48, 48);
+                  utilApi.downloadimgPromise(app.globalData.nationalIcons[4]).then(res => {
+                    contextN.drawImage(res.tempFilePath, 10, 60, 48, 48);
+                    utilApi.downloadimgPromise(app.globalData.nationalIcons[5]).then(res => {
+                      contextN.drawImage(res.tempFilePath, 60, 60, 48, 48);
+                      utilApi.downloadimgPromise(app.globalData.nationalIcons[6]).then(res => {
+                        contextN.drawImage(res.tempFilePath, 110, 60, 48, 48);
+                        utilApi.downloadimgPromise(app.globalData.nationalIcons[7]).then(res => {
+                          contextN.drawImage(res.tempFilePath, 160, 60, 48, 48);
+                          contextN.draw();
+                        })
+                      })
+                    })
+                  })
+                })
+              })
+            })
+          })
+
+          console.log("结果画布：" + app.globalData.nselectImg);
+
         });
     }
 

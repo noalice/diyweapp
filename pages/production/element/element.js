@@ -87,6 +87,7 @@ Page({
       app.globalData.rootURL + "N06MI050.png",
       app.globalData.rootURL + "N06MI060.png",
     ],
+    nselectBackgroundImg:"",
     nationalIcons:[],
     // icon-表示小图标参数
     icon0: "",
@@ -288,10 +289,11 @@ Page({
       Rimg: "",
       is_rimg: false,
       Pimg: app.globalData.rootURL + app.globalData.bp_name + this.data.imgformat,
-      Nimg: this.data.nImgName[this.data.select]
+      Nimg: this.data.nImgName[e.currentTarget.dataset.num],
     });
 
     if(app.globalData.production === 'N'){
+      app.globalData.nselectImg = this.data.nImgName[e.currentTarget.dataset.num];
       console.log("多彩民族"+this.data.Nimg);
     }
     // console.log("select里面滑片:" + this.data.select);

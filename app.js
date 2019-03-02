@@ -121,6 +121,7 @@ App({
       "","","","",
       "","","",""
     ],
+    nselectImg:"https://vrwbg-1256403542.image.myqcloud.com/mini/data/N06MI010.png",
   },
 
 
