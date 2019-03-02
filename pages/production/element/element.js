@@ -88,6 +88,7 @@ Page({
       app.globalData.rootURL + "N06MI060.png",
     ],
     nationalIcons:[],
+    // icon-表示小图标参数
     icon0: "",
     icon1: "",
     icon2: "",
@@ -96,11 +97,17 @@ Page({
     icon5: "",
     icon6: "",
     icon7: "",
+    iconsize:0,
+    iconbottom:0,
+    iconoffset:0,
     // 里面滑片默认选择
     select: 0,
     drawName: "",
     showFinishbt: true, //展示完成按钮
     enablecolor: false, //自动生成颜色变换（可点击）
+    // 民族布包位置
+    Nimgwitdth:0,
+    Nimgheight:0,
     // 图片位置
     centerheight: 0,
     Eimgwidth: 0,
@@ -312,12 +319,6 @@ Page({
     // 字符串长度 str.toString().length
     str = str.substr(1) + "0";
     this.data.drawName = str;
-    console.log("需要绘画图片名称:" + this.data.drawName);
-
-    // 民族风
-    if (app.globalData.production == "N"){
-
-   }
 
     // 披肩
     if (app.globalData.production == "C") {
@@ -440,9 +441,24 @@ Page({
     app.globalData.selectbp = 0; //默认第一个
     app.globalData.selectbc = -1;
 
-    wx.reLaunch({
-      url: '../production'
-    })
+    if(app.globalData.production === 'B'){
+      wx.reLaunch({
+        url: '../production'
+      })
+    }
+
+    if (app.globalData.production === 'C') {
+      wx.reLaunch({
+        url: '../production'
+      })
+    }
+
+    if (app.globalData.production === 'N') {
+      wx.reLaunch({
+        url: '../theme/theme'
+      })
+    }
+
   },
   ResultTap: function() {
     if (app.globalData.bc_name == "") {
@@ -631,6 +647,11 @@ Page({
 
     if (this.data.centerheight > 750) {
       this.setData({
+        Nimgwitdth:750,
+        Nimgheight:861 + 17,
+        iconsize:48,
+        iconoffset:0,
+        iconbottom: (this.data.centerheight - 750) / 2,
         Pimgwidth: 750,
         Pimgbottom: (this.data.centerheight - 750) / 2,
         Eimgwidth: 750,
@@ -650,8 +671,13 @@ Page({
         CimgleftRB: (0.8 * 750 - 375) / 2 + 375 - 80 + 4,
         CimgtopRB: (this.data.centerheight - 625) / 2 + 625 - 80 + 4,
       })
-    } else {
+    } else { // 平板设备
       this.setData({
+        Nimgwitdth: this.data.centerheight - 20,
+        Nimgheight: (861 + 17) * (this.data.centerheight - 20)/750,
+        iconsize: 48 * (this.data.centerheight - 20) / 750,
+        iconbottom: -50,
+        iconoffset:5,
         //图片上下间隔10rpx
         Pimgwidth: this.data.centerheight - 20,
         Pimgbottom: 10,

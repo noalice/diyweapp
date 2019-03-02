@@ -44,28 +44,28 @@
 
   <!-- 民族风中样式TODO -->
   <block wx:if="{{production == 'N'}}">
-    <image mode="aspectFill" src="{{Nimg}}" style='width:750rpx;height:861rpx;position:absolute;bottom:{{Pimgbottom}}rpx;background:#fff;'>
+    <image mode="aspectFill" src="{{Nimg}}" style='width:{{Nimgwitdth}}rpx;height:{{Nimgheight}}rpx;position:absolute;bottom:{{Pimgbottom}}rpx;background:#fff;'>
     </image>
 <!-------------------------------------------8个图标------------------------------------------>
 <!-------------------------------------------1----------------------------------------------->
-        <image mode='aspectFit' src="{{icon0}}" style='width:48rpx;height:48rpx;z-index:10;top:500rpx;left:200rpx;position:absolute;' ></image>
+        <image mode='aspectFit' src="{{icon0}}" style='width:{{iconsize}}rpx;height:{{iconsize}}rpx;z-index:10;bottom:{{iconbottom+210}}rpx;left:{{iconoffset+200}}rpx;position:absolute;' ></image>
 
-        <image mode='aspectFit' src="{{icon1}}" style='width:48rpx;height:48rpx;z-index:10;top:555rpx;left:200rpx;position:absolute;' ></image>
+        <image mode='aspectFit' src="{{icon1}}" style='width:{{iconsize}}rpx;height:{{iconsize}}rpx;z-index:10;bottom:{{iconbottom+155}}rpx;left:{{iconoffset+200}}rpx;position:absolute;' ></image>
 <!-------------------------------------------1----------------------------------------------->
 <!-------------------------------------------2----------------------------------------------->
-        <image mode='aspectFit' src="{{icon2}}" style='width:48rpx;height:48rpx;z-index:10;top:500rpx;left:255rpx;position:absolute;' ></image>
+        <image mode='aspectFit' src="{{icon2}}" style='width:{{iconsize}}rpx;height:{{iconsize}}rpx;z-index:10;bottom:{{iconbottom+210}}rpx;left:{{iconoffset+255}}rpx;position:absolute;' ></image>
 
-        <image mode='aspectFit' src="{{icon3}}" style='width:48rpx;height:48rpx;z-index:10;top:555rpx;left:255rpx;position:absolute;' ></image>
+        <image mode='aspectFit' src="{{icon3}}" style='width:48rpx;height:48rpx;z-index:10;bottom:{{iconbottom+155}}rpx;left:{{iconoffset+255}}rpx;position:absolute;' ></image>
 <!-------------------------------------------2----------------------------------------------->
 <!-------------------------------------------3----------------------------------------------->
-        <image mode='aspectFit' src="{{icon4}}" style='width:48rpx;height:48rpx;z-index:10;top:500rpx;left:310rpx;position:absolute;' ></image>
+        <image mode='aspectFit' src="{{icon4}}" style='width:{{iconsize}}rpx;height:{{iconsize}}rpx;z-index:10;bottom:{{iconbottom+210}}rpx;left:{{iconoffset+310}}rpx;position:absolute;' ></image>
 
-        <image mode='aspectFit' src="{{icon5}}" style='width:48rpx;height:48rpx;z-index:10;top:555rpx;left:310rpx;position:absolute;' ></image>
+        <image mode='aspectFit' src="{{icon5}}" style='width:{{iconsize}}rpx;height:{{iconsize}}rpx;z-index:10;bottom:{{iconbottom+155}}rpx;left:{{iconoffset+310}}rpx;position:absolute;' ></image>
 <!-------------------------------------------3----------------------------------------------->
 <!-------------------------------------------4----------------------------------------------->
-        <image mode='aspectFit' src="{{icon6}}" style='width:48rpx;height:48rpx;z-index:10;top:500rpx;left:365rpx;position:absolute;' ></image>
+        <image mode='aspectFit' src="{{icon6}}" style='width:{{iconsize}}rpx;height:{{iconsize}}rpx;z-index:10;bottom:{{iconbottom+210}}rpx;left:{{iconoffset+365}}rpx;position:absolute;' ></image>
 
-        <image mode='aspectFit' src="{{icon7}}" style='width:48rpx;height:48rpx;z-index:10;top:555rpx;left:365rpx;position:absolute;' ></image>
+        <image mode='aspectFit' src="{{icon7}}" style='width:{{iconsize}}rpx;height:{{iconsize}}rpx;z-index:10;bottom:{{iconbottom+155}}rpx;left:{{iconoffset+365}}rpx;position:absolute;' ></image>
 <!-------------------------------------------4----------------------------------------------->
 
   </block>
