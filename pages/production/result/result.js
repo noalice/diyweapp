@@ -271,32 +271,28 @@ Page({
       // 默认文字图片高70rpx，包高750rpx，间隙20rpx
       var bagx, bagy, bagw, bagh;
       var prox, proy, prow;
+      var iconsize = 24*this.data.r;
       var that = this;
+      var offset = 0;
       if (this.data.centerh > (750 + 70 + 20)) {
         bagw = 750 / 2 * that.data.r;
         bagh = 861 / 2 * that.data.r;
         //750rpx为微信默认iPhone6宽
         bagx = (750 - 750) / 2 / 2 * that.data.r;
-        bagy = (this.data.centerh - 750 - 70 - 20) / 2 / 2 * that.data.r;
+        bagy = (this.data.centerh - 861) / 2 / 2 * that.data.r;
         //结果图宽400rpx，包身高576rpx（比为4.6的5.3----结果图偏上）
-        prow = 400 / 2 * that.data.r;
-        prox = (750 - 400) / 2 / 2 * that.data.r;
-        proy = ((this.data.centerh - 750 - 70 - 20) / 2 + 750 - 576 + (576 - 400) / 2) / 2 * that.data.r;
+        offset = 0;
       } else {
         // 平板设备自适应
         // 文字图片高42rpx，包高600rpx，间隙20rpx
-        bagw = 400 / 2 * that.data.r;
-        bagh = 600 / 2 * that.data.r;
+        bagw = (750 *0.8)/ 2 * that.data.r;
+        bagh = (861*0.8) / 2 * that.data.r;
         //750rpx为微信默认iPhone6宽
-        bagx = (750 - 400) / 2 / 2 * that.data.r;
-        bagy = (this.data.centerh - 600 - 56 - 20) / 2 / 2 * that.data.r;
-
-        //结果图宽320rpx,包身高460rpx
-        prow = 320 / 2 * that.data.r;
-        prox = (750 - 320) / 2 / 2 * that.data.r;
-        proy = ((this.data.centerh - 600 - 56 - 20) / 2 + 600 - 460 + (460 - 320) / 2) / 2 * that.data.r;
+        bagx = (750 - 750*0.8) / 2 / 2 * that.data.r;
+        bagy = (this.data.centerh - 861*0.8) / 2 / 2 * that.data.r;
+        offset = -80;
       }
-      console.log("结果绘制：" + app.globalData.nselectImg);
+      console.log("绘图坐标：" + "x"+bagx+"y"+ bagy);
       utilApi.downloadimgPromise(app.globalData.nselectImg)
         // 使用.then处理结果
         .then(res => {
@@ -307,22 +303,23 @@ Page({
           //画背景包（宽500rpx；高750rpx）
           contextN.drawImage(res.tempFilePath, bagx, bagy, bagw, bagh);
           // 八个小图标
+          // TODO 调整位置及自适应
           utilApi.downloadimgPromise(app.globalData.nationalIcons[0]).then(res => {
-            contextN.drawImage(res.tempFilePath, 10, 10, 48, 48);
+            contextN.drawImage(res.tempFilePath, 135 * that.data.r, (304 + bagy + offset) * that.data.r, iconsize, iconsize);
             utilApi.downloadimgPromise(app.globalData.nationalIcons[1]).then(res => {
-              contextN.drawImage(res.tempFilePath, 60, 10, 48, 48);
+              contextN.drawImage(res.tempFilePath, 135 * that.data.r, (331+bagy+offset) * that.data.r, iconsize, iconsize);
               utilApi.downloadimgPromise(app.globalData.nationalIcons[2]).then(res => {
-                contextN.drawImage(res.tempFilePath, 110, 10, 48, 48);
+                contextN.drawImage(res.tempFilePath, 162 * that.data.r, (304 + bagy + offset) * that.data.r, iconsize, iconsize);
                 utilApi.downloadimgPromise(app.globalData.nationalIcons[3]).then(res => {
-                  contextN.drawImage(res.tempFilePath, 160, 10, 48, 48);
+                  contextN.drawImage(res.tempFilePath, 162 * that.data.r, (331 + bagy + offset) * that.data.r, iconsize, iconsize);
                   utilApi.downloadimgPromise(app.globalData.nationalIcons[4]).then(res => {
-                    contextN.drawImage(res.tempFilePath, 10, 60, 48, 48);
+                    contextN.drawImage(res.tempFilePath, 189 * that.data.r, (304 + bagy + offset) * that.data.r, iconsize, iconsize);
                     utilApi.downloadimgPromise(app.globalData.nationalIcons[5]).then(res => {
-                      contextN.drawImage(res.tempFilePath, 60, 60, 48, 48);
+                      contextN.drawImage(res.tempFilePath, 189 * that.data.r, (331 + bagy + offset) * that.data.r, iconsize, iconsize);
                       utilApi.downloadimgPromise(app.globalData.nationalIcons[6]).then(res => {
-                        contextN.drawImage(res.tempFilePath, 110, 60, 48, 48);
+                        contextN.drawImage(res.tempFilePath, 216 * that.data.r, (304 + bagy + offset) * that.data.r, iconsize, iconsize);
                         utilApi.downloadimgPromise(app.globalData.nationalIcons[7]).then(res => {
-                          contextN.drawImage(res.tempFilePath, 160, 60, 48, 48);
+                          contextN.drawImage(res.tempFilePath, 216 * that.data.r, (331 + bagy + offset) * that.data.r, iconsize, iconsize);
                           contextN.draw();
                         })
                       })
@@ -332,9 +329,6 @@ Page({
               })
             })
           })
-
-          console.log("结果画布：" + app.globalData.nselectImg);
-
         });
     }
 

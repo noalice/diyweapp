@@ -294,7 +294,6 @@ Page({
 
     if(app.globalData.production === 'N'){
       app.globalData.nselectImg = this.data.nImgName[e.currentTarget.dataset.num];
-      console.log("多彩民族"+this.data.Nimg);
     }
     // console.log("select里面滑片:" + this.data.select);
 
@@ -647,7 +646,7 @@ Page({
       production: app.globalData.production
     })
 
-    if (this.data.centerheight > 750) {
+    if (this.data.centerheight > 700) {
       this.setData({
         Nimgwitdth:750,
         Nimgheight:861 + 17,
