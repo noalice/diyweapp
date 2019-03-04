@@ -421,7 +421,7 @@ Page({
     // TODO民族风满意度
     if(app.globalData.production == 'N'){
       this.setData({
-        autoimg: app.globalData.rootURL + "USTT0406.png",
+        autoimg: app.globalData.rootURL + "USTT0411.png",
       });
     } 
   },
@@ -736,7 +736,7 @@ Page({
 
     if (app.globalData.production == "N"){
       this.setData({
-        autoimg: app.globalData.rootURL + "USTT0406.png"
+        autoimg: app.globalData.rootURL + "USTT0411.png"
       });
     }
 
