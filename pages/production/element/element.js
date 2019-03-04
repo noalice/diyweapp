@@ -487,9 +487,17 @@ Page({
    console.log("民族风按钮");
 
    var length = app.globalData.nationalIcons.length;
-   for(var i = 0;i < length; i++){
-     var temp = random(0,48);
+   var noRepeatFilter = new Set();
+   for (var i = 0; i < length; i++){
+     var temp = 0;
+     // 防止元素重复出现
+     while ((noRepeatFilter.size - 1) != i){
+       temp = random(0, 48);
+       noRepeatFilter.add(temp);
+     }
+
      var str = "https://vrwbg-1256403542.image.myqcloud.com/mini/data/N06PI";
+
      if(temp < 10){
        str = str + "00"+temp;
      }
